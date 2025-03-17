@@ -61,26 +61,18 @@ class Enqueue extends CommonEnqueue implements EnqueueInterface, RegisterHooksIn
 	 * @return void
 	 */
 	public function enqueue_scripts_and_styles( string $hook = '' ): void {
-		if ( ! isset( $this->enqueue['scripts'] ) ) {
+		if ( ! isset( $this->enqueue['assets'] ) ) {
 			return;
 		}
 
-		foreach ( $this->enqueue['scripts'] as $script ) {
-			$asset_path = SITE_PATH . '/' . $this->base . '/' . $script['asset_path'];
-			$src        = SITE_URI . '/' . $this->base . '/' . $script['src'];
+		$assets = $this->enqueue['assets'];
 
-			$this->enqueue_script( $asset_path, $src, 'ksd-theme' );
-		}
-
-		if ( ! isset( $this->enqueue['styles'] ) ) {
+		if ( ! is_array( $assets ) ) {
 			return;
 		}
 
-		foreach ( $this->enqueue['styles'] as $style ) {
-			$asset_path = SITE_PATH . '/' . $this->base . '/' . $style['asset_path'];
-			$src        = SITE_URI . '/' . $this->base . '/' . $style['src'];
-
-			$this->enqueue_style( $asset_path, $src, 'ksd-theme' );
+		foreach ( $assets as $asset ) {
+			$asset::register();
 		}
 	}
 
@@ -169,7 +161,10 @@ class Enqueue extends CommonEnqueue implements EnqueueInterface, RegisterHooksIn
 	 * @inheritDoc
 	 */
 	public function register_hooks() {
-		$this->loader->add_action( 'wp_enqueue_scripts', $this, 'enqueue_scripts_and_styles' );
+		foreach ( $this->enqueue['assets'] as $asset ) {
+			$this->loader->add_action( 'wp_enqueue_scripts', $asset, 'register' );
+		}
+
 		$this->loader->add_filter( 'print_styles_array', $this, 'move_global_styles_to_top', 10, 1 );
 
 		// Handle inline scripts and styles

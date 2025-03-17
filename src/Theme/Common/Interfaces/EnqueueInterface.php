@@ -19,15 +19,6 @@ namespace HeikkiVihersalo\BlockThemeCore\Theme\Common\Interfaces;
  */
 interface EnqueueInterface {
 	/**
-	 * The name of the localized object
-	 *
-	 * @since    2.0.0
-	 * @access   protected
-	 * @var      string    LOCALIZED_OBJECT_NAME    The name of the localized object
-	 */
-	public const LOCALIZED_OBJECT_NAME = 'HEIKKI_VIHERSALO_BLOCK_THEME_CORE';
-
-	/**
 	 * Check if the plugin's assets exist and display a notice if they don't
 	 *
 	 * @since    2.0.0
@@ -35,7 +26,7 @@ interface EnqueueInterface {
 	 * @param    string $path The path to the asset
 	 * @return   bool
 	 */
-	public function asset_exists( string $path, string $type = '' ): bool;
+	public static function asset_exists( string $path, string $type = '' ): bool;
 
 	/**
 	 * Register the stylesheets for the plugin.
@@ -47,7 +38,7 @@ interface EnqueueInterface {
 	 * @param    string $handle       The handle for the stylesheet
 	 * @return   void
 	 */
-	public function enqueue_style( string $asset_path, string $style_url, string $handle = '' ): void;
+	public static function enqueue_style(): void;
 
 	/**
 	 * Register the scripts for the plugin.
@@ -59,15 +50,14 @@ interface EnqueueInterface {
 	 * @param    string $handle       The handle for the script
 	 * @return   void
 	 */
-	public function enqueue_script( string $asset_path, string $script_url, string $handle = '' ): void;
+	public static function enqueue_script(): void;
 
 	/**
 	 * Run the editor scripts and styles
 	 *
 	 * @since    2.0.0
 	 * @access   public
-	 * @param    string $hook The current admin page
 	 * @return   void
 	 */
-	public function enqueue_scripts_and_styles( string $hook = '' ): void;
+	public static function register(): void;
 }
