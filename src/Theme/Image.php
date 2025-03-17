@@ -62,13 +62,13 @@ class Image implements RegisterHooksInterface {
 	public function register_image_sizes(): void {
 		/* Update default core image sizes */
 		foreach ( $this->default_image_sizes as $size ) :
-			update_option( $size['slug'] . '_size_w', $size['width'] );
-			update_option( $size['slug'] . '_size_h', $size['height'] );
+			update_option( $size->get_width_option_name(), $size->get_width() );
+			update_option( $size->get_height_option_name(), $size->get_height() );
 		endforeach;
 
 		/* Add new image sizes to core */
 		foreach ( $this->custom_image_sizes as $size ) :
-			add_image_size( $size['slug'], $size['width'], $size['height'], false );
+			add_image_size( $size->get_slug(), $size->get_width(), $size->get_height(), false );
 		endforeach;
 	}
 
@@ -95,7 +95,7 @@ class Image implements RegisterHooksInterface {
 		$custom_images = array();
 
 		foreach ( $this->custom_image_sizes as $image ) :
-			$custom_images[ $image['slug'] ] = $image['name'];
+			$custom_images[ $image->get_slug() ] = $image->get_name();
 		endforeach;
 
 		return array_merge( $sizes, $custom_images );
