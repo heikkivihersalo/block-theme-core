@@ -29,13 +29,25 @@ class Enqueue extends CommonEnqueue implements EnqueueInterface, RegisterHooksIn
 	use ThemeDefaults;
 
 	/**
+	 * @var array
+	 */
+	private array $enqueue;
+
+	/**
+	 * @var string
+	 */
+	private string $base;
+
+	/**
 	 * Constructor
 	 *
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( Loader $loader ) {
-		$this->loader = $loader;
+	public function __construct( Loader $loader, array $enqueue ) {
+		$this->loader  = $loader;
+		$this->enqueue = $enqueue;
+		$this->base    = isset( $enqueue['base'] ) ? $enqueue['base'] : 'build';
 	}
 
 	/**
@@ -47,12 +59,27 @@ class Enqueue extends CommonEnqueue implements EnqueueInterface, RegisterHooksIn
 	 * @return void
 	 */
 	public function enqueue_scripts_and_styles( string $hook = '' ): void {
-		$asset_path = SITE_PATH . '/build/assets/theme.asset.php';
-		$script_url = SITE_URI . '/build/assets/theme.js';
-		$style_url  = SITE_URI . '/build/assets/theme.css';
+		if ( ! isset( $this->enqueue['scripts'] ) ) {
+			return;
+		}
 
-		$this->enqueue_style( $asset_path, $style_url, 'ksd-theme' );
-		$this->enqueue_script( $asset_path, $script_url, 'ksd-theme' );
+		foreach ( $this->enqueue['scripts'] as $script ) {
+			$asset_path = SITE_PATH . '/' . $this->base . '/' . $script['asset_path'];
+			$src        = SITE_URI . '/' . $this->base . '/' . $script['src'];
+
+			$this->enqueue_script( $asset_path, $src, 'ksd-theme' );
+		}
+
+		if ( ! isset( $this->enqueue['styles'] ) ) {
+			return;
+		}
+
+		foreach ( $this->enqueue['styles'] as $style ) {
+			$asset_path = SITE_PATH . '/' . $this->base . '/' . $style['asset_path'];
+			$src        = SITE_URI . '/' . $this->base . '/' . $style['src'];
+
+			$this->enqueue_style( $asset_path, $src, 'ksd-theme' );
+		}
 	}
 
 	/**

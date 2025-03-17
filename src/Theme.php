@@ -45,6 +45,11 @@ class Theme {
 	/**
 	 * @var array
 	 */
+	private $enqueue;
+
+	/**
+	 * @var array
+	 */
 	private $excerpt;
 
 	/**
@@ -63,7 +68,8 @@ class Theme {
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( array $excerpt, array $image_sizes, array $navigation ) {
+	public function __construct( array $enqueue, array $excerpt, array $image_sizes, array $navigation ) {
+		$this->enqueue     = $enqueue;
 		$this->excerpt     = $excerpt;
 		$this->image_sizes = $image_sizes;
 		$this->navigation  = $navigation;
@@ -139,7 +145,7 @@ class Theme {
 	 * @access   private
 	 */
 	private function set_enqueue() {
-		$enqueue = new Enqueue( $this->loader );
+		$enqueue = new Enqueue( $this->loader, $this->enqueue );
 		$enqueue->register_hooks();
 	}
 
