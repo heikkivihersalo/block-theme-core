@@ -42,7 +42,8 @@ class Navigation implements RegisterHooksInterface {
 	 * @access   public
 	 */
 	public function __construct( Loader $loader, array $menu_locations ) {
-		$this->loader = $loader;
+		$this->loader         = $loader;
+		$this->menu_locations = $menu_locations;
 	}
 
 	/**
