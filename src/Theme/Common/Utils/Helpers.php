@@ -47,6 +47,23 @@ final class Helpers {
 	}
 
 	/**
+	 * Load a configuration file
+	 *
+	 * @since 2.0.0
+	 * @param string $file The file to load
+	 * @return array
+	 */
+	public static function load_config( string $file ): array {
+		$config = require_once $file;
+
+		if ( ! is_array( $config ) ) {
+			return array();
+		}
+
+		return $config;
+	}
+
+	/**
 	 * Check if the current page is the plugin's editor page
 	 *
 	 * @since    2.0.0
