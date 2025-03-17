@@ -27,13 +27,19 @@ class Excerpt implements RegisterHooksInterface {
 	use ThemeDefaults;
 
 	/**
+	 * @var array
+	 */
+	private $excerpt;
+
+	/**
 	 * Constructor
 	 *
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( Loader $loader ) {
-		$this->loader = $loader;
+	public function __construct( Loader $loader, array $excerpt ) {
+		$this->loader  = $loader;
+		$this->excerpt = $excerpt;
 	}
 
 	/**
@@ -42,7 +48,21 @@ class Excerpt implements RegisterHooksInterface {
 	 * @return int
 	 */
 	public function custom_excerpt_length(): int {
-		return 20;
+		if ( ! isset( $this->excerpt['length'] ) ) {
+			return 55;
+		}
+
+		// check that is integer
+		if ( is_int( $this->excerpt['length'] ) ) {
+			return $this->excerpt['length'];
+		}
+
+		// Check that is string and convert to integer
+		if ( is_string( $this->excerpt['length'] ) ) {
+			return (int) $this->excerpt['length'];
+		}
+
+		return 55;
 	}
 
 	/**
@@ -51,6 +71,15 @@ class Excerpt implements RegisterHooksInterface {
 	 * @return string
 	 */
 	public function custom_excerpt_more(): string {
+		if ( ! isset( $this->excerpt['more'] ) ) {
+			return '&hellip;';
+		}
+
+		// check that is string
+		if ( is_string( $this->excerpt['more'] ) ) {
+			return $this->excerpt['more'];
+		}
+
 		return '&hellip;';
 	}
 
