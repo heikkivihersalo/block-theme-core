@@ -1,0 +1,39 @@
+{
+    "name": "heikkivihersalo/block-theme-core",
+    "description": "Opionated WordPress block theme core feature library",
+    "type": "library",
+	"license": "GPL-2.0-or-later",
+	"config": {
+		"platform": {
+			"php": "8.2"
+		},
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"version": "0.2.0",
+    "autoload": {
+        "psr-4": {
+            "HeikkiVihersalo\\BlockThemeCore\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Heikki Vihersalo",
+            "email": "heikki@vihersalo.fi"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+		"phpcompatibility/php-compatibility": "dev-develop as 9.3.5",
+		"phpcsstandards/phpcsutils": "^1.0",
+		"phpcsstandards/phpcsextra": "^1.2.0",
+		"phpcompatibility/phpcompatibility-wp": "*",
+        "phpunit/phpunit": "9.*",
+		"squizlabs/php_codesniffer": "*",
+		"yoast/phpunit-polyfills": "^1.0",
+		"wp-coding-standards/wpcs": "^3.0",
+		"wp-phpunit/wp-phpunit": "^6.0"
+    }
+}
