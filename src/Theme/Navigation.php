@@ -41,23 +41,8 @@ class Navigation implements RegisterHooksInterface {
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( Loader $loader ) {
+	public function __construct( Loader $loader, array $menu_locations ) {
 		$this->loader = $loader;
-
-		$this->menu_locations = array(
-			array(
-				'slug' => 'header-nav',
-				'name' => __( 'Header Navigation', 'heikkivihersalo-block-theme-core' ),
-			),
-			array(
-				'slug' => 'legal-nav',
-				'name' => __( 'Legal Navigation', 'heikkivihersalo-block-theme-core' ),
-			),
-			array(
-				'slug' => 'footer-nav',
-				'name' => __( 'Footer Navigation', 'heikkivihersalo-block-theme-core' ),
-			),
-		);
 	}
 
 	/**
