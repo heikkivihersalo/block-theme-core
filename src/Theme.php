@@ -45,7 +45,17 @@ class Theme {
 	/**
 	 * @var array
 	 */
+	private $excerpt;
+
+	/**
+	 * @var array
+	 */
 	private $image_sizes;
+
+	/**
+	 * @var array
+	 */
+	private $navigation;
 
 	/**
 	 * Constructor
@@ -53,8 +63,10 @@ class Theme {
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( array $image_sizes ) {
+	public function __construct( array $excerpt, array $image_sizes, array $navigation ) {
+		$this->excerpt     = $excerpt;
 		$this->image_sizes = $image_sizes;
+		$this->navigation  = $navigation;
 
 		$this->set_loader();
 		$this->set_admin();
@@ -139,7 +151,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_custom_excerpt() {
-		$excerpt = new Excerpt( $this->loader );
+		$excerpt = new Excerpt( $this->loader, $this->excerpt );
 		$excerpt->register_hooks();
 	}
 
@@ -211,7 +223,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_navigation() {
-		$navigation = new Navigation( $this->loader );
+		$navigation = new Navigation( $this->loader, $this->navigation );
 		$navigation->register_hooks();
 	}
 
