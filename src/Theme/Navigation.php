@@ -52,13 +52,9 @@ class Navigation implements RegisterHooksInterface {
 	 * @return void
 	 */
 	public function register_navigation_menus(): void {
-		$menu_array = array();
-
 		foreach ( $this->menu_locations as $menu ) :
-			$menu_array[] = $menu->get_navigation_menu();
+			register_nav_menu( $menu->get_slug(), $menu->get_name() );
 		endforeach;
-
-		register_nav_menus( $menu_array );
 	}
 
 	/**

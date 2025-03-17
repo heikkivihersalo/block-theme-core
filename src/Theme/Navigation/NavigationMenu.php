@@ -19,30 +19,20 @@ defined( 'ABSPATH' ) || die();
  */
 class NavigationMenu {
 	/**
-	 * Slug of the menu
-	 *
-	 * @var string
-	 */
-	private string $slug;
-
-	/**
-	 * Name of the menu
-	 *
-	 * @var string
-	 */
-	private string $name;
-
-	/**
 	 * Constructor
 	 *
-	 * @param string $slug Slug of the menu
-	 * @param string $name Name of the menu
+	 * @param string $slug The slug of the menu
+	 * @param string $name The name of the menu
+	 * @since 2.0.0
+	 * @access private
+	 * @return void
 	 */
-	public function __construct( string $slug, string $name ) {
-		$this->slug = $slug;
-		$this->name = $name;
+	public function __construct( private string $slug, private string $name ) {
 	}
 
+	public static function create( string $slug, string $name ): self {
+		return new self( $slug, $name );
+	}
 	/**
 	 * Get the slug of the menu
 	 *
@@ -59,16 +49,5 @@ class NavigationMenu {
 	 */
 	public function get_name(): string {
 		return $this->name;
-	}
-
-	/**
-	 * Get the navigation menu
-	 *
-	 * @return array
-	 */
-	public function get_navigation_menu(): array {
-		return array(
-			$this->get_slug() => $this->get_name(),
-		);
 	}
 }
