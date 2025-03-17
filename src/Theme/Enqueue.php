@@ -12,6 +12,8 @@ namespace HeikkiVihersalo\BlockThemeCore\Theme;
 
 defined( 'ABSPATH' ) || die();
 
+use WP_Filesystem_Direct;
+
 use HeikkiVihersalo\BlockThemeCore\Theme\Common\Loader;
 use HeikkiVihersalo\BlockThemeCore\Theme\Common\Enqueue as CommonEnqueue;
 use HeikkiVihersalo\BlockThemeCore\Theme\Common\Interfaces\EnqueueInterface;
@@ -83,6 +85,60 @@ class Enqueue extends CommonEnqueue implements EnqueueInterface, RegisterHooksIn
 	}
 
 	/**
+	 * Print inline styles
+	 *
+	 * @since    2.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function inline_sanitize_css(): void {
+		if ( ! isset( $this->enqueue['sanitize'] ) ) {
+			return;
+		}
+
+		$filesystem = new WP_Filesystem_Direct( true );
+		$id         = SITE_PATH . '/' . $this->base . '/' . $this->enqueue['sanitize']['css']['id'];
+		$path       = SITE_PATH . '/' . $this->base . '/' . $this->enqueue['sanitize']['css']['src'];
+
+		if ( ! $filesystem->exists( $path ) ) {
+			return;
+		}
+
+		?>
+		<style id="<?php echo esc_attr( $id ); ?>">
+			<?php echo $filesystem->get_contents( $path ); ?>
+		</style>
+		<?php
+	}
+
+	/**
+	 * Print inline styles
+	 *
+	 * @since    2.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function inline_custom_css(): void {
+		if ( ! isset( $this->enqueue['inline'] ) ) {
+			return;
+		}
+
+		$filesystem = new WP_Filesystem_Direct( true );
+		$id         = SITE_PATH . '/' . $this->base . '/' . $this->enqueue['inline']['css']['id'];
+		$path       = SITE_PATH . '/' . $this->base . '/' . $this->enqueue['inline']['css']['src'];
+
+		if ( ! $filesystem->exists( $path ) ) {
+			return;
+		}
+
+		?>
+		<style id="<?php echo esc_attr( $id ); ?>">
+			<?php echo $filesystem->get_contents( $path ); ?>
+		</style>
+		<?php
+	}
+
+	/**
 	 * Move global styles to top of print styles
 	 * - This is to ensure that global styles are loaded first
 	 * - This is important so we can override the global styles with local styles if needed
@@ -115,5 +171,14 @@ class Enqueue extends CommonEnqueue implements EnqueueInterface, RegisterHooksIn
 	public function register_hooks() {
 		$this->loader->add_action( 'wp_enqueue_scripts', $this, 'enqueue_scripts_and_styles' );
 		$this->loader->add_filter( 'print_styles_array', $this, 'move_global_styles_to_top', 10, 1 );
+
+		// Handle inline scripts and styles
+		if ( isset( $this->enqueue['sanitize']['enabled'] ) && $this->enqueue['sanitize']['enabled'] ) {
+			$this->loader->add_action( 'wp_head', $this, 'inline_sanitize_css', $this->enqueue['sanitize']['css']['priority'] );
+		}
+
+		if ( isset( $this->enqueue['inline']['enabled'] ) && $this->enqueue['inline']['enabled'] ) {
+			$this->loader->add_action( 'wp_head', $this, 'inline_custom_css', $this->enqueue['inline']['css']['priority'] );
+		}
 	}
 }
