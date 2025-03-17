@@ -28,6 +28,20 @@ class Image implements RegisterHooksInterface {
 	use ThemeDefaults;
 
 	/**
+	 * Default image sizes
+	 *
+	 * @var array
+	 */
+	private array $default_image_sizes;
+
+	/**
+	 * Custom image sizes
+	 *
+	 * @var array
+	 */
+	private array $custom_image_sizes;
+
+	/**
 	 * Constructor
 	 *
 	 * @since    2.0.0
