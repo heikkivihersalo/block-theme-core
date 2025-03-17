@@ -5,10 +5,10 @@
  * @link       https://www.kotisivu.dev
  * @since      2.0.0
  *
- * @package    Kotisivu\BlockTheme\Theme\Common\Utils
+ * @package    HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils
  */
 
-namespace Kotisivu\BlockTheme\Theme\Common\Utils;
+namespace HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils;
 
 defined( 'ABSPATH' ) || die();
 
@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || die();
  * Utility functions for security related tasks
  *
  * @since      2.0.0
- * @package    Kotisivu\BlockTheme\Theme\Common\Utils
+ * @package    HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Security {
