@@ -34,11 +34,8 @@ class Api implements RegisterHooksInterface {
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( Loader $loader, string $theme_name, string $version, string $api_version ) {
-		$this->loader      = $loader;
-		$this->theme_name  = $theme_name;
-		$this->version     = $version;
-		$this->api_version = $api_version;
+	public function __construct( Loader $loader ) {
+		$this->loader = $loader;
 	}
 
 	/**
@@ -49,7 +46,7 @@ class Api implements RegisterHooksInterface {
 	 * @return   void
 	 */
 	private function set_api_routes() {
-		$api = new Routes( $this->theme_name, $this->version, $this->api_version );
+		$api = new Routes();
 		$this->loader->add_action( 'rest_api_init', $api, 'register' );
 	}
 
@@ -61,7 +58,7 @@ class Api implements RegisterHooksInterface {
 	 * @return   void
 	 */
 	private function set_api_rest_fields() {
-		$fields = new RestFields( $this->theme_name, $this->version );
+		$fields = new RestFields();
 		$this->loader->add_action( 'rest_api_init', $fields, 'register' );
 	}
 

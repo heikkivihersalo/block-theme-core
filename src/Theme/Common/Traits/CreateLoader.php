@@ -21,13 +21,23 @@ use HeikkiVihersalo\BlockThemeCore\Theme\Common\Loader;
  */
 trait CreateLoader {
 	/**
+	 * The loader that's responsible for maintaining and registering all hooks that power
+	 * the theme.
+	 *
+	 * @since    2.0.0
+	 * @access   protected
+	 * @var      Loader    $loader    Maintains and registers all hooks for the theme.
+	 */
+	protected Loader $loader;
+
+	/**
 	 * Initialize the loader to execute all hooks with WordPress.
 	 *
 	 * @since    2.0.0
 	 * @access   private
 	 * @return   void
 	 */
-	public function create_loader() {
+	public function set_loader() {
 		$this->loader = new Loader();
 	}
 

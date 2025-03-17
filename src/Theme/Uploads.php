@@ -33,10 +33,8 @@ class Uploads implements RegisterHooksInterface {
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( Loader $loader, string $theme_name, string $version ) {
-		$this->loader     = $loader;
-		$this->theme_name = $theme_name;
-		$this->version    = $version;
+	public function __construct( Loader $loader ) {
+		$this->loader = $loader;
 	}
 
 	/**

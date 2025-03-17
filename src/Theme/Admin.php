@@ -38,10 +38,8 @@ class Admin implements RegisterHooksInterface {
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( Loader $loader, string $theme_name, string $version ) {
-		$this->loader     = $loader;
-		$this->theme_name = $theme_name;
-		$this->version    = $version;
+	public function __construct( Loader $loader ) {
+		$this->loader = $loader;
 	}
 
 	/**
@@ -53,7 +51,7 @@ class Admin implements RegisterHooksInterface {
 	 * @return   void
 	 */
 	private function add_admin_pages() {
-		$admin = new Pages( $this->theme_name, $this->version );
+		$admin = new Pages();
 
 		$this->loader->add_action( 'admin_menu', $admin, 'setup_theme_options' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_theme_options' );
@@ -68,7 +66,7 @@ class Admin implements RegisterHooksInterface {
 	 * @return   void
 	 */
 	private function set_admin_scripts_and_styles() {
-		$admin = new Enqueue( $this->theme_name, $this->version );
+		$admin = new Enqueue();
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts_and_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', MediaUtils::class, 'add_wp_media_support' );
 		$this->loader->add_action( 'admin_init', $admin, 'set_editor_styles' );

@@ -15,6 +15,7 @@ defined( 'ABSPATH' ) || die();
 use HeikkiVihersalo\BlockThemeCore\Theme\Common\Loader;
 use HeikkiVihersalo\BlockThemeCore\Theme\Common\Traits\ThemeDefaults;
 use HeikkiVihersalo\BlockThemeCore\Theme\Common\Interfaces\RegisterHooksInterface;
+use HeikkiVihersalo\BlockThemeCore\Theme\Common\Models\ImageSize;
 
 /**
  * Class for handling image customizations
@@ -27,80 +28,15 @@ class Image implements RegisterHooksInterface {
 	use ThemeDefaults;
 
 	/**
-	 * Default image sizes
-	 *
-	 * @since 2.0.0
-	 * @access private
-	 * @var array $custom_image_sizes Array of custom image sizes
-	 */
-	private array $default_image_sizes = array(
-		array(
-			'slug'   => 'large',
-			'width'  => 1600,
-			'height' => 1200,
-		),
-		array(
-			'slug'   => 'medium_large',
-			'name'   => 'Medium Large',
-			'width'  => 1366,
-			'height' => 1025,
-		),
-		array(
-			'slug'   => 'medium',
-			'width'  => 1024,
-			'height' => 768,
-		),
-		array(
-			'slug'   => 'thumbnail',
-			'width'  => 300,
-			'height' => 300,
-		),
-	);
-
-	/**
-	 * Custom image sizes
-	 *
-	 * @since 2.0.0
-	 * @access private
-	 * @var array $custom_image_sizes Array of custom image sizes
-	 */
-	private array $custom_image_sizes = array(
-		array(
-			'slug'   => 'retina',
-			'name'   => 'Retina',
-			'width'  => 2880,
-			'height' => 1800,
-		),
-		array(
-			'slug'   => 'huge',
-			'name'   => 'Huge',
-			'width'  => 1920,
-			'height' => 1440,
-		),
-		array(
-			'slug'   => 'small',
-			'name'   => 'Small',
-			'width'  => 768,
-			'height' => 576,
-		),
-		array(
-			'slug'   => 'extra_small',
-			'name'   => 'Extra Small',
-			'width'  => 640,
-			'height' => 480,
-		),
-	);
-
-	/**
 	 * Constructor
 	 *
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( Loader $loader, string $theme_name, string $version ) {
-		$this->loader     = $loader;
-		$this->theme_name = $theme_name;
-		$this->version    = $version;
+	public function __construct( Loader $loader, array $default_image_sizes, array $custom_image_sizes ) {
+		$this->loader              = $loader;
+		$this->default_image_sizes = $default_image_sizes;
+		$this->custom_image_sizes  = $custom_image_sizes;
 	}
 
 	/**

@@ -23,32 +23,12 @@ use HeikkiVihersalo\BlockThemeCore\Theme\Common\Interfaces\EnqueueInterface;
  */
 abstract class Enqueue implements EnqueueInterface {
 	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    2.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $plugin_name;
-
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    2.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
-
-	/**
 	 * Constructor
 	 *
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
+	public function __construct() {
 	}
 
 	/**

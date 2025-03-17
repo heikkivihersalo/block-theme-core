@@ -43,22 +43,23 @@ class Theme {
 	use ThemeDefaults;
 
 	/**
+	 * @var array
+	 */
+	private $image_sizes;
+
+	/**
 	 * Constructor
 	 *
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	public function __construct() {
-		$this->theme_name  = defined( 'SITE_NAME' ) ? SITE_NAME : 'heikkivihersalo-block-theme-core';
-		$this->version     = defined( 'SITE_VERSION' ) ? SITE_VERSION : '1.0.0';
-		$this->api_version = defined( 'SITE_API_VERSION' ) ? SITE_API_VERSION : '1';
+	public function __construct( array $image_sizes ) {
+		$this->image_sizes = $image_sizes;
 
-		$this->create_loader();
-
+		$this->set_loader();
 		$this->set_admin();
 		$this->set_api();
 		$this->set_cleanup();
-		$this->set_custom_post_types();
 		$this->set_dequeue();
 		$this->set_enqueue();
 		$this->set_custom_excerpt();
@@ -79,7 +80,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_admin() {
-		$admin = new Admin( $this->loader, $this->theme_name, $this->version );
+		$admin = new Admin( $this->loader );
 		$admin->register_hooks();
 	}
 
@@ -91,7 +92,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_api() {
-		$api = new Api( $this->loader, $this->theme_name, $this->version, $this->api_version );
+		$api = new Api( $this->loader );
 		$api->register_hooks();
 	}
 
@@ -103,20 +104,8 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_cleanup() {
-		$cleanup = new Cleanup( $this->loader, $this->theme_name, $this->version );
+		$cleanup = new Cleanup( $this->loader );
 		$cleanup->register_hooks();
-	}
-
-	/**
-	 * Register all of the hooks related to custom post types for the theme
-	 *
-	 * @since    2.0.0
-	 * @access   private
-	 * @return   void
-	 */
-	private function set_custom_post_types() {
-		$cpt = new CustomPostTypes( $this->loader, $this->theme_name, $this->version );
-		$cpt->register_hooks();
 	}
 
 	/**
@@ -127,7 +116,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_dequeue() {
-		$dequeue = new Dequeue( $this->loader, $this->theme_name, $this->version );
+		$dequeue = new Dequeue( $this->loader );
 		$dequeue->register_hooks();
 	}
 
@@ -138,7 +127,7 @@ class Theme {
 	 * @access   private
 	 */
 	private function set_enqueue() {
-		$enqueue = new Enqueue( $this->loader, $this->theme_name, $this->version );
+		$enqueue = new Enqueue( $this->loader );
 		$enqueue->register_hooks();
 	}
 
@@ -150,7 +139,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_custom_excerpt() {
-		$excerpt = new Excerpt( $this->loader, $this->theme_name, $this->version );
+		$excerpt = new Excerpt( $this->loader );
 		$excerpt->register_hooks();
 	}
 
@@ -174,7 +163,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_custom_image() {
-		$image = new Image( $this->loader, $this->theme_name, $this->version );
+		$image = new Image( $this->loader, $this->image_sizes['default'], $this->image_sizes['custom'] );
 		$image->register_hooks();
 	}
 
@@ -186,7 +175,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_meta() {
-		$meta = new Meta( $this->loader, $this->theme_name, $this->version );
+		$meta = new Meta( $this->loader );
 		$meta->register_hooks();
 	}
 
@@ -198,7 +187,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_security() {
-		$security = new Security( $this->loader, $this->theme_name, $this->version );
+		$security = new Security( $this->loader );
 		$security->register_hooks();
 	}
 
@@ -210,7 +199,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_supports() {
-		$supports = new Supports( $this->loader, $this->theme_name, $this->version );
+		$supports = new Supports( $this->loader );
 		$supports->register_hooks();
 	}
 
@@ -222,7 +211,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_navigation() {
-		$navigation = new Navigation( $this->loader, $this->theme_name, $this->version );
+		$navigation = new Navigation( $this->loader );
 		$navigation->register_hooks();
 	}
 
@@ -234,7 +223,7 @@ class Theme {
 	 * @return   void
 	 */
 	private function set_uploads() {
-		$uploads = new Uploads( $this->loader, $this->theme_name, $this->version );
+		$uploads = new Uploads( $this->loader );
 		$uploads->register_hooks();
 	}
 }
