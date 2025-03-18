@@ -66,7 +66,7 @@ class Loader {
 	 * @since    2.0.0
 	 * @access   public
 	 */
-	protected function __construct() { }
+	public function __construct() { }
 
 	/**
 	 * Prevent cloning of the instance of the class
@@ -75,7 +75,7 @@ class Loader {
 	 * @access   protected
 	 * @return   void
 	 */
-	protected function __clone() { }
+	public function __clone() { }
 
 	/**
 	 * Add a new action to the collection to be registered with WordPress.
