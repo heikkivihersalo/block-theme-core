@@ -12,6 +12,7 @@ use Vihersalo\BlockThemeCore\Configuration\Config;
 use Vihersalo\BlockThemeCore\Configuration\ThemeSupportProvider;
 use Vihersalo\BlockThemeCore\Enqueue\EnqueueProvider;
 use Vihersalo\BlockThemeCore\Navigation\NavigationProvider;
+use Vihersalo\BlockThemeCore\Translations\TranslationProvider;
 use Vihersalo\BlockThemeCore\Support\ServiceProvider;
 
 /**
@@ -144,6 +145,7 @@ class Application extends Container {
 		$this->register_provider( new EnqueueProvider( $this ) );
 		$this->register_provider( new NavigationProvider( $this ) );
 		$this->register_provider( new ThemeSupportProvider( $this ) );
+		$this->register_provider( new TranslationProvider( $this ) );
 		$this->register_provider( new DuplicateProvider( $this ) );
 	}
 
