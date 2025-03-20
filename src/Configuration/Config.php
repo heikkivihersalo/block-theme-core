@@ -1,7 +1,13 @@
 <?php
 
-namespace HeikkiVihersalo\BlockThemeCore\Configuration;
+namespace Vihersalo\BlockThemeCore\Configuration;
 
+/**
+ *
+ * @since      2.0.0
+ * @package    Vihersalo\BlockThemeCore\Configuration
+ * @author     Heikki Vihersalo <heikki@vihersalo.fi>
+ */
 class Config {
 	/**
 	 * The path to the configuration files.
