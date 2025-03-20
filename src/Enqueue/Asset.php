@@ -114,7 +114,7 @@ abstract class Asset {
 		if ( ! file_exists( SITE_PATH . '/' . $this->asset ) ) :
 			$message = sprintf(
 				/* translators: %1$s is the path to the asset */
-				__( 'Asset in a path "%1$s" are missing. Run `yarn` and/or `yarn build` to generate them.', 'heikkivihersalo-block-theme-core' ),
+				__( 'Asset in a path "%1$s" are missing. Run `yarn` and/or `yarn build` to generate them.', 'vihersalo-block-theme-core' ),
 				$this->asset
 			);
 

@@ -5,7 +5,7 @@
  * @link       https://www.kotisivu.dev
  * @since      2.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Common
+ * @package    Vihersalo\BlockThemeCore\Common
  */
 
 namespace Vihersalo\BlockThemeCore\Support;
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || die();
  * This class defines all code necessary to display a notice in admin area.
  *
  * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Common
+ * @package    Vihersalo\BlockThemeCore\Common
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Notice {
