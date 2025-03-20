@@ -8,6 +8,8 @@ use Vihersalo\BlockThemeCore\Enqueue\Asset;
 require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
 require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
 
+use WP_Filesystem_Direct;
+
 /**
  * The inline asset class
  *
