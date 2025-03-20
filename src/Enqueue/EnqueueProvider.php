@@ -35,10 +35,6 @@ class EnqueueProvider extends ServiceProvider {
 		$assets = $this->app->make( 'config' )->get( 'app.assets' );
 
 		foreach ( $assets as $asset ) :
-			if ( ! class_exists( $asset ) ) {
-				continue;
-			}
-
 			if ( method_exists( $asset, 'register' ) ) {
 				call_user_func( array( $asset, 'register' ) );
 			}
