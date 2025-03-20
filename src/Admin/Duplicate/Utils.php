@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || die();
  * @package    Vihersalo\BlockThemeCore\Theme\Admin\Pages
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
-final class Helpers {
+final class Utils {
 	/**
 	 * This utility class should never be instantiated.
 	 */
