@@ -4,17 +4,17 @@
  * @link       https://www.kotisivu.dev
  * @since      2.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Navigation
+ * @package    Vihersalo\BlockThemeCore\Navigation
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Navigation;
+namespace Vihersalo\BlockThemeCore\Navigation;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  *
  * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Navigation
+ * @package    Vihersalo\BlockThemeCore\Navigation
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Menu {
