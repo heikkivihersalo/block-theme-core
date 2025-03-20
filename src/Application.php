@@ -1,18 +1,24 @@
 <?php
 
-namespace HeikkiVihersalo\BlockThemeCore;
+namespace Vihersalo\BlockThemeCore;
 
 use Illuminate\Container\Container;
 
-use HeikkiVihersalo\BlockThemeCore\Application\ApplicationBuilder;
-use HeikkiVihersalo\BlockThemeCore\Configuration\Config;
-use HeikkiVihersalo\BlockThemeCore\Navigation\NavigationServiceProvider;
+use Vihersalo\BlockThemeCore\Admin\CustomizerProvider;
+use Vihersalo\BlockThemeCore\Admin\Duplicate\DuplicateProvider;
+use Vihersalo\BlockThemeCore\Application\ApplicationBuilder;
+use Vihersalo\BlockThemeCore\Application\HooksLoader;
+use Vihersalo\BlockThemeCore\Configuration\Config;
+use Vihersalo\BlockThemeCore\Configuration\ThemeSupportProvider;
+use Vihersalo\BlockThemeCore\Enqueue\EnqueueProvider;
+use Vihersalo\BlockThemeCore\Navigation\NavigationProvider;
+use Vihersalo\BlockThemeCore\Support\ServiceProvider;
 
 /**
  * The core application class.
  *
  * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore
+ * @package    Vihersalo\BlockThemeCore
  * @author     Heikki Vihersalo
  */
 class Application extends Container {
@@ -35,14 +41,53 @@ class Application extends Container {
 	protected $base_uri;
 
 	/**
+	 * Indicates if the application has "booted".
+	 *
+	 * @var bool
+	 */
+	protected $booted = false;
+
+	/**
+	 * The array of registered callbacks.
+	 *
+	 * @var callable[]
+	 */
+	protected $registered_callbacks = array();
+
+	/**
+	 * The array of booting callbacks.
+	 *
+	 * @var callable[]
+	 */
+	protected $booting_callbacks = array();
+
+	/**
+	 * The array of booted callbacks.
+	 *
+	 * @var callable[]
+	 */
+	protected $booted_callbacks = array();
+
+	/**
 	 * All of the registered service providers.
 	 *
 	 * @var array<string, \Illuminate\Support\ServiceProvider>
 	 */
-	protected $serviceProviders = array();
+	protected $service_providers = array();
+
+	/**
+	 * The names of the loaded service providers.
+	 *
+	 * @var array
+	 */
+	protected $loaded_providers = array();
 
 	/**
 	 * Constructor
+	 *
+	 * @param string $base_path The path to the application "app" base directory
+	 * @param string $base_uri The URI to the application "app" base directory
+	 * @return void
 	 */
 	public function __construct( $base_path = null, $base_uri = null ) {
 		$this->base_path = $base_path ?? get_template_directory();
@@ -50,43 +95,22 @@ class Application extends Container {
 
 		$this->register_base_bindings();
 		$this->register_base_service_providers();
+		$this->register_configured_providers();
 	}
 
 	/**
 	 * Configure the application
 	 *
-	 * @return ApplicationBuilder
+	 * @return \Vihersalo\BlockThemeCore\Application\ApplicationBuilder
 	 */
 	public static function configure() {
-		return new ApplicationBuilder( new static() );
-	}
-
-	/**
-	 * Get the registered service provider instance if it exists.
-	 *
-	 * @param  \Illuminate\Support\ServiceProvider|string $provider
-	 * @return \Illuminate\Support\ServiceProvider|null
-	 */
-	public function get_provider( $provider ) {
-		$name = is_string( $provider ) ? $provider : get_class( $provider );
-
-		return $this->serviceProviders[ $name ] ?? null;
-	}
-
-	/**
-	 * Resolve a service provider instance from the class name.
-	 *
-	 * @param  string $provider
-	 * @return \Illuminate\Support\ServiceProvider
-	 */
-	public function resolve_provider( $provider ) {
-		return new $provider( $this );
+		return ( new ApplicationBuilder( new static() ) );
 	}
 
 	/**
 	 * Get the instance of the container
 	 *
-	 * @return Container
+	 * @return void
 	 */
 	protected function register_base_bindings() {
 		static::$container = static::setInstance( $this );
@@ -104,9 +128,9 @@ class Application extends Container {
 
 		// Bind the application loader to the container
 		$this->singleton(
-			Loader::class,
+			HooksLoader::class,
 			function () {
-				return new Loader();
+				return new HooksLoader();
 			}
 		);
 	}
@@ -117,17 +141,55 @@ class Application extends Container {
 	 * @return void
 	 */
 	protected function register_base_service_providers() {
-		$this->register( new NavigationServiceProvider( $this ) );
+		$this->register_provider( new EnqueueProvider( $this ) );
+		$this->register_provider( new NavigationProvider( $this ) );
+		$this->register_provider( new ThemeSupportProvider( $this ) );
+		$this->register_provider( new DuplicateProvider( $this ) );
+	}
+
+	/**
+	 * Register all of the configured providers.
+	 *
+	 * @return void
+	 */
+	public function register_configured_providers() {
+		$providers = $this->make( 'config' )->get( 'app.providers' );
+
+		foreach ( $providers as $provider ) {
+			$this->register_provider( $this->resolve_provider( $provider ) );
+		}
+	}
+
+		/**
+		 * Get the registered service provider instance if it exists.
+		 *
+		 * @param  \Vihersalo\BlockThemeCore\Support\ServiceProvider|string $provider The provider to get
+		 * @return \Vihersalo\BlockThemeCore\Support\ServiceProvider|null
+		 */
+	public function get_provider( $provider ) {
+		$name = is_string( $provider ) ? $provider : get_class( $provider );
+
+		return $this->service_providers[ $name ] ?? null;
+	}
+
+	/**
+	 * Resolve a service provider instance from the class name.
+	 *
+	 * @param  string $provider
+	 * @return \Vihersalo\BlockThemeCore\Support\ServiceProvider $provider
+	 */
+	public function resolve_provider( $provider ) {
+		return new $provider( $this );
 	}
 
 	/**
 	 * Register a service provider with the application.
 	 *
-	 * @param  \Illuminate\Support\ServiceProvider|string $provider
-	 * @param  bool                                       $force
-	 * @return \Illuminate\Support\ServiceProvider
+	 * @param  Vihersalo\BlockThemeCore\Support\ServiceProvider|string $provider The provider to register
+	 * @param  bool                                                    $force If true, the provider will be registered even if it has already been registered
+	 * @return Vihersalo\BlockThemeCore\Support\ServiceProvider
 	 */
-	public function register( $provider, $force = false ) {
+	public function register_provider( $provider, $force = false ) {
 		if ( ( $registered = $this->get_provider( $provider ) ) && ! $force ) {
 			return $registered;
 		}
@@ -158,25 +220,131 @@ class Application extends Container {
 			}
 		}
 
-		// $this->markAsRegistered($provider);
+		$this->mark_as_registered( $provider );
 
-		// // If the application has already booted, we will call this boot method on
-		// // the provider class so it has an opportunity to do its boot logic and
-		// // will be ready for any usage by this developer's application logic.
-		// if ($this->isBooted()) {
-		// $this->bootProvider($provider);
-		// }
+		// If the application has already booted, we will call this boot method on
+		// the provider class so it has an opportunity to do its boot logic and
+		// will be ready for any usage by this developer's application logic.
+		if ( $this->is_booted() ) {
+			$this->boot_provider( $provider );
+		}
 
 		return $provider;
 	}
 
 	/**
-	 * Get the configuration value
+	 * Register a new registered listener.
 	 *
-	 * @param string $key
-	 * @return mixed
+	 * @param  callable $callback The callback to run when a provider is registered
+	 * @return void
 	 */
-	protected function config( $key ) {
-		return $this->make( Config::class )->get( $key );
+	public function registered( $callback ) {
+		$this->registered_callbacks[] = $callback;
+	}
+
+	/**
+	 * Mark the given provider as registered.
+	 *
+	 * @param  \Vihersalo\BlockThemeCore\Support\ServiceProvider $provider The provider to mark as registered
+	 * @return void
+	 */
+	protected function mark_as_registered( $provider ) {
+		$class = get_class( $provider );
+
+		$this->service_providers[ $class ] = $provider;
+
+		$this->loaded_providers[ $class ] = true;
+	}
+
+	/**
+	 * Call the booting callbacks for the application.
+	 *
+	 * @param  callable[] $callbacks The callbacks to run
+	 * @return void
+	 */
+	protected function fire_app_callbacks( array &$callbacks ) {
+		$index = 0;
+
+		while ( $index < count( $callbacks ) ) {
+			$callbacks[ $index ]( $this );
+
+			++$index;
+		}
+	}
+
+	/**
+	 * Determine if the application has booted.
+	 *
+	 * @return bool
+	 */
+	public function is_booted() {
+		return $this->booted;
+	}
+
+	/**
+	 * Register a new boot listener.
+	 *
+	 * @param  callable $callback The callback to run when the application is booting
+	 * @return void
+	 */
+	public function booting( $callback ) {
+		$this->booting_callbacks[] = $callback;
+	}
+
+	/**
+	 * Register a new "booted" listener.
+	 *
+	 * @param  callable $callback The callback to run when the application has booted
+	 * @return void
+	 */
+	public function booted( $callback ) {
+		$this->booted_callbacks[] = $callback;
+
+		if ( $this->is_booted() ) {
+			$callback( $this );
+		}
+	}
+
+	/**
+	 * Boot the given service provider.
+	 *
+	 * @param  \Vihersalo\BlockThemeCore\Support\ServiceProvider $provider The provider to boot
+	 * @return void
+	 */
+	protected function boot_provider( $provider ) {
+		$provider->call_booting_callbacks();
+
+		if ( method_exists( $provider, 'boot' ) ) {
+			$this->call( array( $provider, 'boot' ) );
+		}
+
+		$provider->call_booted_callbacks();
+	}
+
+	/**
+	 * Boot the application's service providers.
+	 *
+	 * @return void
+	 */
+	public function boot() {
+		if ( $this->is_booted() ) {
+			return;
+		}
+
+		// Once the application has booted we will also fire some "booted" callbacks
+		// for any listeners that need to do work after this initial booting gets
+		// finished. This is useful when ordering the boot-up processes we run.
+		$this->fire_app_callbacks( $this->booting_callbacks );
+
+		array_walk(
+			$this->service_providers,
+			function ( $p ) {
+				$this->boot_provider( $p );
+			}
+		);
+
+		$this->booted = true;
+
+		$this->fire_app_callbacks( $this->booted_callbacks );
 	}
 }
