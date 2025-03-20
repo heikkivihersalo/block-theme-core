@@ -64,6 +64,12 @@ abstract class Asset {
 	protected $admin;
 
 	/**
+	 * Whether the asset is for `add_editor_style` function or not
+	 * @var bool
+	 */
+	protected $editor;
+
+	/**
 	 * Constructor
 	 *
 	 * @param string $handle The handle of enqueued asset
@@ -72,6 +78,7 @@ abstract class Asset {
 	 * @param string $asset The asset file path
 	 * @param int    $priority The priority of the enqueued asset
 	 * @param bool   $admin Whether the asset is for admin or not
+	 * @param bool   $editor Whether the asset is for `add_editor_style` function or not
 	 *
 	 * @since 2.0.0
 	 * @access private
@@ -83,7 +90,8 @@ abstract class Asset {
 		string $path = '',
 		string $asset = '',
 		int $priority = 10,
-		bool $admin = false
+		bool $admin = false,
+		bool $editor = false
 	) {
 		$this->handle   = $handle;
 		$this->src      = $src;
@@ -91,6 +99,7 @@ abstract class Asset {
 		$this->asset    = $asset;
 		$this->priority = $priority;
 		$this->admin    = $admin;
+		$this->editor   = $editor;
 		$this->app      = Application::getInstance();
 	}
 
@@ -140,6 +149,15 @@ abstract class Asset {
 	}
 
 	/**
+	 * Get the editor boolean of enqueued asset
+	 *
+	 * @return bool
+	 */
+	public function is_editor(): bool {
+		return $this->editor;
+	}
+
+	/**
 	 * Get the asset file path
 	 *
 	 * @return string
@@ -154,6 +172,15 @@ abstract class Asset {
 		endif;
 
 		return $this->asset;
+	}
+
+	/**
+	 * Enqueue the asset in the admin
+	 *
+	 * @return void
+	 */
+	public function add_to_editor_styles() {
+		add_editor_style( $this->app->make( 'config' )->get( 'uri' ) . '/' . $this->get_src() );
 	}
 
 	/**
