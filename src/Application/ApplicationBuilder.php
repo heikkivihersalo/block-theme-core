@@ -1,61 +1,47 @@
 <?php
 
-namespace HeikkiVihersalo\BlockThemeCore\Application;
+namespace Vihersalo\BlockThemeCore\Application;
 
-use HeikkiVihersalo\BlockThemeCore\Application;
-use HeikkiVihersalo\BlockThemeCore\Loader;
+use Vihersalo\BlockThemeCore\Application;
+use Vihersalo\BlockThemeCore\Application\HooksLoader;
 
+/**
+ * Application builder
+ *
+ * @since      2.0.0
+ * @package    Vihersalo\BlockThemeCore\Application
+ * @author     Heikki Vihersalo <heikki@vihersalo.fi>
+ */
 class ApplicationBuilder {
-    /**
-     * Constructor
-     * 
-     * @param Application $app
-     * @return void
-     */
-    public function __construct(protected Application $app) {}
+	/**
+	 * Application instance
+	 *
+	 * @var \Vihersalo\BlockThemeCore\Application
+	 */
+	protected Application $app;
 
-    /**
-     * Register the providers
-     */
-    protected function register_providers() {
-        $providers = $this->app->make('config')->get('app.providers');
+	/**
+	 * Constructor
+	 *
+	 * @param Application $app The application instance.
+	 * @return void
+	 */
+	public function __construct( $app ) {
+		$this->app = $app;
+	}
 
-        foreach ($providers as $provider) {
-            $provider = new $provider($this->app);
-            $provider->register();
-        }
-    }
+	/**
+	 * Get the application instance.
+	 *
+	 * @return \Illuminate\Foundation\Application
+	 */
+	public function boot() {
+		// Boot the application instance
+		$this->app->boot();
 
-    /**
-     * Boot the providers
-     */
-    protected function boot_providers() {
-        $providers = $this->app->make('config')->get('app.providers');
+		// Boot the hooks loader
+		$this->app->make( HooksLoader::class )->run();
 
-        foreach ($providers as $provider) {
-            $provider = new $provider($this->app);
-            $provider->boot();
-        }
-    }
-
-    /**
-     * Register the WordPress hooks from the loader
-     */
-    public function wp() {
-        $loader = $this->app->make(Loader::class)->run();
-
-        return $this;
-    }
-
-    /**
-     * Get the application
-     * 
-     * @return Application
-     */
-    public function create() {
-        $this->register_providers();
-        $this->boot_providers();
-        
-        return $this->app;
-    }
+		return $this->app;
+	}
 }
