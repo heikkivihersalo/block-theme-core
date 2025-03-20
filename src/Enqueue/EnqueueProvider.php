@@ -4,6 +4,7 @@ namespace Vihersalo\BlockThemeCore\Enqueue;
 
 use Vihersalo\BlockThemeCore\Application;
 use Vihersalo\BlockThemeCore\Application\HooksLoader;
+use Vihersalo\BlockThemeCore\Support\Utils\Media as MediaUtils;
 use Vihersalo\BlockThemeCore\Support\ServiceProvider;
 
 /**
@@ -22,6 +23,7 @@ class EnqueueProvider extends ServiceProvider {
 	 */
 	public function register() {
 		$this->register_assets();
+		$this->register_wp_media_support();
 	}
 
 	/**
@@ -39,6 +41,17 @@ class EnqueueProvider extends ServiceProvider {
 				call_user_func( array( $asset, 'register' ) );
 			}
 		endforeach;
+	}
+
+	/**
+	 * Register WP media support
+	 *
+	 * @since    2.0.0
+	 * @access   public
+	 * @return   void
+	 */
+	public function register_wp_media_support() {
+		$this->app->make( HooksLoader::class )->add_action( 'admin_enqueue_scripts', MediaUtils::class, 'add_wp_media_support' );
 	}
 
 	/**
