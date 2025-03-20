@@ -33,11 +33,13 @@ class Script extends Asset {
 	 * @return void
 	 */
 	public function enqueue() {
-		$assets = $this->get_asset();
+		$asset_path = $this->get_asset_path();
 
-		if ( '' === $assets ) {
+		if ( '' === $asset_path ) {
 			return;
 		}
+
+		$assets = require $this->app->make( 'config' )->get( 'app.path' ) . '/' . $asset_path;
 
 		wp_enqueue_script(
 			$this->get_handle(),

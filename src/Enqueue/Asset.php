@@ -11,6 +11,7 @@ namespace Vihersalo\BlockThemeCore\Enqueue;
 
 defined( 'ABSPATH' ) || die();
 
+use Vihersalo\BlockThemeCore\Application;
 use Vihersalo\BlockThemeCore\Support\Notice;
 
 /**
@@ -20,6 +21,48 @@ use Vihersalo\BlockThemeCore\Support\Notice;
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 abstract class Asset {
+	/**
+	 * App instance
+	 * @var Application
+	 */
+	protected $app;
+
+	/**
+	 * The handle of enqueued asset
+	 * @var string
+	 */
+	protected $handle;
+
+	/**
+	 * The src of enqueued asset
+	 * @var string
+	 */
+	protected $src;
+
+	/**
+	 * The path of enqueued asset
+	 * @var string
+	 */
+	protected $path;
+
+	/**
+	 * The asset file path
+	 * @var string
+	 */
+	protected $asset;
+
+	/**
+	 * The priority of the enqueued asset
+	 * @var int
+	 */
+	protected $priority;
+
+	/**
+	 * Whether the asset is for admin or not
+	 * @var bool
+	 */
+	protected $admin;
+
 	/**
 	 * Constructor
 	 *
@@ -35,13 +78,21 @@ abstract class Asset {
 	 * @return void
 	 */
 	public function __construct(
-		private string $handle = '',
-		private string $src = '',
-		private string $path = '',
-		private string $asset = '',
-		private int $priority = 10,
-		private bool $admin = false
-	) {}
+		string $handle = '',
+		string $src = '',
+		string $path = '',
+		string $asset = '',
+		int $priority = 10,
+		bool $admin = false
+	) {
+		$this->handle   = $handle;
+		$this->src      = $src;
+		$this->path     = $path;
+		$this->asset    = $asset;
+		$this->priority = $priority;
+		$this->admin    = $admin;
+		$this->app      = Application::getInstance();
+	}
 
 	/**
 	 * Get the handle of enqueued asset
@@ -93,7 +144,7 @@ abstract class Asset {
 	 *
 	 * @return string
 	 */
-	public function get_asset(): string {
+	public function get_asset_path(): string {
 		if ( '' === $this->asset ) :
 			return '';
 		endif;
@@ -111,7 +162,9 @@ abstract class Asset {
 	 * @return bool
 	 */
 	public function asset_exists(): bool {
-		if ( ! file_exists( SITE_PATH . '/' . $this->asset ) ) :
+		$path = $this->app->make( 'config' )->get( 'app.path' );
+
+		if ( ! file_exists( trailingslashit( $path ) . $this->asset ) ) :
 			$message = sprintf(
 				/* translators: %1$s is the path to the asset */
 				__( 'Asset in a path "%1$s" are missing. Run `yarn` and/or `yarn build` to generate them.', 'vihersalo-block-theme-core' ),
