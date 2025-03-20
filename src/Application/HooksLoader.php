@@ -5,10 +5,10 @@
  * @link       https://www.kotisivu.dev
  * @since      2.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Common
+ * @package    Vihersalo\BlockThemeCore\Application
  */
 
-namespace HeikkiVihersalo\BlockThemeCore;
+namespace Vihersalo\BlockThemeCore\Application;
 
 defined( 'ABSPATH' ) || die();
 
@@ -20,10 +20,10 @@ defined( 'ABSPATH' ) || die();
  * run function to execute the list of actions and filters.
  *
  * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Common
+ * @package    Vihersalo\BlockThemeCore\Application
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
-class Loader {
+class HooksLoader {
 	/**
 	 * The array of actions registered with WordPress.
 	 *
