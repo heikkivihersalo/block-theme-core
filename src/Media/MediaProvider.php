@@ -25,8 +25,10 @@ class MediaProvider extends ServiceProvider {
 	 */
 	public function register() {
 		$loader = $this->app->make( HooksLoader::class );
+
 		$this->register_image_sizes( $loader );
 		$this->allow_svg_file_uploads( $loader );
+		$this->set_custom_excerpt_length( $loader );
 	}
 
 	/**
