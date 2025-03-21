@@ -17,7 +17,18 @@ class AnalyticsProvider extends ServiceProvider {
 	 * Register the navigation provider
 	 */
 	public function register() {
-		$this->app->make( HooksLoader::class )->add_action( 'wp_head', TagManager::class, 'inline_tag_manager', 0 );
+		$this->register_tagmanager();
+	}
+
+	/**
+	 * Register the Google Tag Manager
+	 *
+	 * @return void
+	 */
+	public function register_tagmanager() {
+		$tagmanager = new TagManager();
+
+		$this->app->make( HooksLoader::class )->add_action( 'wp_head', $tagmanager, 'inline_tag_manager', 0 );
 	}
 
 	/**
