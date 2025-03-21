@@ -10,6 +10,7 @@ use Vihersalo\BlockThemeCore\Application\ApplicationBuilder;
 use Vihersalo\BlockThemeCore\Application\HooksLoader;
 use Vihersalo\BlockThemeCore\Configuration\Config;
 use Vihersalo\BlockThemeCore\Configuration\ThemeSupportProvider;
+use Vihersalo\BlockThemeCore\Enqueue\DequeueProvider;
 use Vihersalo\BlockThemeCore\Enqueue\EnqueueProvider;
 use Vihersalo\BlockThemeCore\Navigation\NavigationProvider;
 use Vihersalo\BlockThemeCore\Translations\TranslationProvider;
@@ -142,6 +143,7 @@ class Application extends Container {
 	 * @return void
 	 */
 	protected function register_base_service_providers() {
+		$this->register_provider( new DequeueProvider( $this ) );
 		$this->register_provider( new EnqueueProvider( $this ) );
 		$this->register_provider( new NavigationProvider( $this ) );
 		$this->register_provider( new ThemeSupportProvider( $this ) );
