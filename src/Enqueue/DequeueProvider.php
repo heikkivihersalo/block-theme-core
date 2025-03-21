@@ -21,7 +21,7 @@ class DequeueProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {
-		$this->dequeue_assets();
+		$this->app->make( HooksLoader::class )->add_action( 'wp_enqueue_scripts', $this, 'dequeue_assets' );
 	}
 
 	/**
