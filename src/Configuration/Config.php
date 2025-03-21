@@ -19,7 +19,7 @@ class Config {
 	 * The configuration values.
 	 * @var array
 	 */
-	protected $config = array();
+	protected $config = [];
 
 	/**
 	 * Constructor
