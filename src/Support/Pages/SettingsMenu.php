@@ -72,6 +72,27 @@ class SettingsMenu {
 	private $path;
 
 	/**
+	 * The sub pages
+	 *
+	 * @var array $submenu The sub pages
+	 */
+	private $submenu;
+
+	/**
+	 * The assets
+	 *
+	 * @var array $assets The assets
+	 */
+	private $assets;
+
+	/**
+	 * The localize
+	 *
+	 * @var Localize|bool $localize The localize
+	 */
+	private $localize;
+
+	/**
 	 * Create a new page collection
 	 *
 	 * @param string        $slug The slug of the menu
