@@ -8,7 +8,7 @@ use Vihersalo\BlockThemeCore\Support\Utils\Common as Utils;
 use Vihersalo\BlockThemeCore\Support\ServiceProvider;
 use Vihersalo\BlockThemeCore\Support\Pages\SettingsMenu;
 
-use Vihersalo\BlockThemeCore\Admin\Pages\PagesManager;
+use Vihersalo\BlockThemeCore\Admin\Settings\SettingsMenuManager;
 
 /**
  *
@@ -34,7 +34,7 @@ class SettingsMenuProvider extends ServiceProvider {
 		$uri   = $this->app->make( 'config' )->get( 'app.uri' );
 
 		foreach ( $pages as $page ) :
-			$manager = new PagesManager( $page, $path, $uri );
+			$manager = new SettingsMenuManager( $page, $path, $uri );
 			$loader->add_action( 'admin_menu', $manager, 'add_menu' );
 			$loader->add_action( 'admin_enqueue_scripts', $manager, 'enqueue_assets' );
 		endforeach;
