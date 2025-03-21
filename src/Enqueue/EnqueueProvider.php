@@ -38,7 +38,7 @@ class EnqueueProvider extends ServiceProvider {
 
 		foreach ( $assets as $asset ) :
 			if ( method_exists( $asset, 'register' ) ) {
-				call_user_func( array( $asset, 'register' ) );
+				call_user_func( [ $asset, 'register' ] );
 			}
 		endforeach;
 	}

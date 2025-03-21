@@ -43,7 +43,7 @@ final class Utils {
 			update_user_option(
 				$user_id,
 				$meta_key,
-				array(
+				[
 					'dashboard_site_health',
 					'dashboard_right_now',
 					'dashboard_activity',
@@ -51,7 +51,7 @@ final class Utils {
 					'dashboard_primary',
 					'llar_stats_widget', // Limit Login Attempts Reloaded plugin
 					'fluentform_stat_widget', // Fluent Forms plugin
-				),
+				],
 				true
 			);
 		}
@@ -65,82 +65,82 @@ final class Utils {
 	public static function remove_admin_bar_items() {
 		global $wp_admin_bar;
 
-		$options = array(
-			'wp-logo'      => array(
+		$options = [
+			'wp-logo'      => [
 				'remove'   => true,
-				'children' => array(
+				'children' => [
 					'about'         => true,
 					'wporg'         => true,
 					'documentation' => true,
 					'support-forum' => true,
 					'feedback'      => true,
-				),
-			),
-			'site-name'    => array(
+				],
+			],
+			'site-name'    => [
 				'remove'   => false,
-				'children' => array(
+				'children' => [
 					'dashboard' => false,
 					'themes'    => true,
 					'menus'     => true,
-				),
-			),
-			'updates'      => array(
+				],
+			],
+			'updates'      => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'site-editor'  => array(
+				'children' => [],
+			],
+			'site-editor'  => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'customize'    => array(
+				'children' => [],
+			],
+			'customize'    => [
 				'remove'   => false,
-				'children' => array(),
-			),
-			'comments'     => array(
+				'children' => [],
+			],
+			'comments'     => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'new-content'  => array(
+				'children' => [],
+			],
+			'new-content'  => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'new-post'     => array(
+				'children' => [],
+			],
+			'new-post'     => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'new-media'    => array(
+				'children' => [],
+			],
+			'new-media'    => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'new-page'     => array(
+				'children' => [],
+			],
+			'new-page'     => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'new-user'     => array(
+				'children' => [],
+			],
+			'new-user'     => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'edit'         => array(
+				'children' => [],
+			],
+			'edit'         => [
 				'remove'   => false,
-				'children' => array(),
-			),
-			'user-actions' => array( // to the right - next to your avatar image
+				'children' => [],
+			],
+			'user-actions' => [ // to the right - next to your avatar image
 				'remove'   => false,
-				'children' => array(
+				'children' => [
 					'user-info'    => false,
 					'edit-profile' => false,
 					'logout'       => false,
-				),
-			),
-			'search'       => array(
+				],
+			],
+			'search'       => [
 				'remove'   => true,
-				'children' => array(),
-			),
-			'llar-root'    => array( // Limit Login Attempts Reloaded Plugin
+				'children' => [],
+			],
+			'llar-root'    => [ // Limit Login Attempts Reloaded Plugin
 				'remove'   => true,
-				'children' => array(),
-			),
-		);
+				'children' => [],
+			],
+		];
 
 		foreach ( $options as $key => $value ) {
 			if ( $value['remove'] ) {

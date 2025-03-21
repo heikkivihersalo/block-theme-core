@@ -53,35 +53,35 @@ class Application extends Container {
 	 *
 	 * @var callable[]
 	 */
-	protected $registered_callbacks = array();
+	protected $registered_callbacks = [];
 
 	/**
 	 * The array of booting callbacks.
 	 *
 	 * @var callable[]
 	 */
-	protected $booting_callbacks = array();
+	protected $booting_callbacks = [];
 
 	/**
 	 * The array of booted callbacks.
 	 *
 	 * @var callable[]
 	 */
-	protected $booted_callbacks = array();
+	protected $booted_callbacks = [];
 
 	/**
 	 * All of the registered service providers.
 	 *
 	 * @var array<string, \Illuminate\Support\ServiceProvider>
 	 */
-	protected $service_providers = array();
+	protected $service_providers = [];
 
 	/**
 	 * The names of the loaded service providers.
 	 *
 	 * @var array
 	 */
-	protected $loaded_providers = array();
+	protected $loaded_providers = [];
 
 	/**
 	 * Constructor
@@ -177,7 +177,7 @@ class Application extends Container {
 	/**
 	 * Resolve a service provider instance from the class name.
 	 *
-	 * @param  string $provider
+	 * @param  string $provider The provider to resolve
 	 * @return \Vihersalo\BlockThemeCore\Support\ServiceProvider $provider
 	 */
 	public function resolve_provider( $provider ) {
@@ -317,7 +317,7 @@ class Application extends Container {
 		$provider->call_booting_callbacks();
 
 		if ( method_exists( $provider, 'boot' ) ) {
-			$this->call( array( $provider, 'boot' ) );
+			$this->call( [ $provider, 'boot' ] );
 		}
 
 		$provider->call_booted_callbacks();

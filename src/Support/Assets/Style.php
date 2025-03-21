@@ -45,7 +45,7 @@ class Style extends Asset {
 		wp_enqueue_style(
 			$this->get_handle(),
 			$this->app->make( 'config' )->get( 'uri' ) . '/' . $this->get_src(),
-			array(),
+			[],
 			$assets['version'],
 			'all'
 		);

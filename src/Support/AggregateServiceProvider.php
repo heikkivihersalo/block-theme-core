@@ -15,14 +15,14 @@ class AggregateServiceProvider extends ServiceProvider {
 	 *
 	 * @var array
 	 */
-	protected $providers = array();
+	protected $providers = [];
 
 	/**
 	 * An array of the service provider instances.
 	 *
 	 * @var array
 	 */
-	protected $instances = array();
+	protected $instances = [];
 
 	/**
 	 * Register the service provider.
@@ -30,7 +30,7 @@ class AggregateServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {
-		$this->instances = array();
+		$this->instances = [];
 
 		foreach ( $this->providers as $provider ) {
 			$this->instances[] = $this->app->register_provider( $provider );
@@ -43,7 +43,7 @@ class AggregateServiceProvider extends ServiceProvider {
 	 * @return array
 	 */
 	public function provides() {
-		$provides = array();
+		$provides = [];
 
 		foreach ( $this->providers as $provider ) {
 			$instance = $this->app->resolve_provider( $provider );

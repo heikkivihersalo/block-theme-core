@@ -31,7 +31,7 @@ class HooksLoader {
 	 * @access   protected
 	 * @var      array    $actions    The actions registered with WordPress to fire when the theme loads.
 	 */
-	protected $actions = array();
+	protected $actions = [];
 
 	/**
 	 * The array of remove actions registered with WordPress.
@@ -40,7 +40,7 @@ class HooksLoader {
 	 * @access   protected
 	 * @var      array    $remove_actions    The actions registered with WordPress to remove when the theme loads.
 	 */
-	protected $remove_actions = array();
+	protected $remove_actions = [];
 
 	/**
 	 * The array of filters registered with WordPress.
@@ -49,7 +49,7 @@ class HooksLoader {
 	 * @access   protected
 	 * @var      array    $filters    The filters registered with WordPress to fire when the theme loads.
 	 */
-	protected $filters = array();
+	protected $filters = [];
 
 	/**
 	 * The array of remove filters registered with WordPress.
@@ -58,7 +58,7 @@ class HooksLoader {
 	 * @access   protected
 	 * @var      array    $remove_filters    The filters registered with WordPress to remove when the theme loads.
 	 */
-	protected $remove_filters = array();
+	protected $remove_filters = [];
 
 	/**
 	 * Constructor for the class. Should not be called directly.
@@ -146,13 +146,13 @@ class HooksLoader {
 	 * @return   array                                  The collection of actions and filters registered with WordPress.
 	 */
 	private function add( $hooks, $hook, $component, $callback, $priority = 10, $accepted_args = 0 ) {
-		$hooks[] = array(
+		$hooks[] = [
 			'hook'          => $hook,
 			'component'     => $component,
 			'callback'      => $callback,
 			'priority'      => $priority,
 			'accepted_args' => $accepted_args,
-		);
+		];
 
 		return $hooks;
 	}
@@ -166,7 +166,7 @@ class HooksLoader {
 		foreach ( $this->remove_filters as $hook ) {
 			remove_filter(
 				$hook['hook'],
-				null !== $hook['component'] ? array( $hook['component'], $hook['callback'] ) : $hook['callback'],
+				null !== $hook['component'] ? [ $hook['component'], $hook['callback'] ] : $hook['callback'],
 				$hook['priority']
 			);
 		}
@@ -174,7 +174,7 @@ class HooksLoader {
 		foreach ( $this->remove_actions as $hook ) {
 			remove_action(
 				$hook['hook'],
-				null !== $hook['component'] ? array( $hook['component'], $hook['callback'] ) : $hook['callback'],
+				null !== $hook['component'] ? [ $hook['component'], $hook['callback'] ] : $hook['callback'],
 				$hook['priority']
 			);
 		}
@@ -182,7 +182,7 @@ class HooksLoader {
 		foreach ( $this->filters as $hook ) {
 			add_filter(
 				$hook['hook'],
-				null !== $hook['component'] ? array( $hook['component'], $hook['callback'] ) : $hook['callback'],
+				null !== $hook['component'] ? [ $hook['component'], $hook['callback'] ] : $hook['callback'],
 				$hook['priority'],
 				$hook['accepted_args']
 			);
@@ -191,7 +191,7 @@ class HooksLoader {
 		foreach ( $this->actions as $hook ) {
 			add_action(
 				$hook['hook'],
-				null !== $hook['component'] ? array( $hook['component'], $hook['callback'] ) : $hook['callback'],
+				null !== $hook['component'] ? [ $hook['component'], $hook['callback'] ] : $hook['callback'],
 				$hook['priority'],
 				$hook['accepted_args']
 			);

@@ -55,13 +55,13 @@ final class Media {
 		$id   = get_post_thumbnail_id( $post_id );
 		$meta = wp_get_attachment_image_src( $id, $size );
 
-		return array(
+		return [
 			'id'     => $id,
 			'url'    => isset( $meta[0] ) ? $meta[0] : '',
 			'width'  => isset( $meta[1] ) ? $meta[1] : '',
 			'height' => isset( $meta[2] ) ? $meta[2] : '',
 			'alt'    => get_post_meta( $id, '_wp_attachment_image_alt', true ),
 			'title'  => get_the_title( $id ),
-		);
+		];
 	}
 }

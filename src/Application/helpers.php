@@ -22,7 +22,7 @@ namespace Vihersalo\BlockThemeCore\Application {
 		 * @param  array                            $parameters
 		 * @return ($abstract is class-string<TClass> ? TClass : ($abstract is null ? \Illuminate\Foundation\Application : mixed))
 		 */
-		function app( $abstract = null, array $parameters = array() ) {
+		function app( $abstract = null, array $parameters = [] ) {
 			if ( is_null( $abstract ) ) {
 				return Container::getInstance();
 			}

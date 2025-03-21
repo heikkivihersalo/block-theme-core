@@ -84,7 +84,7 @@ class ImageSizeManager {
 	 * @return array
 	 */
 	public function add_custom_image_sizes_to_admin( mixed $sizes ): array {
-		$custom_images = array();
+		$custom_images = [];
 
 		foreach ( $this->custom_image_sizes as $image ) :
 			$custom_images[ $image->get_slug() ] = $image->get_name();

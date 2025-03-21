@@ -25,14 +25,14 @@ abstract class ServiceProvider {
 	 *
 	 * @var array
 	 */
-	protected $booting_callbacks = array();
+	protected $booting_callbacks = [];
 
 	/**
 	 * All of the registered booted callbacks.
 	 *
 	 * @var array
 	 */
-	protected $booted_callbacks = array();
+	protected $booted_callbacks = [];
 
 	/**
 	 * Create a new service provider instance.
@@ -123,7 +123,7 @@ abstract class ServiceProvider {
 	 * @return array
 	 */
 	public function provides() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -132,7 +132,7 @@ abstract class ServiceProvider {
 	 * @return array
 	 */
 	public function when() {
-		return array();
+		return [];
 	}
 
 	/**

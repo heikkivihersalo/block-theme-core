@@ -56,6 +56,6 @@ class Notice {
 	 * @since    2.0.0
 	 */
 	public function display() {
-		add_action( 'admin_notices', array( $this, 'get_html' ) );
+		add_action( 'admin_notices', [ $this, 'get_html' ] );
 	}
 }

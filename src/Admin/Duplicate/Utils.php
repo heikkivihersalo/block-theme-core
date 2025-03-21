@@ -40,10 +40,10 @@ final class Utils {
 
 		$url = wp_nonce_url(
 			add_query_arg(
-				array(
+				[
 					'action' => 'create_duplicate_post_as_draft',
 					'post'   => $post->ID,
-				),
+				],
 				'admin.php'
 			),
 			basename( __FILE__ ),
@@ -91,7 +91,7 @@ final class Utils {
 		/**
 		 * Add new duplicate
 		 */
-		$args = array(
+		$args = [
 			'comment_status' => $post->comment_status,
 			'ping_status'    => $post->ping_status,
 			'post_author'    => $new_post_author,
@@ -105,7 +105,7 @@ final class Utils {
 			'post_type'      => $post->post_type,
 			'to_ping'        => $post->to_ping,
 			'menu_order'     => $post->menu_order,
-		);
+		];
 
 		// insert the post by wp_insert_post() function
 		$new_post_id = wp_insert_post( $args );
@@ -116,7 +116,7 @@ final class Utils {
 		$taxonomies = get_object_taxonomies( get_post_type( $post ) ); // returns array of taxonomy names for post type, ex array("category", "post_tag");
 		if ( $taxonomies ) {
 			foreach ( $taxonomies as $taxonomy ) {
-				$post_terms = wp_get_object_terms( $post_id, $taxonomy, array( 'fields' => 'slugs' ) );
+				$post_terms = wp_get_object_terms( $post_id, $taxonomy, [ 'fields' => 'slugs' ] );
 				wp_set_object_terms( $new_post_id, $post_terms, $taxonomy, false );
 			}
 		}
@@ -138,10 +138,10 @@ final class Utils {
 		// or we can redirect to all posts with a message
 		wp_safe_redirect(
 			add_query_arg(
-				array(
+				[
 					'post_type' => ( 'post' !== get_post_type( $post ) ? get_post_type( $post ) : false ),
 					'saved'     => 'post_duplication_created', // just a custom slug here
-				),
+				],
 				admin_url( 'edit.php' )
 			)
 		);
