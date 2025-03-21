@@ -13,7 +13,6 @@ defined( 'ABSPATH' ) || die();
 
 use Vihersalo\BlockThemeCore\Support\Assets\Localize;
 use Vihersalo\BlockThemeCore\Admin\Settings\SettingsMenuBuilder;
-use Vihersalo\BlockThemeCore\Support\Collections\MenuCollection;
 
 /**
  *
@@ -143,7 +142,7 @@ class SettingsMenu {
 	 * @param string $capability The capability required to view the page
 	 * @param string $icon The icon of the menu
 	 * @param int    $position The position of the menu
-	 * @return \Vihersalo\BlockThemeCore\Admin\Pages\SettingsMenuBuilder
+	 * @return \Vihersalo\BlockThemeCore\Admin\Settings\SettingsMenuBuilder
 	 */
 	public static function configure(
 		string $slug,
