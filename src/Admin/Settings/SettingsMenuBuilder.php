@@ -3,6 +3,7 @@
 namespace Vihersalo\BlockThemeCore\Admin\Settings;
 
 use Vihersalo\BlockThemeCore\Support\Assets\Localize;
+use Vihersalo\BlockThemeCore\Support\Collections;
 
 /**
  * Application builder
