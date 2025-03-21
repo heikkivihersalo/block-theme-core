@@ -7,12 +7,12 @@
  * @package    Vihersalo\BlockThemeCore\Support\Pages
  */
 
-namespace Vihersalo\BlockThemeCore\Support\Pages;
+namespace Vihersalo\BlockThemeCore\Admin\Settings;
 
 defined( 'ABSPATH' ) || die();
 
 use Vihersalo\BlockThemeCore\Support\Assets\Localize;
-use Vihersalo\BlockThemeCore\Admin\Pages\SettingsMenuBuilder;
+use Vihersalo\BlockThemeCore\Admin\Settings\SettingsMenuBuilder;
 use Vihersalo\BlockThemeCore\Support\Collections\MenuCollection;
 
 /**

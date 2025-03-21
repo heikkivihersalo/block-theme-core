@@ -1,11 +1,8 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Admin\Pages;
+namespace Vihersalo\BlockThemeCore\Admin\Settings;
 
 use Vihersalo\BlockThemeCore\Support\Assets\Localize;
-use Vihersalo\BlockThemeCore\Support\Collections\AssetCollection;
-use Vihersalo\BlockThemeCore\Support\Collections\MenuCollection;
-use Vihersalo\BlockThemeCore\Support\Pages\SettingsMenu;
 
 /**
  * Application builder
@@ -30,7 +27,7 @@ class SettingsMenuBuilder {
 	 * @return self
 	 */
 	public function with_submenu( ?callable $callback = null ) {
-		$submenu = new MenuCollection();
+		$submenu = new Collections\MenuCollection();
 
 		if ( ! $callback ) {
 			return $this;
@@ -50,7 +47,7 @@ class SettingsMenuBuilder {
 	 * @return self
 	 */
 	public function with_assets( ?callable $callback = null ) {
-		$assets = new AssetCollection();
+		$assets = new Collections\AssetCollection();
 
 		if ( ! $callback ) {
 			return $this;

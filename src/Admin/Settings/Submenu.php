@@ -4,17 +4,17 @@
  * @link       https://www.kotisivu.dev
  * @since      2.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Support\Pages
+ * @package    Vihersalo\BlockThemeCore\Admin\Settings
  */
 
-namespace Vihersalo\BlockThemeCore\Support\Pages;
+namespace Vihersalo\BlockThemeCore\Admin\Settings;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  *
  * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Pages
+ * @package    Vihersalo\BlockThemeCore\Admin\Settings
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Submenu {

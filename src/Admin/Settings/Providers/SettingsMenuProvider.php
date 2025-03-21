@@ -1,6 +1,6 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Admin\Pages;
+namespace Vihersalo\BlockThemeCore\Admin\Settings\Providers;
 
 use Vihersalo\BlockThemeCore\Application;
 use Vihersalo\BlockThemeCore\Application\HooksLoader;
@@ -16,7 +16,7 @@ use Vihersalo\BlockThemeCore\Admin\Pages\PagesManager;
  * @package    Vihersalo\BlockThemeCore\Admin
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
-class AdminPagesProvider extends ServiceProvider {
+class SettingsMenuProvider extends ServiceProvider {
 	/**
 	 * Register the navigation provider
 	 */

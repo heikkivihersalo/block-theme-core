@@ -8,11 +8,10 @@
  * @package    HeikkiVihersalo\BlockThemeCore\Theme\Admin\Pages
  */
 
-namespace Vihersalo\BlockThemeCore\Admin\Pages;
+namespace Vihersalo\BlockThemeCore\Admin\Settings;
 
 defined( 'ABSPATH' ) || die();
 
-use Vihersalo\BlockThemeCore\Support\Pages\SettingsMenu;
 use Vihersalo\BlockThemeCore\Support\Utils\Common as CommonUtils;
 
 /**
@@ -22,7 +21,7 @@ use Vihersalo\BlockThemeCore\Support\Utils\Common as CommonUtils;
  * @package    HeikkiVihersalo\BlockThemeCore\Theme\Admin\Pages
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
-class PagesManager {
+class SettingsMenuManager {
 	/**
 	 * Admin pages
 	 *

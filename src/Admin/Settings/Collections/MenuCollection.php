@@ -4,10 +4,10 @@
  * @link       https://www.kotisivu.dev
  * @since      2.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Support\Pages
+ * @package    Vihersalo\BlockThemeCore\Admin\Settings\Collections
  */
 
-namespace Vihersalo\BlockThemeCore\Support\Collections;
+namespace Vihersalo\BlockThemeCore\Admin\Settings\Collections;
 
 defined( 'ABSPATH' ) || die();
 
@@ -16,7 +16,7 @@ use Vihersalo\BlockThemeCore\Support\Pages\Submenu;
 /**
  *
  * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Pages
+ * @package    Vihersalo\BlockThemeCore\Admin\Settings\Collections
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class MenuCollection {
