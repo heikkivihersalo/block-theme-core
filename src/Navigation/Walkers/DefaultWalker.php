@@ -8,7 +8,7 @@
  * @package    HeikkiVihersalo\BlockThemeCore\Theme\Navigation\Walkers
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Navigation\Walkers;
+namespace HeikkiVihersalo\BlockThemeCore\Navigation\Walkers;
 
 defined( 'ABSPATH' ) || die();
 
@@ -32,7 +32,7 @@ class MenuWalker extends Walker_Nav_Menu {
 	 * @param int    $id ID of the current menu item. Default 0.
 	 * @return void
 	 */
-	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
 		/**
 		 * Build indent and caret
 		 */
@@ -42,7 +42,7 @@ class MenuWalker extends Walker_Nav_Menu {
 		/**
 		 * Build class names
 		 */
-		$class_names = join( ' ', array( 'site-header__menu-item', $item->classes[0] ) );
+		$class_names = join( ' ', [ 'site-header__menu-item', $item->classes[0] ] );
 		$class_names = ' class="' . esc_attr( $class_names ) . '"';
 
 		/**
@@ -54,7 +54,7 @@ class MenuWalker extends Walker_Nav_Menu {
 		/**
 		 * Build attributes
 		 */
-		$atts                 = array();
+		$atts                 = [];
 		$atts['title']        = ! empty( $item->attr_title ) ? $item->attr_title : '';
 		$atts['target']       = ! empty( $item->target ) ? $item->target : '';
 		$atts['rel']          = ! empty( $item->xfn ) ? $item->xfn : '';
@@ -103,7 +103,7 @@ class MenuWalker extends Walker_Nav_Menu {
 	 * @param array  $args An object of wp_nav_menu() arguments.
 	 * @return void
 	 */
-	public function end_el( &$output, $category, $depth = 0, $args = array() ) {
+	public function end_el( &$output, $category, $depth = 0, $args = [] ) {
 		$output .= "</li>\n";
 	}
 
@@ -115,7 +115,7 @@ class MenuWalker extends Walker_Nav_Menu {
 	 * @param array  $args An object of wp_nav_menu() arguments.
 	 * @return void
 	 */
-	public function start_lvl( &$output, $depth = 0, $args = array() ) {
+	public function start_lvl( &$output, $depth = 0, $args = [] ) {
 		$indent = str_repeat( "\t", $depth );
 
 		switch ( $depth ) {
@@ -142,7 +142,7 @@ class MenuWalker extends Walker_Nav_Menu {
 	 * @param array  $args An object of wp_nav_menu() arguments.
 	 * @return void
 	 */
-	public function end_lvl( &$output, $depth = 0, $args = array() ) {
+	public function end_lvl( &$output, $depth = 0, $args = [] ) {
 		$indent  = str_repeat( "\t", $depth );
 		$output .= "$indent</ul>\n";
 	}

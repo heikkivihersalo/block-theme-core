@@ -1,14 +1,6 @@
 <?php
-/**
- * Utility functions for options
- *
- * @link       https://www.kotisivu.dev
- * @since      2.0.0
- *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Common
- */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils;
+namespace Vihersalo\BlockThemeCore\Support\Utils;
 
 defined( 'ABSPATH' ) || die();
 
@@ -16,7 +8,7 @@ defined( 'ABSPATH' ) || die();
  * Utility functions for options
  *
  * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Common
+ * @package    HeikkiVihersalo\BlockThemeCore\Support\Utils
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Options {
