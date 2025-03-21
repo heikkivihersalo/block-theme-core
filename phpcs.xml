@@ -11,7 +11,10 @@
 	<exclude-pattern>*/.git/*</exclude-pattern>
 	<exclude-pattern>.github/</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/bin/*</exclude-pattern>
     <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/inc/lib/*</exclude-pattern>
 
 	<!-- <config name="testVersion" value="7.4"/>
 	<config name="php_version" value="70407"/> -->
@@ -41,6 +44,10 @@
         <exclude name="WordPress.Files.FileName.InvalidClassFileName" />
         <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
 
+        <!-- We like to use short array syntax -->
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+        <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+
         <!-- Very strict VIP/discouraged rules that are not needed -->
         <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
         <exclude name="WordPress.Security.EscapeOutput.UnsafePrintingFunction" />
@@ -66,11 +73,22 @@
         <exclude name="Squiz.PHP.CommentedOutCode.Found" />
     </rule>
 
+    <!-- Optionally enforce short arrays: -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    
     <!-- Verify that the text_domain is set to the desired text-domain.
     Multiple valid text domains can be provided as a comma-delimited list. -->
     <rule ref="WordPress.WP.I18n">
         <properties>
             <property name="text_domain" type="array" value="vihersalo-block-theme-core" />
+        </properties>
+    </rule>
+
+    <!-- Allow for theme specific exceptions to the file name rules based
+    on the theme hierarchy. -->
+    <rule ref="WordPress.Files.FileName">
+        <properties>
+            <property name="is_theme" value="true" />
         </properties>
     </rule>
 
