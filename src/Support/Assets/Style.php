@@ -34,13 +34,13 @@ class Style extends Asset {
      * @return void
      */
     public function enqueue() {
-        $asset_path = $this->getAssetPath();
+        $assetPath = $this->getAssetPath();
 
-        if ('' === $asset_path) {
+        if ('' === $assetPath) {
             return;
         }
 
-        $assets = require $this->app->make('config')->get('app.path') . '/' . $asset_path;
+        $assets = require $this->app->make('config')->get('app.path') . '/' . $assetPath;
 
         wp_enqueue_style(
             $this->getHandle(),
