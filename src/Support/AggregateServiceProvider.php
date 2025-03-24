@@ -1,12 +1,12 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Support;
+namespace Vihersalo\Core\Support;
 
 /**
  * The aggregate service provider class.
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class AggregateServiceProvider extends ServiceProvider {

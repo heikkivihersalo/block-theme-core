@@ -1,12 +1,12 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Support\Assets;
+namespace Vihersalo\Core\Support\Assets;
 
 /**
  *
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Assets
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support\Assets
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Localize {

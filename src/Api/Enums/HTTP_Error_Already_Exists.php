@@ -3,22 +3,22 @@
  * HTTP Error Already Exists
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Already_Exists
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Already_Exists
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums;
+namespace Vihersalo\Core\Theme\Api\Enums;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\HTTP_Response_Interface;
+use Vihersalo\Core\Theme\Api\Interfaces\HTTP_Response_Interface;
 
 /**
  * HTTP Error Already Exists
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Already_Exists
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Already_Exists
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 enum HTTP_Error_Already_Exists implements HTTP_Response_Interface {
@@ -27,18 +27,18 @@ enum HTTP_Error_Already_Exists implements HTTP_Response_Interface {
 
 	public function values(): array {
 		return match ( $this ) {
-			self::GENERIC_200 => array(
-				'message'     => __( 'Resource already exists.', 'heikkivihersalo-block-theme-core' ),
+			self::GENERIC_200 => [
+				'message'     => __( 'Resource already exists.', 'Vihersalo-block-theme-core' ),
 				'type'        => 'already_exists',
 				'code'        => 2001,
 				'http_status' => 200,
-			),
-			self::GENERIC_400 => array(
-				'message'     => __( 'Resource already exists.', 'heikkivihersalo-block-theme-core' ),
+			],
+			self::GENERIC_400 => [
+				'message'     => __( 'Resource already exists.', 'Vihersalo-block-theme-core' ),
 				'type'        => 'already_exists',
 				'code'        => 2002,
 				'http_status' => 400,
-			)
+			]
 		};
 	}
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Support\Assets;
+namespace Vihersalo\Core\Support\Assets;
 
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Enqueue\Asset;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Enqueue\Asset;
 
 require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
 require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
@@ -13,8 +13,8 @@ use WP_Filesystem_Direct;
 /**
  * The inline asset class
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Assets
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support\Assets
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Inline extends Asset {

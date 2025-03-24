@@ -1,15 +1,15 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Analytics;
+namespace Vihersalo\Core\Analytics;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\ServiceProvider;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Analytics
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Analytics
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class AnalyticsProvider extends ServiceProvider {

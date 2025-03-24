@@ -1,11 +1,11 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Configuration;
+namespace Vihersalo\Core\Configuration;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Configuration
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Configuration
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Config {

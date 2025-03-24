@@ -2,22 +2,22 @@
 /**
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Support\Collections
+ * @package    Vihersalo\Core\Support\Collections
  */
 
-namespace Vihersalo\BlockThemeCore\Support\Collections;
+namespace Vihersalo\Core\Support\Collections;
 
 defined( 'ABSPATH' ) || die();
 
-use Vihersalo\BlockThemeCore\Enqueue\Asset;
+use Vihersalo\Core\Enqueue\Asset;
 
 /**
  * Collection of assets to be enqueued in the theme
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Collections
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support\Collections
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class AssetCollection {
@@ -31,7 +31,7 @@ class AssetCollection {
 	/**
 	 * Constructor
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */

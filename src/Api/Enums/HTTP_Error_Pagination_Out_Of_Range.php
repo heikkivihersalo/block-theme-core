@@ -3,22 +3,22 @@
  * HTTP Error Pagination Out Of Range
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Pagination_Out_Of_Range
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Pagination_Out_Of_Range
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums;
+namespace Vihersalo\Core\Theme\Api\Enums;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\HTTP_Response_Interface;
+use Vihersalo\Core\Theme\Api\Interfaces\HTTP_Response_Interface;
 
 /**
  * HTTP Error Pagination Out Of Range
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Pagination_Out_Of_Range
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Pagination_Out_Of_Range
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 enum HTTP_Error_Pagination_Out_Of_Range implements HTTP_Response_Interface {
@@ -26,12 +26,12 @@ enum HTTP_Error_Pagination_Out_Of_Range implements HTTP_Response_Interface {
 
 	public function values(): array {
 		return match ( $this ) {
-			self::GENERIC => array(
-				'message'     => __( 'Pagination parameters are out of range.', 'heikkivihersalo-block-theme-core' ),
+			self::GENERIC => [
+				'message'     => __( 'Pagination parameters are out of range.', 'Vihersalo-block-theme-core' ),
 				'type'        => 'pagination_out_of_range',
 				'code'        => 1004,
 				'http_status' => 400,
-			)
+			]
 		};
 	}
 

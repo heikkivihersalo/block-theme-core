@@ -3,23 +3,23 @@
  * Parameters Empty Exception
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\ParametersEmptyException
+ * @package    Vihersalo\Core\Theme\Api\Responses\ParametersEmptyException
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses;
+namespace Vihersalo\Core\Theme\Api\Responses;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\ExceptionInterface;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Parameters_Empty;
+use Vihersalo\Core\Theme\Api\Interfaces\ExceptionInterface;
+use Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Parameters_Empty;
 
 /**
  * Parameters Empty Exception
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\ParametersEmptyException
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Responses\ParametersEmptyException
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class ParametersEmptyException extends \Exception implements ExceptionInterface {

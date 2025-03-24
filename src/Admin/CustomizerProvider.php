@@ -1,16 +1,16 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Admin;
+namespace Vihersalo\Core\Admin;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Support\Utils\Common as Utils;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\Utils\Common as Utils;
+use Vihersalo\Core\Support\ServiceProvider;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Admin
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Admin
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class CustomizerProvider extends ServiceProvider {
@@ -24,7 +24,7 @@ class CustomizerProvider extends ServiceProvider {
 	/**
 	 * Enable customizer
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */

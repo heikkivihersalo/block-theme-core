@@ -1,16 +1,16 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Styles;
+namespace Vihersalo\Core\Styles;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
-use Vihersalo\BlockThemeCore\Styles\Scheme;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\ServiceProvider;
+use Vihersalo\Core\Styles\Scheme;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Analytics
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Analytics
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class StylesProvider extends ServiceProvider {
@@ -24,7 +24,7 @@ class StylesProvider extends ServiceProvider {
 	/**
 	 * Register theme meta styles
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return   void
 	 */

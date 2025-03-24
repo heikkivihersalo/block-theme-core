@@ -3,23 +3,23 @@
  * Delete Failed Exception
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\DeleteFailedException
+ * @package    Vihersalo\Core\Theme\Api\Responses\DeleteFailedException
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses;
+namespace Vihersalo\Core\Theme\Api\Responses;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\ExceptionInterface;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Delete_Failed;
+use Vihersalo\Core\Theme\Api\Interfaces\ExceptionInterface;
+use Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Delete_Failed;
 
 /**
  * Delete Failed Exception
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\DeleteFailedException
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Responses\DeleteFailedException
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class DeleteFailedException extends \Exception implements ExceptionInterface {

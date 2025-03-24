@@ -3,23 +3,23 @@
  * NotImplementedException
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\NotImplementedException
+ * @package    Vihersalo\Core\Theme\Api\Responses\NotImplementedException
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses;
+namespace Vihersalo\Core\Theme\Api\Responses;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\ExceptionInterface;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Not_Implemented;
+use Vihersalo\Core\Theme\Api\Interfaces\ExceptionInterface;
+use Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Not_Implemented;
 
 /**
  * NotImplementedException
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\NotImplementedException
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Responses\NotImplementedException
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class NotImplementedException extends \Exception implements ExceptionInterface {

@@ -2,20 +2,20 @@
 /**
  * Original class name Google\Site_Kit\Core\Storage\Data_Encryption
  *
- * @package   HeikkiVihersalo\BlockThemeCore\Api
+ * @package   Vihersalo\Core\Api
  * @copyright 2019 Google LLC
  * @license   https://www.apache.org/licenses/LICENSE-2.0 Apache License 2.0
  * @link      https://sitekit.withgoogle.com
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api;
+namespace Vihersalo\Core\Theme\Api;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Class responsible for encrypting and decrypting data.
  *
- * @since 2.0.0
+ * @since 1.0.0
  * @access private
  * @ignore
  */
@@ -24,7 +24,7 @@ final class Encryption {
 	/**
 	 * Key to use for encryption.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @var string
 	 */
 	private $key;
@@ -32,7 +32,7 @@ final class Encryption {
 	/**
 	 * Salt to use for encryption.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @var string
 	 */
 	private $salt;
@@ -40,7 +40,7 @@ final class Encryption {
 	/**
 	 * Constructor.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->key  = $this->get_default_key();
@@ -52,7 +52,7 @@ final class Encryption {
 	 *
 	 * If a user-based key is set, that key is used. Otherwise the default key is used.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 *
 	 * @param string $value Value to encrypt.
 	 * @return string|bool Encrypted value, or false on failure.
@@ -79,7 +79,7 @@ final class Encryption {
 	 *
 	 * If a user-based key is set, that key is used. Otherwise the default key is used.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 *
 	 * @param string $raw_value Value to decrypt.
 	 * @return string|bool Decrypted value, or false on failure.
@@ -108,7 +108,7 @@ final class Encryption {
 	/**
 	 * Gets the default encryption key to use.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string Default (not user-based) encryption key.
 	 */
@@ -128,7 +128,7 @@ final class Encryption {
 	/**
 	 * Gets the default encryption salt to use.
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 *
 	 * @return string Encryption salt.
 	 */

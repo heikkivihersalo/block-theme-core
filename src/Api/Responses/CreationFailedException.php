@@ -3,23 +3,23 @@
  * Creation Failed Exception
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\CreationFailedException
+ * @package    Vihersalo\Core\Theme\Api\Responses\CreationFailedException
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses;
+namespace Vihersalo\Core\Theme\Api\Responses;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\ExceptionInterface;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Creation_Failed;
+use Vihersalo\Core\Theme\Api\Interfaces\ExceptionInterface;
+use Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Creation_Failed;
 
 /**
  * Creation Failed Exception
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\CreationFailedException
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Responses\CreationFailedException
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class CreationFailedException extends \Exception implements ExceptionInterface {

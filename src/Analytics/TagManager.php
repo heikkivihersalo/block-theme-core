@@ -1,19 +1,19 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Analytics;
+namespace Vihersalo\Core\Analytics;
 
-use Vihersalo\BlockThemeCore\Support\Utils\Options as Utils;
+use Vihersalo\Core\Support\Utils\Options as Utils;
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Analytics
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Analytics
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class TagManager {
 	/**
 	 * Inline script for Google Tag Manager to be added to the head
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */

@@ -2,19 +2,19 @@
 /**
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Navigation
+ * @package    Vihersalo\Core\Navigation
  */
 
-namespace Vihersalo\BlockThemeCore\Navigation;
+namespace Vihersalo\Core\Navigation;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Navigation
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Navigation
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Menu {
@@ -23,7 +23,7 @@ class Menu {
 	 *
 	 * @param string $slug The slug of the menu
 	 * @param string $name The name of the menu
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */

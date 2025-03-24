@@ -3,23 +3,23 @@
  * Exception for failed updates
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\UpdateFailedException
+ * @package    Vihersalo\Core\Theme\Api\Responses\UpdateFailedException
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses;
+namespace Vihersalo\Core\Theme\Api\Responses;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\ExceptionInterface;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Update_Failed;
+use Vihersalo\Core\Theme\Api\Interfaces\ExceptionInterface;
+use Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Update_Failed;
 
 /**
  * Exception for failed updates
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\UpdateFailedException
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Responses\UpdateFailedException
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class UpdateFailedException extends \Exception implements ExceptionInterface {

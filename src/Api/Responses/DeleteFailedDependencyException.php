@@ -3,23 +3,23 @@
  * Delete Failed Dependency Exception
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\DeleteFailedDependencyException
+ * @package    Vihersalo\Core\Theme\Api\Responses\DeleteFailedDependencyException
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses;
+namespace Vihersalo\Core\Theme\Api\Responses;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\ExceptionInterface;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Delete_Failed_Dependency;
+use Vihersalo\Core\Theme\Api\Interfaces\ExceptionInterface;
+use Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Delete_Failed_Dependency;
 
 /**
  * Delete Failed Dependency Exception
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Responses\DeleteFailedDependencyException
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Responses\DeleteFailedDependencyException
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class DeleteFailedDependencyException extends \Exception implements ExceptionInterface {

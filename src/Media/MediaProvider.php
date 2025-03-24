@@ -1,25 +1,25 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Media;
+namespace Vihersalo\Core\Media;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
-use Vihersalo\BlockThemeCore\Media\ImageSizeManager;
-use Vihersalo\BlockThemeCore\Media\ExcerptManager;
-use Vihersalo\BlockThemeCore\Support\Utils\Media as MediaUtils;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\ServiceProvider;
+use Vihersalo\Core\Media\ImageSizeManager;
+use Vihersalo\Core\Media\ExcerptManager;
+use Vihersalo\Core\Support\Utils\Media as MediaUtils;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Enqueue
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Enqueue
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class MediaProvider extends ServiceProvider {
 	/**
 	 * Register the navigation provider
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return void
 	 */
@@ -37,7 +37,7 @@ class MediaProvider extends ServiceProvider {
 	 * @param HooksLoader $loader The hooks loader
 	 * @return void
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function register_image_sizes( HooksLoader $loader ) {
@@ -58,7 +58,7 @@ class MediaProvider extends ServiceProvider {
 	 * @param HooksLoader $loader The hooks loader
 	 * @return void
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function allow_svg_file_uploads( HooksLoader $loader ) {
@@ -70,7 +70,7 @@ class MediaProvider extends ServiceProvider {
 	 *
 	 * @param HooksLoader $loader The hooks loader
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return   void
 	 */
@@ -89,7 +89,7 @@ class MediaProvider extends ServiceProvider {
 	/**
 	 * Boot the navigation provider
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return void
 	 */

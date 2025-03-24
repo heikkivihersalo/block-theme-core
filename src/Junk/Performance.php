@@ -3,20 +3,20 @@
  * Utility functions for performance related tasks
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Common
+ * @package    Vihersalo\Core\Theme\Common
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils;
+namespace Vihersalo\Core\Theme\Common\Utils;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Utility functions for performance related tasks
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Common
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Common
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Performance {
@@ -39,9 +39,9 @@ final class Performance {
 			if ( $script->deps ) { // Check whether the script has any dependencies
 				$script->deps = array_diff(
 					$script->deps,
-					array(
+					[
 						'jquery-migrate',
-					)
+					]
 				);
 			}
 		}
@@ -67,7 +67,7 @@ final class Performance {
 	 * @return array
 	 */
 	public static function disable_emojis_tinymce( $plugins ): array {
-		return is_array( $plugins ) ? array_diff( $plugins, array( 'wpemoji' ) ) : array();
+		return is_array( $plugins ) ? array_diff( $plugins, [ 'wpemoji' ] ) : [];
 	}
 
 	/**
@@ -89,7 +89,7 @@ final class Performance {
 
 		$svg_url = reset( $svg_url );
 		$svg_url = apply_filters( 'emoji_svg_url', $svg_url );
-		$urls    = array_diff( $urls, array( $svg_url ) );
+		$urls    = array_diff( $urls, [ $svg_url ] );
 
 		return $urls;
 	}

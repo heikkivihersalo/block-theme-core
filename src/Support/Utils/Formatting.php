@@ -3,20 +3,20 @@
  * Utility functions for formatting
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Support\Utils
+ * @package    Vihersalo\Core\Support\Utils
  */
 
-namespace Vihersalo\BlockThemeCore\Support\Utils;
+namespace Vihersalo\Core\Support\Utils;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Utility functions for formatting
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Utils
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support\Utils
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Formatting {

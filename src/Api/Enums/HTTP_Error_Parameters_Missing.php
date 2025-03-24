@@ -3,22 +3,22 @@
  * HTTP Error Parameters Missing
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Parameters_Missing
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Parameters_Missing
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums;
+namespace Vihersalo\Core\Theme\Api\Enums;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\HTTP_Response_Interface;
+use Vihersalo\Core\Theme\Api\Interfaces\HTTP_Response_Interface;
 
 /**
  * HTTP Error Parameters Missing
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Parameters_Missing
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Parameters_Missing
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 enum HTTP_Error_Parameters_Missing implements HTTP_Response_Interface {
@@ -26,12 +26,12 @@ enum HTTP_Error_Parameters_Missing implements HTTP_Response_Interface {
 
 	public function values(): array {
 		return match ( $this ) {
-			self::GENERIC => array(
-				'message'     => __( 'Request is missing required parameters.', 'heikkivihersalo-block-theme-core' ),
+			self::GENERIC => [
+				'message'     => __( 'Request is missing required parameters.', 'Vihersalo-block-theme-core' ),
 				'type'        => 'parameters_missing',
 				'code'        => 1001,
 				'http_status' => 400,
-			)
+			]
 		};
 	}
 

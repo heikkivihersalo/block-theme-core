@@ -3,20 +3,20 @@
  * Regex
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\Regex
+ * @package    Vihersalo\Core\Theme\Api\Enums\Regex
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums;
+namespace Vihersalo\Core\Theme\Api\Enums;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Regex
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\Regex
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Enums\Regex
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 enum Regex {

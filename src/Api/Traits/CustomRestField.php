@@ -3,18 +3,18 @@
  * Custom REST field
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Common
+ * @package    Vihersalo\Core\Common
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Traits;
+namespace Vihersalo\Core\Theme\Api\Traits;
 
 /**
  * Custom REST field
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Common
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Common
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 trait CustomRestField {
@@ -30,9 +30,9 @@ trait CustomRestField {
 		register_rest_field(
 			$type,
 			$field,
-			array(
+			[
 				'get_callback' => $callback,
-			)
+			]
 		);
 	}
 }

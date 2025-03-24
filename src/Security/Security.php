@@ -3,25 +3,25 @@
  * The security-specific functionality of the theme.
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme
+ * @package    Vihersalo\Core\Theme
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme;
+namespace Vihersalo\Core\Theme;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Loader;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Traits\ThemeDefaults;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils\Security as SecurityUtils;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Interfaces\RegisterHooksInterface;
+use Vihersalo\Core\Theme\Common\Loader;
+use Vihersalo\Core\Theme\Common\Traits\ThemeDefaults;
+use Vihersalo\Core\Theme\Common\Utils\Security as SecurityUtils;
+use Vihersalo\Core\Theme\Common\Interfaces\RegisterHooksInterface;
 
 /**
  * The security-specific functionality of the theme.
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Security implements RegisterHooksInterface {
@@ -30,7 +30,7 @@ class Security implements RegisterHooksInterface {
 	/**
 	 * Constructor
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function __construct( Loader $loader ) {
@@ -40,7 +40,7 @@ class Security implements RegisterHooksInterface {
 	/**
 	 * Register all of the hooks related to the API security enhancements
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */
@@ -65,7 +65,7 @@ class Security implements RegisterHooksInterface {
 	/**
 	 * Register all of the hooks related to the API security enhancements
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */
@@ -76,7 +76,7 @@ class Security implements RegisterHooksInterface {
 	/**
 	 * Register all of the hooks related to the security enhancements
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */
@@ -89,7 +89,7 @@ class Security implements RegisterHooksInterface {
 	/**
 	 * Remove WordPress version from header
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */
@@ -101,7 +101,7 @@ class Security implements RegisterHooksInterface {
 	/**
 	 * Disable XML-RPC
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */

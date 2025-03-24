@@ -1,15 +1,15 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Support\Assets;
+namespace Vihersalo\Core\Support\Assets;
 
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Enqueue\Asset;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Enqueue\Asset;
 
 /**
  * The script asset class
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Assets
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support\Assets
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Style extends Asset {

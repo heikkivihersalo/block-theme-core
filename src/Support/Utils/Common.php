@@ -3,22 +3,22 @@
  * Utility functions for helper functions
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Support\Utils
+ * @package    Vihersalo\Core\Support\Utils
  */
 
-namespace Vihersalo\BlockThemeCore\Support\Utils;
+namespace Vihersalo\Core\Support\Utils;
 
 defined( 'ABSPATH' ) || die();
 
-use Vihersalo\BlockThemeCore\Support\Notice;
+use Vihersalo\Core\Support\Notice;
 
 /**
  * Utility functions for helper functions
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Utils
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support\Utils
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Common {
@@ -31,7 +31,7 @@ final class Common {
 	/**
 	 * Return true
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	public static function return_true(): bool {
@@ -41,7 +41,7 @@ final class Common {
 	/**
 	 * Return false
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	public static function return_false(): bool {
@@ -51,7 +51,7 @@ final class Common {
 	/**
 	 * Check if the current page is the admin page
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @return bool
 	 */
 	public static function is_admin(): bool {
@@ -61,7 +61,7 @@ final class Common {
 	/**
 	 * Check if the current page is the plugin's editor page
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @param string $hook The current admin page
 	 * @return bool
 	 */
@@ -72,7 +72,7 @@ final class Common {
 	/**
 	 * Check if the current page is the plugin's editor page
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @param string $hook The current admin page
 	 * @return bool
 	 */

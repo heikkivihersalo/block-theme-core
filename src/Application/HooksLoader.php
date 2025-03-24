@@ -3,12 +3,12 @@
  * Register all actions and filters for the theme
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Application
+ * @package    Vihersalo\Core\Application
  */
 
-namespace Vihersalo\BlockThemeCore\Application;
+namespace Vihersalo\Core\Application;
 
 defined( 'ABSPATH' ) || die();
 
@@ -19,15 +19,15 @@ defined( 'ABSPATH' ) || die();
  * the theme, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Application
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Application
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class HooksLoader {
 	/**
 	 * The array of actions registered with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @var      array    $actions    The actions registered with WordPress to fire when the theme loads.
 	 */
@@ -36,7 +36,7 @@ class HooksLoader {
 	/**
 	 * The array of remove actions registered with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @var      array    $remove_actions    The actions registered with WordPress to remove when the theme loads.
 	 */
@@ -45,7 +45,7 @@ class HooksLoader {
 	/**
 	 * The array of filters registered with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @var      array    $filters    The filters registered with WordPress to fire when the theme loads.
 	 */
@@ -54,7 +54,7 @@ class HooksLoader {
 	/**
 	 * The array of remove filters registered with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @var      array    $remove_filters    The filters registered with WordPress to remove when the theme loads.
 	 */
@@ -63,7 +63,7 @@ class HooksLoader {
 	/**
 	 * Constructor for the class. Should not be called directly.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function __construct() { }
@@ -71,7 +71,7 @@ class HooksLoader {
 	/**
 	 * Prevent cloning of the instance of the class
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @return   void
 	 */
@@ -80,7 +80,7 @@ class HooksLoader {
 	/**
 	 * Add a new action to the collection to be registered with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @param    string      $hook             The name of the WordPress action that is being registered.
 	 * @param    object|null $component        A reference to the instance of the object on which the action is defined.
 	 * @param    string      $callback         The name of the function definition on the $component.
@@ -94,7 +94,7 @@ class HooksLoader {
 	/**
 	 * Remove an action from the collection to be registered with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @param    string                $hook             The name of the WordPress action that is being removed.
 	 * @param    callable|string|array $callback         The name of the function definition on the $component.
 	 * @param    int                   $priority         Optional. The priority at which the function should be fired. Default is 10.
@@ -107,7 +107,7 @@ class HooksLoader {
 	/**
 	 * Add a new filter to the collection to be registered with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @param    string      $hook             The name of the WordPress filter that is being registered.
 	 * @param    object|null $component        A reference to the instance of the object on which the filter is defined.
 	 * @param    string      $callback         The name of the function definition on the $component.
@@ -121,7 +121,7 @@ class HooksLoader {
 	/**
 	 * Remove a filter from the collection to be registered with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @param    string                $hook             The name of the WordPress filter that is being removed.
 	 * @param    callable|string|array $callback         The name of the function definition on the $component.
 	 * @param    int                   $priority         Optional. The priority at which the function should be fired. Default is 10.
@@ -135,7 +135,7 @@ class HooksLoader {
 	 * A utility function that is used to register the actions and hooks into a single
 	 * collection.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @param    array       $hooks            The collection of hooks that is being registered (that is, actions or filters).
 	 * @param    string      $hook             The name of the WordPress filter that is being registered.
@@ -160,7 +160,7 @@ class HooksLoader {
 	/**
 	 * Register the filters and actions with WordPress.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 */
 	public function run() {
 		foreach ( $this->remove_filters as $hook ) {

@@ -3,22 +3,22 @@
  * HTTP Error Delete Failed
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Delete_Failed
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Delete_Failed
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums;
+namespace Vihersalo\Core\Theme\Api\Enums;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\HTTP_Response_Interface;
+use Vihersalo\Core\Theme\Api\Interfaces\HTTP_Response_Interface;
 
 /**
  * HTTP Error Delete Failed
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Delete_Failed
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Delete_Failed
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 enum HTTP_Error_Delete_Failed implements HTTP_Response_Interface {
@@ -26,12 +26,12 @@ enum HTTP_Error_Delete_Failed implements HTTP_Response_Interface {
 
 	public function values(): array {
 		return match ( $this ) {
-			self::GENERIC => array(
-				'message'     => __( 'Failed to delete resource.', 'heikkivihersalo-block-theme-core' ),
+			self::GENERIC => [
+				'message'     => __( 'Failed to delete resource.', 'Vihersalo-block-theme-core' ),
 				'type'        => 'delete_failed',
 				'code'        => 5000,
 				'http_status' => 400,
-			)
+			]
 		};
 	}
 

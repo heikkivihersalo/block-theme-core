@@ -3,22 +3,22 @@
  * HTTP Error Pagination Invalid Parameters
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Pagination_Invalid_Parameters
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Pagination_Invalid_Parameters
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums;
+namespace Vihersalo\Core\Theme\Api\Enums;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\HTTP_Response_Interface;
+use Vihersalo\Core\Theme\Api\Interfaces\HTTP_Response_Interface;
 
 /**
  * HTTP Error Pagination Invalid Parameters
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Error_Pagination_Invalid_Parameters
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Enums\HTTP_Error_Pagination_Invalid_Parameters
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 enum HTTP_Error_Pagination_Invalid_Parameters implements HTTP_Response_Interface {
@@ -26,12 +26,12 @@ enum HTTP_Error_Pagination_Invalid_Parameters implements HTTP_Response_Interface
 
 	public function values(): array {
 		return match ( $this ) {
-			self::GENERIC => array(
-				'message'     => __( 'Pagination parameters are invalid.', 'heikkivihersalo-block-theme-core' ),
+			self::GENERIC => [
+				'message'     => __( 'Pagination parameters are invalid.', 'Vihersalo-block-theme-core' ),
 				'type'        => 'pagination_invalid_parameters',
 				'code'        => 1003,
 				'http_status' => 400,
-			)
+			]
 		};
 	}
 

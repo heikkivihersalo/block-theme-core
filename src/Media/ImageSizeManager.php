@@ -3,20 +3,20 @@
  * Image class for handling image customizations
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme
+ * @package    Vihersalo\Core\Theme
  */
 
-namespace Vihersalo\BlockThemeCore\Media;
+namespace Vihersalo\Core\Media;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Class for handling image customizations
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class ImageSizeManager {
@@ -37,7 +37,7 @@ class ImageSizeManager {
 	/**
 	 * Constructor
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function __construct( array $default_image_sizes, array $custom_image_sizes ) {

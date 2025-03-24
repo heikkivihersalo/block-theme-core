@@ -2,22 +2,22 @@
 /**
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Support\Pages
+ * @package    Vihersalo\Core\Support\Pages
  */
 
-namespace Vihersalo\BlockThemeCore\Admin\Settings;
+namespace Vihersalo\Core\Admin\Settings;
 
 defined( 'ABSPATH' ) || die();
 
-use Vihersalo\BlockThemeCore\Support\Assets\Localize;
-use Vihersalo\BlockThemeCore\Admin\Settings\SettingsMenuBuilder;
+use Vihersalo\Core\Support\Assets\Localize;
+use Vihersalo\Core\Admin\Settings\SettingsMenuBuilder;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support\Pages
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support\Pages
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class SettingsMenu {
@@ -104,7 +104,7 @@ class SettingsMenu {
 	 * @param array         $sub_pages The sub pages
 	 * @param array         $assets The assets
 	 * @param Localize|bool $localize The localize
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */
@@ -142,7 +142,7 @@ class SettingsMenu {
 	 * @param string $capability The capability required to view the page
 	 * @param string $icon The icon of the menu
 	 * @param int    $position The position of the menu
-	 * @return \Vihersalo\BlockThemeCore\Admin\Settings\SettingsMenuBuilder
+	 * @return \Vihersalo\Core\Admin\Settings\SettingsMenuBuilder
 	 */
 	public static function configure(
 		string $slug,
@@ -251,7 +251,7 @@ class SettingsMenu {
 	/**
 	 * Set submenu pages
 	 *
-	 * @param Vihersalo\BlockThemeCore\Support\Collections\MenuCollection $submenu The submenu pages
+	 * @param Vihersalo\Core\Support\Collections\MenuCollection $submenu The submenu pages
 	 * @return void
 	 */
 	public function set_submenu( $submenu ) {
@@ -261,7 +261,7 @@ class SettingsMenu {
 	/**
 	 * Set assets
 	 *
-	 * @param Vihersalo\BlockThemeCore\Support\Collections\AssetCollection $assets The assets
+	 * @param Vihersalo\Core\Support\Collections\AssetCollection $assets The assets
 	 * @return void
 	 */
 	public function set_assets( $assets ) {

@@ -3,12 +3,12 @@
  * The notice class.
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Common
+ * @package    Vihersalo\Core\Common
  */
 
-namespace Vihersalo\BlockThemeCore\Support;
+namespace Vihersalo\Core\Support;
 
 defined( 'ABSPATH' ) || die();
 
@@ -17,15 +17,15 @@ defined( 'ABSPATH' ) || die();
  *
  * This class defines all code necessary to display a notice in admin area.
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Common
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Common
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Notice {
 	/**
 	 * The message
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   protected
 	 * @var      string    $message    The message
 	 */
@@ -34,7 +34,7 @@ class Notice {
 	/**
 	 * Constructor
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function __construct( string $message ) {
@@ -53,7 +53,7 @@ class Notice {
 	/**
 	 * Display the notice
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 */
 	public function display() {
 		add_action( 'admin_notices', [ $this, 'get_html' ] );

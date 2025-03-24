@@ -3,22 +3,22 @@
  * Class for setting up the theme options
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Admin\Pages
+ * @package    Vihersalo\Core\Theme\Admin\Pages
  */
 
-namespace Vihersalo\BlockThemeCore\Admin\Settings;
+namespace Vihersalo\Core\Admin\Settings;
 
 defined( 'ABSPATH' ) || die();
 
-use Vihersalo\BlockThemeCore\Support\Utils\Common as CommonUtils;
+use Vihersalo\Core\Support\Utils\Common as CommonUtils;
 
 /**
  * Class for setting up the theme options
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Admin\Pages
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Admin\Pages
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class SettingsMenuManager {
@@ -44,7 +44,7 @@ class SettingsMenuManager {
 	/**
 	 * Constructor
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function __construct( SettingsMenu $page, string $path, string $uri ) {
@@ -98,7 +98,7 @@ class SettingsMenuManager {
 	/**
 	 * Callback function for the admin page
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function callback() {
@@ -120,7 +120,7 @@ class SettingsMenuManager {
 	/**
 	 * Add the menu
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function add_menu() {

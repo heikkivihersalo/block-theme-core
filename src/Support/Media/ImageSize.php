@@ -2,19 +2,19 @@
 /**
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Media
+ * @package    Vihersalo\Core\Media
  */
 
-namespace Vihersalo\BlockThemeCore\Support\Media;
+namespace Vihersalo\Core\Support\Media;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Media
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Media
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class ImageSize {
@@ -23,7 +23,7 @@ class ImageSize {
 	 *
 	 * @param string $slug The slug of the menu
 	 * @param string $name The name of the menu
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */

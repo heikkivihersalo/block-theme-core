@@ -3,26 +3,26 @@
  * Functions to clean up the theme from unnecessary WordPress junk
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme
+ * @package    Vihersalo\Core\Theme
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme;
+namespace Vihersalo\Core\Theme;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Loader;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Traits\ThemeDefaults;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils\Helpers as HelpersUtils;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils\Performance as PerformanceUtils;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Interfaces\RegisterHooksInterface;
+use Vihersalo\Core\Theme\Common\Loader;
+use Vihersalo\Core\Theme\Common\Traits\ThemeDefaults;
+use Vihersalo\Core\Theme\Common\Utils\Helpers as HelpersUtils;
+use Vihersalo\Core\Theme\Common\Utils\Performance as PerformanceUtils;
+use Vihersalo\Core\Theme\Common\Interfaces\RegisterHooksInterface;
 
 /**
  * Functions to clean up the theme from unnecessary WordPress junk
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Cleanup implements RegisterHooksInterface {
@@ -31,7 +31,7 @@ class Cleanup implements RegisterHooksInterface {
 	/**
 	 * Constructor
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function __construct( Loader $loader ) {
@@ -41,7 +41,7 @@ class Cleanup implements RegisterHooksInterface {
 	/**
 	 * Register all of the hooks related to the optimized jQuery
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */
@@ -53,7 +53,7 @@ class Cleanup implements RegisterHooksInterface {
 	/**
 	 * Remove WP duotone filters
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */
@@ -65,7 +65,7 @@ class Cleanup implements RegisterHooksInterface {
 	/**
 	 * Remove WP default junk
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */
@@ -110,7 +110,7 @@ class Cleanup implements RegisterHooksInterface {
 	/**
 	 * Remove WP emojis
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */

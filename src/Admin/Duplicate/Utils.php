@@ -3,12 +3,12 @@
  * Class for duplicate post feature
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Theme\Admin\Pages
+ * @package    Vihersalo\Core\Theme\Admin\Pages
  */
 
-namespace Vihersalo\BlockThemeCore\Admin\Duplicate;
+namespace Vihersalo\Core\Admin\Duplicate;
 
 defined( 'ABSPATH' ) || die();
 
@@ -16,8 +16,8 @@ defined( 'ABSPATH' ) || die();
  * Class for duplicate post feature
  * TODO: This is copy paste from old theme and based on https://rudrastyh.com/wordpress/duplicate-post.html. Needs to be refactored.
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Theme\Admin\Pages
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Admin\Pages
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Utils {

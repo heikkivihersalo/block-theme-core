@@ -1,15 +1,15 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Configuration;
+namespace Vihersalo\Core\Configuration;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\ServiceProvider;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Configuration
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Configuration
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class ThemeSupportProvider extends ServiceProvider {
@@ -24,7 +24,7 @@ class ThemeSupportProvider extends ServiceProvider {
 	/**
 	 * Set theme supports
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return   void
 	 */
@@ -39,7 +39,7 @@ class ThemeSupportProvider extends ServiceProvider {
 	/**
 	 * Remove theme supports
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return   void
 	 */

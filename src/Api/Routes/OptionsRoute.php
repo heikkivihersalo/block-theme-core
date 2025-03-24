@@ -3,27 +3,27 @@
  * OptionsRoute class
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Routes\OptionsRoute
+ * @package    Vihersalo\Core\Theme\Api\Routes\OptionsRoute
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Routes;
+namespace Vihersalo\Core\Theme\Api\Routes;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\RouteInterface;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\HTTP_Success;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\Permission;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\Regex;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Utils\OptionsUtils;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils\Options as Utils;
+use Vihersalo\Core\Theme\Api\Interfaces\RouteInterface;
+use Vihersalo\Core\Theme\Api\Enums\HTTP_Success;
+use Vihersalo\Core\Theme\Api\Enums\Permission;
+use Vihersalo\Core\Theme\Api\Enums\Regex;
+use Vihersalo\Core\Theme\Api\Utils\OptionsUtils;
+use Vihersalo\Core\Theme\Common\Utils\Options as Utils;
 
 /**
  * OptionsRoute class
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Routes\OptionsRoute
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Routes\OptionsRoute
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class OptionsRoute extends BaseRoute implements RouteInterface {
@@ -39,11 +39,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/contact',
-			array(
+			[
 				'methods'             => \WP_REST_Server::READABLE, // Alias for GET transport method.
-				'callback'            => array( $this, 'get_contact_settings' ),
+				'callback'            => [ $this, 'get_contact_settings' ],
 				'permission_callback' => Permission::PUBLIC->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -53,11 +53,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/contact',
-			array(
+			[
 				'methods'             => \WP_REST_Server::EDITABLE, // Alias for POST transport method.
-				'callback'            => array( $this, 'update_contact_settings' ),
+				'callback'            => [ $this, 'update_contact_settings' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -67,11 +67,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/social',
-			array(
+			[
 				'methods'             => \WP_REST_Server::READABLE, // Alias for GET transport method.
-				'callback'            => array( $this, 'get_social_settings' ),
+				'callback'            => [ $this, 'get_social_settings' ],
 				'permission_callback' => Permission::PUBLIC->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -81,11 +81,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/social',
-			array(
+			[
 				'methods'             => \WP_REST_Server::EDITABLE, // Alias for POST transport method.
-				'callback'            => array( $this, 'update_social_settings' ),
+				'callback'            => [ $this, 'update_social_settings' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -95,11 +95,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/analytics',
-			array(
+			[
 				'methods'             => \WP_REST_Server::READABLE, // Alias for GET transport method.
-				'callback'            => array( $this, 'get_analytics_settings' ),
+				'callback'            => [ $this, 'get_analytics_settings' ],
 				'permission_callback' => Permission::PUBLIC->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -109,11 +109,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/analytics',
-			array(
+			[
 				'methods'             => \WP_REST_Server::EDITABLE, // Alias for POST transport method.
-				'callback'            => array( $this, 'update_analytics_settings' ),
+				'callback'            => [ $this, 'update_analytics_settings' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -123,11 +123,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/chatgpt',
-			array(
+			[
 				'methods'             => \WP_REST_Server::READABLE, // Alias for GET transport method.
-				'callback'            => array( $this, 'get_chatgpt_settings' ),
+				'callback'            => [ $this, 'get_chatgpt_settings' ],
 				'permission_callback' => Permission::PUBLIC->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -137,11 +137,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/chatgpt',
-			array(
+			[
 				'methods'             => \WP_REST_Server::EDITABLE, // Alias for POST transport method.
-				'callback'            => array( $this, 'update_chatgpt_settings' ),
+				'callback'            => [ $this, 'update_chatgpt_settings' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -151,11 +151,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/purge-cache',
-			array(
+			[
 				'methods'             => \WP_REST_Server::CREATABLE, // Alias for POST transport method.
-				'callback'            => array( $this, 'clean_transient_cache' ),
+				'callback'            => [ $this, 'clean_transient_cache' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -165,11 +165,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/logo',
-			array(
+			[
 				'methods'             => \WP_REST_Server::READABLE, // Alias for GET transport method.
-				'callback'            => array( $this, 'get_custom_logo' ),
+				'callback'            => [ $this, 'get_custom_logo' ],
 				'permission_callback' => Permission::PUBLIC->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -179,11 +179,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/logo',
-			array(
+			[
 				'methods'             => \WP_REST_Server::EDITABLE, // Alias for POST transport method.
-				'callback'            => array( $this, 'update_custom_logo' ),
+				'callback'            => [ $this, 'update_custom_logo' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 	}
 
@@ -203,12 +203,12 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::FETCHED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Fetched succesfully', 'heikkivihersalo-block-theme-core' ),
+				'message' => __( 'Fetched succesfully', 'Vihersalo-block-theme-core' ),
 				'data'    => $result,
-			),
+			],
 			HTTP_Success::FETCHED_SUCCESSFULLY->get_http_status()
 		);
 	}
@@ -230,12 +230,12 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::UPDATED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Updated succesfully', 'heikkivihersalo-block-theme-core' ),
+				'message' => __( 'Updated succesfully', 'Vihersalo-block-theme-core' ),
 				'data'    => $result,
-			),
+			],
 			HTTP_Success::UPDATED_SUCCESSFULLY->get_http_status()
 		);
 	}
@@ -255,12 +255,12 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::FETCHED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Fetched succesfully', 'heikkivihersalo-block-theme-core' ),
+				'message' => __( 'Fetched succesfully', 'Vihersalo-block-theme-core' ),
 				'data'    => $result,
-			),
+			],
 			HTTP_Success::FETCHED_SUCCESSFULLY->get_http_status()
 		);
 	}
@@ -282,12 +282,12 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::UPDATED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Updated succesfully', 'heikkivihersalo-block-theme-core' ),
+				'message' => __( 'Updated succesfully', 'Vihersalo-block-theme-core' ),
 				'data'    => $result,
-			),
+			],
 			HTTP_Success::UPDATED_SUCCESSFULLY->get_http_status()
 		);
 	}
@@ -307,12 +307,12 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::FETCHED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Fetched succesfully', 'heikkivihersalo-block-theme-core' ),
+				'message' => __( 'Fetched succesfully', 'Vihersalo-block-theme-core' ),
 				'data'    => $result,
-			),
+			],
 			HTTP_Success::FETCHED_SUCCESSFULLY->get_http_status()
 		);
 	}
@@ -334,12 +334,12 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::UPDATED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Updated succesfully', 'heikkivihersalo-block-theme-core' ),
+				'message' => __( 'Updated succesfully', 'Vihersalo-block-theme-core' ),
 				'data'    => $result,
-			),
+			],
 			HTTP_Success::UPDATED_SUCCESSFULLY->get_http_status()
 		);
 	}
@@ -361,11 +361,11 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::CLEARED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Cache purged succesfully', 'heikkivihersalo-block-theme-core' ),
-			),
+				'message' => __( 'Cache purged succesfully', 'Vihersalo-block-theme-core' ),
+			],
 			HTTP_Success::CLEARED_SUCCESSFULLY->get_http_status()
 		);
 	}
@@ -385,12 +385,12 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::FETCHED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Fetched succesfully', 'heikkivihersalo-block-theme-core' ),
+				'message' => __( 'Fetched succesfully', 'Vihersalo-block-theme-core' ),
 				'data'    => $result,
-			),
+			],
 			HTTP_Success::FETCHED_SUCCESSFULLY->get_http_status()
 		);
 	}
@@ -412,12 +412,12 @@ class OptionsRoute extends BaseRoute implements RouteInterface {
 		 * Return WP REST Response
 		 */
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'success',
 				'type'    => HTTP_Success::UPDATED_SUCCESSFULLY->get_type(),
-				'message' => __( 'Updated succesfully', 'heikkivihersalo-block-theme-core' ),
+				'message' => __( 'Updated succesfully', 'Vihersalo-block-theme-core' ),
 				'data'    => $result,
-			),
+			],
 			HTTP_Success::UPDATED_SUCCESSFULLY->get_http_status()
 		);
 	}

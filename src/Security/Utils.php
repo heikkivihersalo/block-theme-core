@@ -3,20 +3,20 @@
  * Utility functions for security related tasks
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils
+ * @package    Vihersalo\Core\Theme\Common\Utils
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils;
+namespace Vihersalo\Core\Theme\Common\Utils;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Utility functions for security related tasks
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Common\Utils
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Common\Utils
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Security {
@@ -42,7 +42,7 @@ final class Security {
 	public static function disable_theme_update( array $response, string $url ): array {
 		if ( 0 === strpos( $url, 'https://api.wordpress.org/themes/update-check' ) ) {
 			$themes = json_decode( $response['body']['themes'] );
-			unset( $themes->themes->{'heikkivihersalo-block-theme-core'} );
+			unset( $themes->themes->{'Vihersalo-block-theme-core'} );
 			unset( $themes->themes->{'style'} );
 			$response['body']['themes'] = wp_json_encode( $themes );
 		}

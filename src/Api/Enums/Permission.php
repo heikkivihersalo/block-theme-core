@@ -3,20 +3,20 @@
  * Permission
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\Permission
+ * @package    Vihersalo\Core\Theme\Api\Enums\Permission
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums;
+namespace Vihersalo\Core\Theme\Api\Enums;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Permission
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\Permission
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Enums\Permission
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 enum Permission {

@@ -2,22 +2,22 @@
 /**
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Enqueue
+ * @package    Vihersalo\Core\Enqueue
  */
 
-namespace Vihersalo\BlockThemeCore\Enqueue;
+namespace Vihersalo\Core\Enqueue;
 
 defined( 'ABSPATH' ) || die();
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Support\Notice;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Support\Notice;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Enqueue
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Enqueue
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 abstract class Asset {
@@ -80,7 +80,7 @@ abstract class Asset {
 	 * @param bool   $admin Whether the asset is for admin or not
 	 * @param bool   $editor Whether the asset is for `add_editor_style` function or not
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */

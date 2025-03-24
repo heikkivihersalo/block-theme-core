@@ -3,22 +3,22 @@
  * Options Route Utility Functions
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Utils\OptionsUtils
+ * @package    Vihersalo\Core\Theme\Api\Utils\OptionsUtils
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Utils;
+namespace Vihersalo\Core\Theme\Api\Utils;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Api\Encryption;
+use Vihersalo\Core\Api\Encryption;
 
 /**
  * Options Route Utility Functions
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\OptionsUtils
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\OptionsUtils
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class OptionsUtils {
@@ -35,7 +35,7 @@ final class OptionsUtils {
 	public static function get_contact_information(): array {
 		$contact = get_option(
 			'valintarengas_block_theme_contact',
-			array(
+			[
 				'name'        => '',
 				'address'     => '',
 				'zip'         => '',
@@ -45,7 +45,7 @@ final class OptionsUtils {
 				'business_id' => '',
 				'phone'       => '',
 				'email'       => '',
-			)
+			]
 		);
 
 		return $contact;
@@ -68,7 +68,7 @@ final class OptionsUtils {
 
 		$update = update_option(
 			'valintarengas_block_theme_contact',
-			array(
+			[
 				'name'        => $body['name'] ?? $current['name'],
 				'address'     => $body['address'] ?? $current['address'],
 				'zip'         => $body['zip'] ?? $current['zip'],
@@ -78,7 +78,7 @@ final class OptionsUtils {
 				'business_id' => $body['business_id'] ?? $current['business_id'],
 				'phone'       => $body['phone'] ?? $current['phone'],
 				'email'       => $body['email'] ?? $current['email'],
-			),
+			],
 			true
 		);
 
@@ -86,7 +86,7 @@ final class OptionsUtils {
 			throw new \Exception( 'Failed to update contact information.', 500 );
 		}
 
-		return array(
+		return [
 			'name'        => $body['name'] ?? $current['name'],
 			'address'     => $body['address'] ?? $current['address'],
 			'zip'         => $body['zip'] ?? $current['zip'],
@@ -96,7 +96,7 @@ final class OptionsUtils {
 			'business_id' => $body['business_id'] ?? $current['business_id'],
 			'phone'       => $body['phone'] ?? $current['phone'],
 			'email'       => $body['email'] ?? $current['email'],
-		);
+		];
 	}
 
 	/**
@@ -106,7 +106,7 @@ final class OptionsUtils {
 	public static function get_social_media_links(): array {
 		$social = get_option(
 			'valintarengas_block_theme_social',
-			array(
+			[
 				'facebook'  => '',
 				'twitter'   => '',
 				'instagram' => '',
@@ -119,7 +119,7 @@ final class OptionsUtils {
 				'reddit'    => '',
 				'discord'   => '',
 				'whatsapp'  => '',
-			)
+			]
 		);
 
 		return $social;
@@ -142,7 +142,7 @@ final class OptionsUtils {
 
 		$update = update_option(
 			'valintarengas_block_theme_social',
-			array(
+			[
 				'facebook'  => $body['facebook'] ?? $current['facebook'],
 				'twitter'   => $body['twitter'] ?? $current['twitter'],
 				'instagram' => $body['instagram'] ?? $current['instagram'],
@@ -155,7 +155,7 @@ final class OptionsUtils {
 				'reddit'    => $body['reddit'] ?? $current['reddit'],
 				'discord'   => $body['discord'] ?? $current['discord'],
 				'whatsapp'  => $body['whatsapp'] ?? $current['whatsapp'],
-			),
+			],
 			true
 		);
 
@@ -163,7 +163,7 @@ final class OptionsUtils {
 			throw new \Exception( 'Failed to update social media links.', 500 );
 		}
 
-		return array(
+		return [
 			'facebook'  => $body['facebook'] ?? $current['facebook'],
 			'twitter'   => $body['twitter'] ?? $current['twitter'],
 			'instagram' => $body['instagram'] ?? $current['instagram'],
@@ -176,7 +176,7 @@ final class OptionsUtils {
 			'reddit'    => $body['reddit'] ?? $current['reddit'],
 			'discord'   => $body['discord'] ?? $current['discord'],
 			'whatsapp'  => $body['whatsapp'] ?? $current['whatsapp'],
-		);
+		];
 	}
 
 	/**
@@ -186,12 +186,12 @@ final class OptionsUtils {
 	public static function get_analytics_settings(): array {
 		$settings = get_option(
 			'valintarengas_block_theme_tagmanager',
-			array(
+			[
 				'active'  => false,
 				'id'      => '',
 				'url'     => 'www.googletagmanager.com',
 				'timeout' => 1500,
-			)
+			]
 		);
 
 		return $settings;
@@ -214,12 +214,12 @@ final class OptionsUtils {
 
 		$update = update_option(
 			'valintarengas_block_theme_tagmanager',
-			array(
+			[
 				'active'  => $body['active'] ?? $current['active'] ?? false,
 				'id'      => $body['id'] ?? $current['id'] ?? '',
 				'url'     => $body['url'] ?? $current['url'] ?? 'www.googletagmanager.com',
 				'timeout' => $body['timeout'] ?? $current['timeout'] ?? 1500,
-			),
+			],
 			true
 		);
 
@@ -227,12 +227,12 @@ final class OptionsUtils {
 			throw new \Exception( 'Failed to update analytics settings.', 500 );
 		}
 
-		return array(
+		return [
 			'active'  => $body['active'] ?? $current['active'] ?? false,
 			'id'      => $body['id'] ?? $current['id'] ?? '',
 			'url'     => $body['url'] ?? $current['url'] ?? 'www.googletagmanager.com',
 			'timeout' => $body['timeout'] ?? $current['timeout'] ?? 1500,
-		);
+		];
 	}
 
 	/**
@@ -242,13 +242,13 @@ final class OptionsUtils {
 	public static function get_custom_logo(): array {
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
 		$custom_logo    = wp_get_attachment_image_src( $custom_logo_id, 'full' );
-		return array(
+		return [
 			'id'     => (int) $custom_logo_id,
 			'url'    => $custom_logo[0],
 			'width'  => $custom_logo[1],
 			'height' => $custom_logo[2],
 			'alt'    => get_post_meta( $custom_logo_id, '_wp_attachment_image_alt', true ),
-		);
+		];
 	}
 
 	/**
@@ -278,12 +278,12 @@ final class OptionsUtils {
 
 		$custom_logo = wp_get_attachment_image_src( $id, 'full' );
 
-		return array(
+		return [
 			'id'     => (int) $id,
 			'url'    => $custom_logo[0],
 			'width'  => $custom_logo[1],
 			'height' => $custom_logo[2],
 			'alt'    => get_post_meta( $id, '_wp_attachment_image_alt', true ),
-		);
+		];
 	}
 }

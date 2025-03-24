@@ -2,19 +2,19 @@
 /**
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Admin\Settings
+ * @package    Vihersalo\Core\Admin\Settings
  */
 
-namespace Vihersalo\BlockThemeCore\Admin\Settings;
+namespace Vihersalo\Core\Admin\Settings;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Admin\Settings
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Admin\Settings
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Submenu {
@@ -25,7 +25,7 @@ class Submenu {
 	 * @param string $page_title The title of the page
 	 * @param string $menu_title The title of the menu
 	 * @param string $capability The capability required to view the page
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */

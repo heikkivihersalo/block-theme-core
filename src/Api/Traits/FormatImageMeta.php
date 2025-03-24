@@ -3,18 +3,18 @@
  * Register custom image sizes
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Common
+ * @package    Vihersalo\Core\Common
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Traits;
+namespace Vihersalo\Core\Theme\Api\Traits;
 
 /**
  * Register custom image sizes
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Common
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Common
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 trait FormatImageMeta {
@@ -28,13 +28,13 @@ trait FormatImageMeta {
 		$id   = get_post_thumbnail_id( $post_id );
 		$meta = wp_get_attachment_image_src( $id, $size );
 
-		return array(
+		return [
 			'id'     => $id,
 			'url'    => isset( $meta[0] ) ? $meta[0] : '',
 			'width'  => isset( $meta[1] ) ? $meta[1] : '',
 			'height' => isset( $meta[2] ) ? $meta[2] : '',
 			'alt'    => get_post_meta( $id, '_wp_attachment_image_alt', true ),
 			'title'  => get_the_title( $id ),
-		);
+		];
 	}
 }

@@ -3,12 +3,12 @@
  * Custom walker for header menu
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Navigation\Walkers
+ * @package    Vihersalo\Core\Theme\Navigation\Walkers
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Navigation\Walkers;
+namespace Vihersalo\Core\Navigation\Walkers;
 
 defined( 'ABSPATH' ) || die();
 
@@ -17,8 +17,8 @@ use Walker_Nav_Menu;
 /**
  * Custom walker for header menu
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Navigation\Walkers
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Navigation\Walkers
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class MenuWalker extends Walker_Nav_Menu {

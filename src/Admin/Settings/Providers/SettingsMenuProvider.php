@@ -1,19 +1,19 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Admin\Settings\Providers;
+namespace Vihersalo\Core\Admin\Settings\Providers;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Support\Utils\Common as Utils;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
-use Vihersalo\BlockThemeCore\Support\Pages\SettingsMenu;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\Utils\Common as Utils;
+use Vihersalo\Core\Support\ServiceProvider;
+use Vihersalo\Core\Support\Pages\SettingsMenu;
 
-use Vihersalo\BlockThemeCore\Admin\Settings\SettingsMenuManager;
+use Vihersalo\Core\Admin\Settings\SettingsMenuManager;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Admin
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Admin
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class SettingsMenuProvider extends ServiceProvider {

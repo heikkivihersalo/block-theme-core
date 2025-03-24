@@ -3,24 +3,24 @@
  * Abstract base class for API routes
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Routes\BaseRoute
+ * @package    Vihersalo\Core\Theme\Api\Routes\BaseRoute
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Routes;
+namespace Vihersalo\Core\Theme\Api\Routes;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\RouteInterface;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\Permission;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Enums\Regex;
+use Vihersalo\Core\Theme\Api\Interfaces\RouteInterface;
+use Vihersalo\Core\Theme\Api\Enums\Permission;
+use Vihersalo\Core\Theme\Api\Enums\Regex;
 
 /**
  * Abstract base class for API routes
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Routes\BaseRoute
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Routes\BaseRoute
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 abstract class BaseRoute implements RouteInterface {
@@ -56,11 +56,11 @@ abstract class BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base,
-			array(
+			[
 				'methods'             => \WP_REST_Server::READABLE, // Alias for GET transport method.
-				'callback'            => array( $this, 'get_all_items' ),
+				'callback'            => [ $this, 'get_all_items' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -71,11 +71,11 @@ abstract class BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/' . Regex::NUMERIC_ID->get_request_regex(),
-			array(
+			[
 				'methods'             => \WP_REST_Server::READABLE, // Alias for GET transport method.
-				'callback'            => array( $this, 'get_item_by_id' ),
+				'callback'            => [ $this, 'get_item_by_id' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -86,11 +86,11 @@ abstract class BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base,
-			array(
+			[
 				'methods'             => \WP_REST_Server::CREATABLE, // Alias for POST transport method.
-				'callback'            => array( $this, 'create_item' ),
+				'callback'            => [ $this, 'create_item' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -101,11 +101,11 @@ abstract class BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/' . Regex::NUMERIC_ID->get_request_regex(),
-			array(
+			[
 				'methods'             => \WP_REST_Server::EDITABLE, // Alias for POST, PUT, PATCH transport methods together.
-				'callback'            => array( $this, 'update_item' ),
+				'callback'            => [ $this, 'update_item' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 
 		/**
@@ -116,11 +116,11 @@ abstract class BaseRoute implements RouteInterface {
 		register_rest_route(
 			RouteInterface::NAMESPACE . RouteInterface::VERSION,
 			'/' . $this->base . '/' . Regex::NUMERIC_ID->get_request_regex(),
-			array(
+			[
 				'methods'             => \WP_REST_Server::DELETABLE, // Alias for DELETE transport method.
-				'callback'            => array( $this, 'delete_item' ),
+				'callback'            => [ $this, 'delete_item' ],
 				'permission_callback' => Permission::ADMIN->get_callback(),
-			)
+			]
 		);
 	}
 
@@ -129,13 +129,13 @@ abstract class BaseRoute implements RouteInterface {
 	 */
 	public function get_all_items( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'error',
 				'type'    => HTTP_Error_Not_Implemented::GENERIC->get_type(),
 				'code'    => HTTP_Error_Not_Implemented::GENERIC->get_code(),
 				'message' => HTTP_Error_Not_Implemented::GENERIC->get_message(),
 				'data'    => null,
-			),
+			],
 			HTTP_Error_Not_Implemented::GENERIC->get_http_status()
 		);
 	}
@@ -145,13 +145,13 @@ abstract class BaseRoute implements RouteInterface {
 	 */
 	public function get_item_by_id( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'error',
 				'type'    => HTTP_Error_Not_Implemented::GENERIC->get_type(),
 				'code'    => HTTP_Error_Not_Implemented::GENERIC->get_code(),
 				'message' => HTTP_Error_Not_Implemented::GENERIC->get_message(),
 				'data'    => null,
-			),
+			],
 			HTTP_Error_Not_Implemented::GENERIC->get_http_status()
 		);
 	}
@@ -161,13 +161,13 @@ abstract class BaseRoute implements RouteInterface {
 	 */
 	public function create_item( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'error',
 				'type'    => HTTP_Error_Not_Implemented::GENERIC->get_type(),
 				'code'    => HTTP_Error_Not_Implemented::GENERIC->get_code(),
 				'message' => HTTP_Error_Not_Implemented::GENERIC->get_message(),
 				'data'    => null,
-			),
+			],
 			HTTP_Error_Not_Implemented::GENERIC->get_http_status()
 		);
 	}
@@ -177,13 +177,13 @@ abstract class BaseRoute implements RouteInterface {
 	 */
 	public function update_item( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'error',
 				'type'    => HTTP_Error_Not_Implemented::GENERIC->get_type(),
 				'code'    => HTTP_Error_Not_Implemented::GENERIC->get_code(),
 				'message' => HTTP_Error_Not_Implemented::GENERIC->get_message(),
 				'data'    => null,
-			),
+			],
 			HTTP_Error_Not_Implemented::GENERIC->get_http_status()
 		);
 	}
@@ -193,13 +193,13 @@ abstract class BaseRoute implements RouteInterface {
 	 */
 	public function delete_item( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
 		return new \WP_REST_Response(
-			array(
+			[
 				'status'  => 'error',
 				'type'    => HTTP_Error_Not_Implemented::GENERIC->get_type(),
 				'code'    => HTTP_Error_Not_Implemented::GENERIC->get_code(),
 				'message' => HTTP_Error_Not_Implemented::GENERIC->get_message(),
 				'data'    => null,
-			),
+			],
 			HTTP_Error_Not_Implemented::GENERIC->get_http_status()
 		);
 	}

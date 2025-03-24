@@ -1,23 +1,23 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Enqueue;
+namespace Vihersalo\Core\Enqueue;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Support\Utils\Media as MediaUtils;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\Utils\Media as MediaUtils;
+use Vihersalo\Core\Support\ServiceProvider;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Enqueue
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Enqueue
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class EnqueueProvider extends ServiceProvider {
 	/**
 	 * Register the navigation provider
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return void
 	 */
@@ -29,7 +29,7 @@ class EnqueueProvider extends ServiceProvider {
 	/**
 	 * Register theme assets
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return   void
 	 */
@@ -46,7 +46,7 @@ class EnqueueProvider extends ServiceProvider {
 	/**
 	 * Register WP media support
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return   void
 	 */
@@ -57,7 +57,7 @@ class EnqueueProvider extends ServiceProvider {
 	/**
 	 * Boot the navigation provider
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return void
 	 */

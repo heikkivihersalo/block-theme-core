@@ -1,14 +1,14 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Support\Utils;
+namespace Vihersalo\Core\Support\Utils;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Utility functions for options
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Support\Utils
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support\Utils
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Options {
@@ -64,7 +64,7 @@ final class Options {
 			$wpdb->prepare(
 				'SELECT option_name FROM %i WHERE option_name LIKE %s',
 				$wpdb->options, // Name of the options table
-				'_transient_timeout_heikkivihersalo-block-theme-core%'
+				'_transient_timeout_Vihersalo-block-theme-core%'
 			)
 		);
 

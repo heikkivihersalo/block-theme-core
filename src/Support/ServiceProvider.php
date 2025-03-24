@@ -1,22 +1,22 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Support;
+namespace Vihersalo\Core\Support;
 
 use Closure;
-use Vihersalo\BlockThemeCore\Application;
+use Vihersalo\Core\Application;
 
 /**
  * The service provider class.
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Support
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Support
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 abstract class ServiceProvider {
 	/**
 	 * The application instance.
 	 *
-	 * @var \Vihersalo\BlockThemeCore\Application
+	 * @var \Vihersalo\Core\Application
 	 */
 	protected $app;
 
@@ -37,7 +37,7 @@ abstract class ServiceProvider {
 	/**
 	 * Create a new service provider instance.
 	 *
-	 * @param  \Vihersalo\BlockThemeCore\Application $app The application instance.
+	 * @param  \Vihersalo\Core\Application $app The application instance.
 	 * @return void
 	 */
 	public function __construct( $app ) {

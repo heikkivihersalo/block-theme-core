@@ -1,16 +1,16 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Admin\Duplicate;
+namespace Vihersalo\Core\Admin\Duplicate;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Admin\Duplicate\Utils;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Admin\Duplicate\Utils;
+use Vihersalo\Core\Support\ServiceProvider;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Admin\Duplicate
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Admin\Duplicate
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class DuplicateProvider extends ServiceProvider {
@@ -24,7 +24,7 @@ class DuplicateProvider extends ServiceProvider {
 	/**
 	 * Enable customizer
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */

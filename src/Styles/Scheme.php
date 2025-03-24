@@ -1,11 +1,11 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Styles;
+namespace Vihersalo\Core\Styles;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Analytics
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Analytics
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Scheme {
@@ -24,7 +24,7 @@ class Scheme {
 	/**
 	 * Constructor
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access public
 	 * @param string $theme_color The theme color
 	 * @param bool   $dark_mode The dark mode
@@ -38,7 +38,7 @@ class Scheme {
 	/**
 	 * Inline theme color
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */

@@ -3,20 +3,20 @@
  * Class for cleaning up the theme admin panel
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Admin\Pages
+ * @package    Vihersalo\Core\Theme\Admin\Pages
  */
 
-namespace Vihersalo\BlockThemeCore\Admin\Cleanup;
+namespace Vihersalo\Core\Admin\Cleanup;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Class for cleaning up the theme admin panel
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Admin\Pages
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Admin\Pages
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 final class Utils {

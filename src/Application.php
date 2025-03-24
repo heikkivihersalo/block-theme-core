@@ -1,26 +1,26 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore;
+namespace Vihersalo\Core;
 
 use Illuminate\Container\Container;
 
-use Vihersalo\BlockThemeCore\Admin\CustomizerProvider;
-use Vihersalo\BlockThemeCore\Admin\Duplicate\DuplicateProvider;
-use Vihersalo\BlockThemeCore\Application\ApplicationBuilder;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Configuration\Config;
-use Vihersalo\BlockThemeCore\Configuration\ThemeSupportProvider;
-use Vihersalo\BlockThemeCore\Enqueue\DequeueProvider;
-use Vihersalo\BlockThemeCore\Enqueue\EnqueueProvider;
-use Vihersalo\BlockThemeCore\Navigation\NavigationProvider;
-use Vihersalo\BlockThemeCore\Translations\TranslationProvider;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
+use Vihersalo\Core\Admin\CustomizerProvider;
+use Vihersalo\Core\Admin\Duplicate\DuplicateProvider;
+use Vihersalo\Core\Application\ApplicationBuilder;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Configuration\Config;
+use Vihersalo\Core\Configuration\ThemeSupportProvider;
+use Vihersalo\Core\Enqueue\DequeueProvider;
+use Vihersalo\Core\Enqueue\EnqueueProvider;
+use Vihersalo\Core\Navigation\NavigationProvider;
+use Vihersalo\Core\Translations\TranslationProvider;
+use Vihersalo\Core\Support\ServiceProvider;
 
 /**
  * The core application class.
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore
+ * @since      1.0.0
+ * @package    Vihersalo\Core
  * @author     Heikki Vihersalo
  */
 class Application extends Container {
@@ -103,7 +103,7 @@ class Application extends Container {
 	/**
 	 * Configure the application
 	 *
-	 * @return \Vihersalo\BlockThemeCore\Application\ApplicationBuilder
+	 * @return \Vihersalo\Core\Application\ApplicationBuilder
 	 */
 	public static function configure() {
 		return ( new ApplicationBuilder( new static() ) );
@@ -167,8 +167,8 @@ class Application extends Container {
 		/**
 		 * Get the registered service provider instance if it exists.
 		 *
-		 * @param  \Vihersalo\BlockThemeCore\Support\ServiceProvider|string $provider The provider to get
-		 * @return \Vihersalo\BlockThemeCore\Support\ServiceProvider|null
+		 * @param  \Vihersalo\Core\Support\ServiceProvider|string $provider The provider to get
+		 * @return \Vihersalo\Core\Support\ServiceProvider|null
 		 */
 	public function get_provider( $provider ) {
 		$name = is_string( $provider ) ? $provider : get_class( $provider );
@@ -180,7 +180,7 @@ class Application extends Container {
 	 * Resolve a service provider instance from the class name.
 	 *
 	 * @param  string $provider The provider to resolve
-	 * @return \Vihersalo\BlockThemeCore\Support\ServiceProvider $provider
+	 * @return \Vihersalo\Core\Support\ServiceProvider $provider
 	 */
 	public function resolve_provider( $provider ) {
 		return new $provider( $this );
@@ -189,9 +189,9 @@ class Application extends Container {
 	/**
 	 * Register a service provider with the application.
 	 *
-	 * @param  Vihersalo\BlockThemeCore\Support\ServiceProvider|string $provider The provider to register
-	 * @param  bool                                                    $force If true, the provider will be registered even if it has already been registered
-	 * @return Vihersalo\BlockThemeCore\Support\ServiceProvider
+	 * @param  Vihersalo\Core\Support\ServiceProvider|string $provider The provider to register
+	 * @param  bool                                          $force If true, the provider will be registered even if it has already been registered
+	 * @return Vihersalo\Core\Support\ServiceProvider
 	 */
 	public function register_provider( $provider, $force = false ) {
 		if ( ( $registered = $this->get_provider( $provider ) ) && ! $force ) {
@@ -249,7 +249,7 @@ class Application extends Container {
 	/**
 	 * Mark the given provider as registered.
 	 *
-	 * @param  \Vihersalo\BlockThemeCore\Support\ServiceProvider $provider The provider to mark as registered
+	 * @param  \Vihersalo\Core\Support\ServiceProvider $provider The provider to mark as registered
 	 * @return void
 	 */
 	protected function mark_as_registered( $provider ) {
@@ -312,7 +312,7 @@ class Application extends Container {
 	/**
 	 * Boot the given service provider.
 	 *
-	 * @param  \Vihersalo\BlockThemeCore\Support\ServiceProvider $provider The provider to boot
+	 * @param  \Vihersalo\Core\Support\ServiceProvider $provider The provider to boot
 	 * @return void
 	 */
 	protected function boot_provider( $provider ) {

@@ -3,25 +3,25 @@
  * Route Interface
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\RouteInterface
+ * @package    Vihersalo\Core\Theme\Api\Interfaces\RouteInterface
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces;
+namespace Vihersalo\Core\Theme\Api\Interfaces;
 
 defined( 'ABSPATH' ) || die();
 
 /**
  * Route Interface
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\Interfaces\RouteInterface
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\Interfaces\RouteInterface
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 interface RouteInterface {
 	const VERSION   = '1';
-	const NAMESPACE = 'heikkivihersalo-block-theme-core/v';
+	const NAMESPACE = 'Vihersalo-block-theme-core/v';
 
 	/**
 	 * Register default CRUD endpoints

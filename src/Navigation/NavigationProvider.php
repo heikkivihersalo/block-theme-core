@@ -1,22 +1,22 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Navigation;
+namespace Vihersalo\Core\Navigation;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
-use Vihersalo\BlockThemeCore\Support\ServiceProvider;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\ServiceProvider;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Navigation
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Navigation
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class NavigationProvider extends ServiceProvider {
 	/**
 	 * Register the navigation provider
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */
@@ -27,7 +27,7 @@ class NavigationProvider extends ServiceProvider {
 	/**
 	 * Load navigation menus
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */
@@ -42,7 +42,7 @@ class NavigationProvider extends ServiceProvider {
 	/**
 	 * Boot the navigation provider
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access public
 	 * @return void
 	 */

@@ -8,8 +8,8 @@
  * @link https://github.com/laravel/framework/blob/12.x/src/Illuminate/Foundation/helpers.php
  */
 
-namespace Vihersalo\BlockThemeCore\Application {
-	use Vihersalo\BlockThemeCore\Application;
+namespace Vihersalo\Core\Application {
+	use Vihersalo\Core\Application;
 	use Illuminate\Container\Container;
 
 	if ( ! function_exists( 'app' ) ) {
@@ -58,7 +58,7 @@ namespace Vihersalo\BlockThemeCore\Application {
 		/**
 		 * Get the hooks loader instance
 		 *
-		 * @return \Vihersalo\BlockThemeCore\Application\HooksLoader
+		 * @return \Vihersalo\Core\Application\HooksLoader
 		 */
 		function wp_loader() {
 			return app( HooksLoader::class );

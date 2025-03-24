@@ -2,21 +2,21 @@
 /**
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    Vihersalo\BlockThemeCore\Admin\Settings\Collections
+ * @package    Vihersalo\Core\Admin\Settings\Collections
  */
 
-namespace Vihersalo\BlockThemeCore\Support\Collections;
+namespace Vihersalo\Core\Support\Collections;
 
 defined( 'ABSPATH' ) || die();
 
-use Vihersalo\BlockThemeCore\Support\Pages\Submenu;
+use Vihersalo\Core\Support\Pages\Submenu;
 
 /**
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Admin\Settings\Collections
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Admin\Settings\Collections
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class MenuCollection {
@@ -30,7 +30,7 @@ class MenuCollection {
 	/**
 	 * Constructor
 	 *
-	 * @since 2.0.0
+	 * @since 1.0.0
 	 * @access private
 	 * @return void
 	 */

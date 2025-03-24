@@ -3,26 +3,26 @@
  * The API functionality of the theme.
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme
+ * @package    Vihersalo\Core\Theme
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme;
+namespace Vihersalo\Core\Theme;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Routes;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\RestFields;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Loader;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Traits\ThemeDefaults;
-use HeikkiVihersalo\BlockThemeCore\Theme\Common\Interfaces\RegisterHooksInterface;
+use Vihersalo\Core\Theme\Api\Routes;
+use Vihersalo\Core\Theme\Api\RestFields;
+use Vihersalo\Core\Theme\Common\Loader;
+use Vihersalo\Core\Theme\Common\Traits\ThemeDefaults;
+use Vihersalo\Core\Theme\Common\Interfaces\RegisterHooksInterface;
 
 /**
  * The API functionality of the theme.
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class Api implements RegisterHooksInterface {
@@ -31,7 +31,7 @@ class Api implements RegisterHooksInterface {
 	/**
 	 * Constructor
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 */
 	public function __construct( Loader $loader ) {
@@ -41,7 +41,7 @@ class Api implements RegisterHooksInterface {
 	/**
 	 * Register the API routes for the theme.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   public
 	 * @return   void
 	 */
@@ -53,7 +53,7 @@ class Api implements RegisterHooksInterface {
 	/**
 	 * Register the custom REST fields for the theme.
 	 *
-	 * @since    2.0.0
+	 * @since    1.0.0
 	 * @access   private
 	 * @return   void
 	 */

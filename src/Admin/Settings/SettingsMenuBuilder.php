@@ -1,15 +1,15 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Admin\Settings;
+namespace Vihersalo\Core\Admin\Settings;
 
-use Vihersalo\BlockThemeCore\Support\Assets\Localize;
-use Vihersalo\BlockThemeCore\Support\Collections;
+use Vihersalo\Core\Support\Assets\Localize;
+use Vihersalo\Core\Support\Collections;
 
 /**
  * Application builder
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Application
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Application
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class SettingsMenuBuilder {

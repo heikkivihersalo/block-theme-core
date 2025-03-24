@@ -1,22 +1,22 @@
 <?php
 
-namespace Vihersalo\BlockThemeCore\Application;
+namespace Vihersalo\Core\Application;
 
-use Vihersalo\BlockThemeCore\Application;
-use Vihersalo\BlockThemeCore\Application\HooksLoader;
+use Vihersalo\Core\Application;
+use Vihersalo\Core\Application\HooksLoader;
 
 /**
  * Application builder
  *
- * @since      2.0.0
- * @package    Vihersalo\BlockThemeCore\Application
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Application
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class ApplicationBuilder {
 	/**
 	 * Application instance
 	 *
-	 * @var \Vihersalo\BlockThemeCore\Application
+	 * @var \Vihersalo\Core\Application
 	 */
 	protected Application $app;
 

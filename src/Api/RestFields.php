@@ -3,23 +3,23 @@
  * Class for registering custom fields for the rest API
  *
  * @link       https://www.kotisivu.dev
- * @since      2.0.0
+ * @since      1.0.0
  *
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\RestFields
+ * @package    Vihersalo\Core\Theme\Api\RestFields
  */
 
-namespace HeikkiVihersalo\BlockThemeCore\Theme\Api;
+namespace Vihersalo\Core\Theme\Api;
 
 defined( 'ABSPATH' ) || die();
 
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Traits\CustomRestField;
-use HeikkiVihersalo\BlockThemeCore\Theme\Api\Traits\FormatImageMeta;
+use Vihersalo\Core\Theme\Api\Traits\CustomRestField;
+use Vihersalo\Core\Theme\Api\Traits\FormatImageMeta;
 
 /**
  * Class for registering custom fields for the rest API
  *
- * @since      2.0.0
- * @package    HeikkiVihersalo\BlockThemeCore\Theme\Api\RestFields
+ * @since      1.0.0
+ * @package    Vihersalo\Core\Theme\Api\RestFields
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class RestFields {
