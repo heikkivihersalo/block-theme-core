@@ -1,42 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vihersalo\Core\Admin\Settings\Providers;
 
-use Vihersalo\Core\Application;
-use Vihersalo\Core\Application\HooksLoader;
-use Vihersalo\Core\Support\Utils\Common as Utils;
-use Vihersalo\Core\Support\ServiceProvider;
-use Vihersalo\Core\Support\Pages\SettingsMenu;
-
 use Vihersalo\Core\Admin\Settings\SettingsMenuManager;
+use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Support\ServiceProvider;
+use Vihersalo\Core\Support\Utils\Common as Utils;
 
-/**
- *
- * @since      1.0.0
- * @package    Vihersalo\Core\Admin
- * @author     Heikki Vihersalo <heikki@vihersalo.fi>
- */
 class SettingsMenuProvider extends ServiceProvider {
-	/**
-	 * Register the navigation provider
-	 */
-	public function register() {
-		if ( ! Utils::is_admin() ) {
-			return;
-		}
+    /**
+     * Register the navigation provider
+     */
+    public function register() {
+        if (! Utils::isAdmin()) {
+            return;
+        }
 
-		$this->register_admin_pages( $this->app->make( HooksLoader::class ) );
-	}
+        $this->registerAdminPages($this->app->make(HooksLoader::class));
+    }
 
-	public function register_admin_pages( HooksLoader $loader ) {
-		$pages = $this->app->make( 'config' )->get( 'pages' );
-		$path  = $this->app->make( 'config' )->get( 'app.path' );
-		$uri   = $this->app->make( 'config' )->get( 'app.uri' );
+    public function registerAdminPages(HooksLoader $loader) {
+        $pages = $this->app->make('config')->get('pages');
+        $path  = $this->app->make('config')->get('app.path');
+        $uri   = $this->app->make('config')->get('app.uri');
 
-		foreach ( $pages as $page ) :
-			$manager = new SettingsMenuManager( $page, $path, $uri );
-			$loader->add_action( 'admin_menu', $manager, 'add_menu' );
-			$loader->add_action( 'admin_enqueue_scripts', $manager, 'enqueue_assets' );
-		endforeach;
-	}
+        foreach ($pages as $page) :
+            $manager = new SettingsMenuManager($page, $path, $uri);
+            $loader->addAction('admin_menu', $manager, 'addMenu');
+            $loader->addAction('admin_enqueue_scripts', $manager, 'enqueueAssets');
+        endforeach;
+    }
 }

@@ -1,104 +1,87 @@
 <?php
-/**
- * Image class for handling image customizations
- *
- * @link       https://www.kotisivu.dev
- * @since      1.0.0
- *
- * @package    Vihersalo\Core\Theme
- */
+
+declare(strict_types=1);
 
 namespace Vihersalo\Core\Media;
 
-defined( 'ABSPATH' ) || die();
-
-/**
- * Class for handling image customizations
- *
- * @since      1.0.0
- * @package    Vihersalo\Core\Theme
- * @author     Heikki Vihersalo <heikki@vihersalo.fi>
- */
 class ImageSizeManager {
-	/**
-	 * Default image sizes
-	 *
-	 * @var array
-	 */
-	private array $default_image_sizes;
+    /**
+     * Default image sizes
+     * @var array
+     */
+    private array $defaultImageSizes;
 
-	/**
-	 * Custom image sizes
-	 *
-	 * @var array
-	 */
-	private array $custom_image_sizes;
+    /**
+     * Custom image sizes
+     * @var array
+     */
+    private array $customImageSizes;
 
-	/**
-	 * Constructor
-	 *
-	 * @since    1.0.0
-	 * @access   public
-	 */
-	public function __construct( array $default_image_sizes, array $custom_image_sizes ) {
-		$this->default_image_sizes = $default_image_sizes;
-		$this->custom_image_sizes  = $custom_image_sizes;
-	}
+    /**
+     * Constructor
+     * @param array $defaultImageSizes Default image sizes
+     * @param array $customImageSizes Custom image sizes
+     * @return void
+     */
+    public function __construct(array $defaultImageSizes, array $customImageSizes) {
+        $this->defaultImageSizes = $defaultImageSizes;
+        $this->customImageSizes  = $customImageSizes;
+    }
 
-	/**
-	 * Add custom image options for WordPress
-	 *
-	 * @param mixed $sizes Image sizes
-	 * @return void
-	 */
-	public function register_image_sizes(): void {
-		/* Update default core image sizes */
-		foreach ( $this->default_image_sizes as $size ) :
-			update_option( $size->get_width_option_name(), $size->get_width() );
-			update_option( $size->get_height_option_name(), $size->get_height() );
-		endforeach;
+    /**
+     * Add custom image options for WordPress
+     *
+     * @param mixed $sizes Image sizes
+     * @return void
+     */
+    public function registerImageSizes(): void {
+        /* Update default core image sizes */
+        foreach ($this->defaultImageSizes as $size) :
+            update_option($size->getWidthOptionName(), $size->getWidth());
+            update_option($size->getHeightOptionName(), $size->getHeight());
+        endforeach;
 
-		/* Add new image sizes to core */
-		foreach ( $this->custom_image_sizes as $size ) :
-			add_image_size( $size->get_slug(), $size->get_width(), $size->get_height(), false );
-		endforeach;
-	}
+        /* Add new image sizes to core */
+        foreach ($this->customImageSizes as $size) :
+            add_image_size($size->getSlug(), $size->getWidth(), $size->getHeight(), false);
+        endforeach;
+    }
 
-	/**
-	 * Remove default image sizes from WordPress
-	 *
-	 * @param mixed $sizes Image sizes
-	 * @return mixed
-	 */
-	public function remove_default_image_sizes( mixed $sizes ): mixed {
-		unset( $sizes['1536x1536'] ); // remove 1536x1536 image size
-		unset( $sizes['2048x2048'] ); // remove 2048x2048 image size
+    /**
+     * Remove default image sizes from WordPress
+     *
+     * @param mixed $sizes Image sizes
+     * @return mixed
+     */
+    public function removeDefaultImageSizes(mixed $sizes): mixed {
+        unset($sizes['1536x1536'], $sizes['2048x2048']); // remove 1536x1536 image size
+        // remove 2048x2048 image size
 
-		return $sizes;
-	}
+        return $sizes;
+    }
 
-	/**
-	 * Add custom image options to admin interface
-	 *
-	 * @param mixed $sizes Image sizes
-	 * @return array
-	 */
-	public function add_custom_image_sizes_to_admin( mixed $sizes ): array {
-		$custom_images = [];
+    /**
+     * Add custom image options to admin interface
+     *
+     * @param mixed $sizes Image sizes
+     * @return array
+     */
+    public function addCustomImageSizesToAdmin(mixed $sizes): array {
+        $customImages = [];
 
-		foreach ( $this->custom_image_sizes as $image ) :
-			$custom_images[ $image->get_slug() ] = $image->get_name();
-		endforeach;
+        foreach ($this->customImageSizes as $image) :
+            $customImages[ $image->getSlug() ] = $image->getName();
+        endforeach;
 
-		return array_merge( $sizes, $custom_images );
-	}
+        return array_merge($sizes, $customImages);
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function register_hooks() {
-		$this->loader->add_action( 'after_setup_theme', $this, 'register_image_sizes' );
-		$this->loader->add_filter( 'intermediate_image_sizes', $this, 'remove_default_image_sizes' );
-		$this->loader->add_filter( 'image_size_names_choose', $this, 'add_custom_image_sizes_to_admin' );
-	}
+    /**
+     * @inheritDoc
+     */
+    public function registerHooks() {
+        $this->loader->add_action('after_setup_theme', $this, 'registerImageSizes');
+        $this->loader->add_filter('intermediate_image_sizes', $this, 'removeDefaultImageSizes');
+        $this->loader->add_filter('image_size_names_choose', $this, 'addCustomImageSizesToAdmin');
+    }
 }

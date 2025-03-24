@@ -6,13 +6,7 @@
 	"eslint.format.enable": true,
 	"eslint.workingDirectories": [],
 	"[php]": {
-		"editor.defaultFormatter": "valeryanm.vscode-phpsab",
+		"editor.defaultFormatter": "open-southeners.laravel-pint",
 		"editor.formatOnSave": true
 	},
-	"phpsab.standard": "WordPress",
-	"phpsab.snifferEnable": true,
-	"phpsab.snifferMode": "onSave",
-	"phpsab.snifferArguments": [
-		"--ignore=*/wp-admin/*,*/wp-includes/*,*/vendor/*,**/inc/lib/**"
-	]
 }

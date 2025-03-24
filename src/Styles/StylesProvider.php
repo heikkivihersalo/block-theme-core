@@ -1,44 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vihersalo\Core\Styles;
 
-use Vihersalo\Core\Application;
 use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
-use Vihersalo\Core\Styles\Scheme;
 
-/**
- *
- * @since      1.0.0
- * @package    Vihersalo\Core\Analytics
- * @author     Heikki Vihersalo <heikki@vihersalo.fi>
- */
 class StylesProvider extends ServiceProvider {
-	/**
-	 * Register the navigation provider
-	 */
-	public function register() {
-		$this->inline_meta_styles();
-	}
+    /**
+     * Register the navigation provider
+     */
+    public function register() {
+        $this->inlineMetaStyles();
+    }
 
-	/**
-	 * Register theme meta styles
-	 *
-	 * @since    1.0.0
-	 * @access   public
-	 * @return   void
-	 */
-	public function inline_meta_styles() {
-		$color = $this->app->make( 'config' )->get( 'app.color' );
+    /**
+     * Register theme meta styles
+     * @return   void
+     */
+    public function inlineMetaStyles() {
+        $color = $this->app->make('config')->get('app.color');
 
-		$scheme = new Scheme( $color );
+        $scheme = new Scheme($color);
 
-		$this->app->make( HooksLoader::class )->add_action( 'wp_head', $scheme, 'inline_theme_color', 0 );
-	}
+        $this->app->make(HooksLoader::class)->addAction('wp_head', $scheme, 'inlineThemeColor', 0);
+    }
 
-	/**
-	 * Boot the navigation provider
-	 */
-	public function boot() {
-	}
+    /**
+     * Boot the navigation provider
+     */
+    public function boot() {
+    }
 }

@@ -1,85 +1,75 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vihersalo\Core\Admin\Settings;
 
 use Vihersalo\Core\Support\Assets\Localize;
 use Vihersalo\Core\Support\Collections;
 
-/**
- * Application builder
- *
- * @since      1.0.0
- * @package    Vihersalo\Core\Application
- * @author     Heikki Vihersalo <heikki@vihersalo.fi>
- */
 class SettingsMenuBuilder {
-	/**
-	 * Constructor
-	 *
-	 * @return void
-	 */
-	public function __construct( protected SettingsMenu $menu ) {
-	}
+    /**
+     * Constructor
+     * @return void
+     */
+    public function __construct(protected SettingsMenu $menu) {
+    }
 
-	/**
-	 * Build the submenu from the user callback function
-	 *
-	 * @param callable|null $callback The user callback function
-	 * @return self
-	 */
-	public function with_submenu( ?callable $callback = null ) {
-		$submenu = new Collections\MenuCollection();
+    /**
+     * Build the submenu from the user callback function
+     * @param callable|null $callback The user callback function
+     * @return self
+     */
+    public function withSubmenu(?callable $callback = null) {
+        $submenu = new Collections\MenuCollection();
 
-		if ( ! $callback ) {
-			return $this;
-		}
+        if (! $callback) {
+            return $this;
+        }
 
-		$callback( $submenu );
+        $callback($submenu);
 
-		$this->menu->set_submenu( $submenu->get() );
+        $this->menu->setSubmenu($submenu->get());
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Build the assets from the user callback function
-	 *
-	 * @param callable|null $callback The user callback function
-	 * @return self
-	 */
-	public function with_assets( ?callable $callback = null ) {
-		$assets = new Collections\AssetCollection();
+    /**
+     * Build the assets from the user callback function
+     * @param callable|null $callback The user callback function
+     * @return self
+     */
+    public function withAssets(?callable $callback = null) {
+        $assets = new Collections\AssetCollection();
 
-		if ( ! $callback ) {
-			return $this;
-		}
+        if (! $callback) {
+            return $this;
+        }
 
-		$callback( $assets );
+        $callback($assets);
 
-		$this->menu->set_assets( $assets->get() );
+        $this->menu->setAssets($assets->get());
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Build the localize from the user callback function
-	 *
-	 * @param string $handle The script handle to allow the data to be attached to
-	 * @param string $object_name The name of the object (this is the name you will use to access the data in JavaScript)
-	 * @param array  $l10n The data to localize the script with
-	 * @return self
-	 */
-	public function with_localize( string $handle, string $object_name, array $l10n ) {
-		$this->menu->set_localize( Localize::create( $handle, $object_name, $l10n ) );
-		return $this;
-	}
+    /**
+     * Build the localize from the user callback function
+     * @param string $handle The script handle to allow the data to be attached to
+     * @param string $objectName The name of the object (this is the name you will use to access the data in JavaScript)
+     * @param array  $l10n The data to localize the script with
+     * @return self
+     */
+    public function withLocalize(string $handle, string $objectName, array $l10n) {
+        $this->menu->setLocalize(Localize::create($handle, $objectName, $l10n));
+        return $this;
+    }
 
-	/**
-	 * Create a new settings menu
-	 *
-	 * @return SettingsMenu
-	 */
-	public function create() {
-		return $this->menu;
-	}
+    /**
+     * Create a new settings menu
+     * @return SettingsMenu
+     */
+    public function create() {
+        return $this->menu;
+    }
 }

@@ -1,40 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vihersalo\Core\Admin;
 
-use Vihersalo\Core\Application;
 use Vihersalo\Core\Application\HooksLoader;
-use Vihersalo\Core\Support\Utils\Common as Utils;
 use Vihersalo\Core\Support\ServiceProvider;
+use Vihersalo\Core\Support\Utils\Common as Utils;
 
-/**
- *
- * @since      1.0.0
- * @package    Vihersalo\Core\Admin
- * @author     Heikki Vihersalo <heikki@vihersalo.fi>
- */
 class CustomizerProvider extends ServiceProvider {
-	/**
-	 * Register the navigation provider
-	 */
-	public function register() {
-		$this->enable_customizer();
-	}
+    /**
+     * Register the navigation provider
+     * @return void
+     */
+    public function register() {
+        $this->enableCustomizer();
+    }
 
-	/**
-	 * Enable customizer
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @return   void
-	 */
-	private function enable_customizer() {
-		$this->app->make( HooksLoader::class )->add_action( 'customize_register', Utils::class, 'return_true' );
-	}
+    /**
+     * Enable customizer
+     * @return void
+     */
+    private function enableCustomizer() {
+        $this->app->make(HooksLoader::class)->addAction('customize_register', Utils::class, 'returnTrue');
+    }
 
-	/**
-	 * Boot the navigation provider
-	 */
-	public function boot() {
-	}
+    /**
+     * Boot the navigation provider
+     * @return void
+     */
+    public function boot() {
+    }
 }

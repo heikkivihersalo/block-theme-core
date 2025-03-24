@@ -1,72 +1,53 @@
 <?php
-/**
- *
- * @link       https://www.kotisivu.dev
- * @since      1.0.0
- *
- * @package    Vihersalo\Core\Admin\Settings\Collections
- */
+
+declare(strict_types=1);
 
 namespace Vihersalo\Core\Support\Collections;
 
-defined( 'ABSPATH' ) || die();
-
 use Vihersalo\Core\Support\Pages\Submenu;
 
-/**
- *
- * @since      1.0.0
- * @package    Vihersalo\Core\Admin\Settings\Collections
- * @author     Heikki Vihersalo <heikki@vihersalo.fi>
- */
 class MenuCollection {
-	/**
-	 * The menus
-	 *
-	 * @var array $menus The menus
-	 */
-	private $menus = [];
+    /**
+     * The menus
+     * @var array $menus The menus
+     */
+    private $menus = [];
 
-	/**
-	 * Constructor
-	 *
-	 * @since 1.0.0
-	 * @access private
-	 * @return void
-	 */
-	public function __construct() {
-	}
+    /**
+     * Constructor
+     * @return void
+     */
+    public function __construct() {
+    }
 
-	/**
-	 * Add a menu or array of menus
-	 *
-	 * @param Submenu|array $submenu The submenu or array of submenus
-	 * @return self
-	 */
-	public function add( $submenu ) {
-		if ( is_array( $submenu ) ) {
-			foreach ( $submenu as $menu ) {
-				if ( $menu instanceof Submenu ) {
-					$this->menus[] = $menu;
-				}
-			}
+    /**
+     * Add a menu or array of menus
+     * @param Submenu|array $submenu The submenu or array of submenus
+     * @return self
+     */
+    public function add($submenu) {
+        if (is_array($submenu)) {
+            foreach ($submenu as $menu) {
+                if ($menu instanceof Submenu) {
+                    $this->menus[] = $menu;
+                }
+            }
 
-			return $this;
-		}
+            return $this;
+        }
 
-		if ( $submenu instanceof Submenu ) {
-			$this->menus[] = $submenu;
-		}
+        if ($submenu instanceof Submenu) {
+            $this->menus[] = $submenu;
+        }
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get the menus
-	 *
-	 * @return array The menus
-	 */
-	public function get(): array {
-		return $this->menus;
-	}
+    /**
+     * Get the menus
+     * @return array The menus
+     */
+    public function get(): array {
+        return $this->menus;
+    }
 }

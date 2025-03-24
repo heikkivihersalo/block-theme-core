@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Class for registering custom fields for the rest API
  *
@@ -10,7 +12,7 @@
 
 namespace Vihersalo\Core\Theme\Api;
 
-defined( 'ABSPATH' ) || die();
+defined('ABSPATH') || die();
 
 use Vihersalo\Core\Theme\Api\Traits\CustomRestField;
 use Vihersalo\Core\Theme\Api\Traits\FormatImageMeta;
@@ -23,33 +25,33 @@ use Vihersalo\Core\Theme\Api\Traits\FormatImageMeta;
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 class RestFields {
-	use FormatImageMeta;
-	use CustomRestField;
+    use FormatImageMeta;
+    use CustomRestField;
 
-	/**
-	 * Register the custom REST fields
-	 *
-	 * @return void
-	 */
-	public function register() {
-		$this->register_custom_rest_field(
-			'post',
-			'metadata',
-			function ( $data ) {
-				$meta                   = get_post_meta( $data['id'], '', '' );
-				$meta['featured_image'] = $this->get_featured_image_meta( $data['id'], 'full' );
-				return $meta;
-			}
-		);
+    /**
+     * Register the custom REST fields
+     *
+     * @return void
+     */
+    public function register() {
+        $this->register_custom_rest_field(
+            'post',
+            'metadata',
+            function ($data) {
+                $meta                   = get_post_meta($data['id'], '', '');
+                $meta['featured_image'] = $this->getFeaturedImageMeta($data['id'], 'full');
+                return $meta;
+            }
+        );
 
-		$this->register_custom_rest_field(
-			'attachment',
-			'metadata',
-			function ( $data ) {
-				$meta                   = get_post_meta( $data['id'], '', '' );
-				$meta['featured_image'] = $this->get_featured_image_meta( $data['id'], 'medium' );
-				return $meta;
-			}
-		);
-	}
+        $this->register_custom_rest_field(
+            'attachment',
+            'metadata',
+            function ($data) {
+                $meta                   = get_post_meta($data['id'], '', '');
+                $meta['featured_image'] = $this->getFeaturedImageMeta($data['id'], 'medium');
+                return $meta;
+            }
+        );
+    }
 }

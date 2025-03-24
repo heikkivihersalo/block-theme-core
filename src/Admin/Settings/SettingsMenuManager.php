@@ -1,185 +1,171 @@
 <?php
-/**
- * Class for setting up the theme options
- *
- * @link       https://www.kotisivu.dev
- * @since      1.0.0
- *
- * @package    Vihersalo\Core\Theme\Admin\Pages
- */
+
+declare(strict_types=1);
 
 namespace Vihersalo\Core\Admin\Settings;
 
-defined( 'ABSPATH' ) || die();
-
 use Vihersalo\Core\Support\Utils\Common as CommonUtils;
 
-/**
- * Class for setting up the theme options
- *
- * @since      1.0.0
- * @package    Vihersalo\Core\Theme\Admin\Pages
- * @author     Heikki Vihersalo <heikki@vihersalo.fi>
- */
 class SettingsMenuManager {
-	/**
-	 * Admin pages
-	 *
-	 * @var SettingsMenu $page The settings menu
-	 */
-	private $page;
+    /**
+     * Admin pages
+     * @var SettingsMenu $page The settings menu
+     */
+    private $page;
 
-	/**
-	 * Base path
-	 * @var string
-	 */
-	private $path;
+    /**
+     * Base path
+     * @var string
+     */
+    private $path;
 
-	/**
-	 * Base URI
-	 * @var string
-	 */
-	private $uri;
+    /**
+     * Base URI
+     * @var string
+     */
+    private $uri;
 
-	/**
-	 * Constructor
-	 *
-	 * @since    1.0.0
-	 * @access   public
-	 */
-	public function __construct( SettingsMenu $page, string $path, string $uri ) {
-		$this->page = $page;
-		$this->path = $path;
-		$this->uri  = $uri;
-	}
+    /**
+     * Constructor
+     * @param SettingsMenu $page The settings menu
+     * @param string $path The base path
+     * @param string $uri The base URI
+     * @return void
+     */
+    public function __construct(SettingsMenu $page, string $path, string $uri) {
+        $this->page = $page;
+        $this->path = $path;
+        $this->uri  = $uri;
+    }
 
-	/**
-	 * Get the page ID from the menu title
-	 * - Page title is generated from the menu title by replacing spaces with dashes
-	 *   and converting the string to lowercase
-	 *
-	 * @param string $menu_title The menu title
-	 * @return string The page ID
-	 */
-	public function get_page_id( $menu_title ) {
-		return str_replace( ' ', '-', strtolower( $menu_title ) );
-	}
+    /**
+     * Get the page ID from the menu title
+     * - Page title is generated from the menu title by replacing spaces with dashes
+     *   and converting the string to lowercase
+     * @param string $menuTitle The menu title
+     * @return string The page ID
+     */
+    public function getPageId($menuTitle) {
+        return str_replace(' ', '-', strtolower($menuTitle));
+    }
 
-	/**
-	 * Get the prefix for the top level page
-	 *
-	 * @return string The prefix for the top level page
-	 */
-	public function get_toplevel_page_prefix() {
-		return 'toplevel_page_';
-	}
+    /**
+     * Get the prefix for the top level page
+     *
+     * @return string The prefix for the top level page
+     */
+    public function getToplevelPagePrefix() {
+        return 'toplevel_page_';
+    }
 
-	/**
-	 * Check if the current page is a custom admin page
-	 *
-	 * @param string $hook The current admin page
-	 * @return bool
-	 */
-	public function is_custom_admin_page( $hook ): bool {
-		$is_top_level = str_contains( $hook, $this->get_toplevel_page_prefix() . $this->page->get_slug() );
-		$is_sub_page  = false;
+    /**
+     * Check if the current page is a custom admin page
+     *
+     * @param string $hook The current admin page
+     * @return bool
+     */
+    public function isCustomAdminPage($hook): bool {
+        $is_top_level = str_contains($hook, $this->getToplevelPagePrefix() . $this->page->getSlug());
+        $is_sub_page  = false;
 
-		$submenu = $this->page->get_submenu();
+        $submenu = $this->page->getSubmenu();
 
-		if ( $submenu ) {
-			foreach ( $submenu as $subpage ) {
-				$is_sub_page = str_contains( $hook, $subpage->get_slug() ) ? true : $is_sub_page;
-			}
-		}
+        if ($submenu) {
+            foreach ($submenu as $subpage) {
+                $is_sub_page = str_contains($hook, $subpage->getSlug()) ? true : $is_sub_page;
+            }
+        }
 
-		return $is_top_level || $is_sub_page;
-	}
+        return $is_top_level || $is_sub_page;
+    }
 
-	/**
-	 * Callback function for the admin page
-	 *
-	 * @since    1.0.0
-	 * @access   public
-	 */
-	public function callback() {
-		$path = $this->path . '/' . $this->page->get_path();
+    /**
+     * Callback function for the admin page
+     *
+     * @since    1.0.0
+     * @access   public
+     */
+    public function callback() {
+        $path = $this->path . '/' . $this->page->getPath();
 
-		if ( ! current_user_can( $this->page->get_capability() ) ) {
-			wp_die( 'You do not have sufficient permissions to access this page' );
-		}
+        if (! current_user_can($this->page->getCapability())) {
+            wp_die('You do not have sufficient permissions to access this page');
+        }
 
-		if ( ! CommonUtils::asset_exists( $path ) ) {
-			return;
-		}
+        if (! CommonUtils::assetExists($path)) {
+            return;
+        }
 
-		ob_start();
-		require $path;
-		echo ob_get_clean();
-	}
+        ob_start();
+        require $path;
+        echo ob_get_clean();
+    }
 
-	/**
-	 * Add the menu
-	 *
-	 * @since    1.0.0
-	 * @access   public
-	 */
-	public function add_menu() {
-		add_menu_page(
-			$this->page->get_page_title(),
-			$this->page->get_menu_title(),
-			$this->page->get_capability(),
-			$this->page->get_slug(),
-			[ $this, 'callback' ],
-			$this->page->get_icon(),
-			$this->page->get_position()
-		);
+    /**
+     * Add the menu
+     *
+     * @since    1.0.0
+     * @access   public
+     */
+    public function addMenu() {
+        // This is WP core function to add a menu page
+        add_menu_page(
+            $this->page->getPageTitle(),
+            $this->page->getMenuTitle(),
+            $this->page->getCapability(),
+            $this->page->getSlug(),
+            [$this, 'callback'],
+            $this->page->getIcon(),
+            $this->page->getPosition()
+        );
 
-		$submenu = $this->page->get_submenu();
+        $submenu = $this->page->getSubmenu();
 
-		if ( ! $submenu ) {
-			return;
-		}
+        if (! $submenu) {
+            return;
+        }
 
-		foreach ( $submenu as $subpage ) {
-			add_submenu_page(
-				$this->page->get_slug(),
-				$subpage->get_page_title(),
-				$subpage->get_menu_title(),
-				$subpage->get_capability(),
-				$subpage->get_slug(),
-				[ $this, 'callback' ]
-			);
-		}
-	}
+        foreach ($submenu as $subpage) {
+            // This is WP core function to add a submenu page
+            add_submenu_page(
+                $this->page->getSlug(),
+                $subpage->getPageTitle(),
+                $subpage->getMenuTitle(),
+                $subpage->getCapability(),
+                $subpage->getSlug(),
+                [$this, 'callback']
+            );
+        }
+    }
 
-	/**
-	 * Enqueue theme option related assets
-	 * @param string $hook The current admin page
-	 * @return void
-	 */
-	public function enqueue_assets( $hook ) {
-		if ( ! $this->is_custom_admin_page( $hook ) ) {
-			return;
-		}
-		$assets = $this->page->get_assets();
+    /**
+     * Enqueue theme option related assets
+     * @param string $hook The current admin page
+     * @return void
+     */
+    public function enqueueAssets($hook) {
+        if (! $this->isCustomAdminPage($hook)) {
+            return;
+        }
+        $assets = $this->page->getAssets();
 
-		foreach ( $assets as $asset ) :
-			if ( method_exists( $asset, 'register' ) ) {
-				call_user_func( [ $asset, 'register' ] );
-			}
-		endforeach;
+        foreach ($assets as $asset) :
+            if (method_exists($asset, 'register')) {
+                call_user_func([$asset, 'register']);
+            }
+        endforeach;
 
-		/**
-		 * Localize the script with the data needed for the REST API
-		 */
-		$localize = $this->page->get_localize();
+        /**
+         * Localize the script with the data needed for the REST API
+         */
+        $localize = $this->page->getLocalize();
 
-		if ( ! $localize ) {
-			return;
-		}
+        if (! $localize) {
+            return;
+        }
 
-		if ( method_exists( $localize, 'register' ) ) {
-			call_user_func( [ $localize, 'register' ] );
-		}
-	}
+        if (method_exists($localize, 'register')) {
+            call_user_func([$localize, 'register']);
+        }
+    }
 }

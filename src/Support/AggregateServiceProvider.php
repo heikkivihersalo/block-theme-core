@@ -1,56 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vihersalo\Core\Support;
 
-/**
- * The aggregate service provider class.
- *
- * @since      1.0.0
- * @package    Vihersalo\Core\Support
- * @author     Heikki Vihersalo <heikki@vihersalo.fi>
- */
 class AggregateServiceProvider extends ServiceProvider {
-	/**
-	 * The provider class names.
-	 *
-	 * @var array
-	 */
-	protected $providers = [];
+    /**
+     * The provider class names.
+     *
+     * @var array
+     */
+    protected $providers = [];
 
-	/**
-	 * An array of the service provider instances.
-	 *
-	 * @var array
-	 */
-	protected $instances = [];
+    /**
+     * An array of the service provider instances.
+     *
+     * @var array
+     */
+    protected $instances = [];
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register() {
-		$this->instances = [];
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register() {
+        $this->instances = [];
 
-		foreach ( $this->providers as $provider ) {
-			$this->instances[] = $this->app->register_provider( $provider );
-		}
-	}
+        foreach ($this->providers as $provider) {
+            $this->instances[] = $this->app->registerProvider($provider);
+        }
+    }
 
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides() {
-		$provides = [];
+    /**
+     * Get the services provided by the provider.
+     * @return array
+     */
+    public function provides() {
+        $provides = [];
 
-		foreach ( $this->providers as $provider ) {
-			$instance = $this->app->resolve_provider( $provider );
+        foreach ($this->providers as $provider) {
+            $instance = $this->app->resolveProvider($provider);
 
-			$provides = array_merge( $provides, $instance->provides() );
-		}
+            $provides = array_merge($provides, $instance->provides());
+        }
 
-		return $provides;
-	}
+        return $provides;
+    }
 }
