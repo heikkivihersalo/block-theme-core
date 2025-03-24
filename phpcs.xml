@@ -39,6 +39,7 @@
         <exclude name="Squiz.Commenting.InlineComment.SpacingAfter" />
         <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop" />
         <exclude name="Squiz.Commenting.FunctionComment.ExtraParamComment" />
+        <exclude name="Squiz.Commenting.ClassComment" />
 
         <!-- General WordPress stuff we like to overrule -->
         <exclude name="WordPress.Files.FileName.InvalidClassFileName" />
