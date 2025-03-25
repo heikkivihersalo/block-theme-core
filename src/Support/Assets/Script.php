@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Support\Assets;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Enqueue\Asset;
 
 class Script extends Asset {
@@ -55,6 +55,6 @@ class Script extends Asset {
      */
     public function register(): void {
         $action = $this->isAdmin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts';
-        $this->app->make(HooksLoader::class)->addAction($action, $this, 'enqueue', $this->getPriority());
+        $this->app->make(WP_Hooks::class)->addAction($action, $this, 'enqueue', $this->getPriority());
     }
 }

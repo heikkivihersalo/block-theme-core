@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Admin;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Common as Utils;
 
@@ -22,7 +22,7 @@ class CustomizerServiceProvider extends ServiceProvider {
      * @return void
      */
     private function enableCustomizer() {
-        $this->app->make(HooksLoader::class)->addAction('customize_register', Utils::class, 'returnTrue');
+        $this->app->make(WP_Hooks::class)->addAction('customize_register', Utils::class, 'returnTrue');
     }
 
     /**

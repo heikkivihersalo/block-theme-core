@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Translations;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class TranslationProvider extends ServiceProvider {
@@ -13,7 +13,7 @@ class TranslationProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->make(HooksLoader::class)->addAction('after_setup_theme', $this, 'loadTextdomain');
+        $this->app->make(WP_Hooks::class)->addAction('after_setup_theme', $this, 'loadTextdomain');
     }
 
     /**

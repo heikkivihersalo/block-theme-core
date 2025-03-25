@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Navigation;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class NavigationServiceProvider extends ServiceProvider {
@@ -13,7 +13,7 @@ class NavigationServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->make(HooksLoader::class)->addAction('init', $this, 'registerNavigationMenus');
+        $this->app->make(WP_Hooks::class)->addAction('init', $this, 'registerNavigationMenus');
     }
 
     /**

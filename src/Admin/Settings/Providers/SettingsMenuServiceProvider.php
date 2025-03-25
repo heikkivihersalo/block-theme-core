@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Admin\Settings\Providers;
 
 use Vihersalo\Core\Admin\Settings\SettingsMenuManager;
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Common as Utils;
 
@@ -18,10 +18,10 @@ class SettingsMenuServiceProvider extends ServiceProvider {
             return;
         }
 
-        $this->registerAdminPages($this->app->make(HooksLoader::class));
+        $this->registerAdminPages($this->app->make(WP_Hooks::class));
     }
 
-    public function registerAdminPages(HooksLoader $loader) {
+    public function registerAdminPages(WP_Hooks $loader) {
         $pages = $this->app->make('config')->get('pages');
         $path  = $this->app->make('config')->get('app.path');
         $uri   = $this->app->make('config')->get('app.uri');

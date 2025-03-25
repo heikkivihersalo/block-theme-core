@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Media;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Media as MediaUtils;
 
@@ -14,7 +14,7 @@ class MediaServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $loader = $this->app->make(HooksLoader::class);
+        $loader = $this->app->make(WP_Hooks::class);
 
         $this->registerImageSizes($loader);
         $this->allowSvgFileUploads($loader);
@@ -23,10 +23,10 @@ class MediaServiceProvider extends ServiceProvider {
 
     /**
      * Register image sizes
-     * @param HooksLoader $loader The hooks loader
+     * @param WP_Hooks $loader The hooks loader
      * @return void
      */
-    public function registerImageSizes(HooksLoader $loader) {
+    public function registerImageSizes(WP_Hooks $loader) {
         $media_config       = $this->app->make('config')->get('app.media');
         $image_size_manager = new ImageSizeManager(
             $media_config['sizes']['default'],
@@ -40,19 +40,19 @@ class MediaServiceProvider extends ServiceProvider {
 
     /**
      * Set file uploads
-     * @param HooksLoader $loader The hooks loader
+     * @param WP_Hooks $loader The hooks loader
      * @return void
      */
-    public function allowSvgFileUploads(HooksLoader $loader) {
+    public function allowSvgFileUploads(WP_Hooks $loader) {
         $loader->addFilter('upload_mimes', MediaUtils::class, 'allowSvgUploads');
     }
 
     /**
      * Set custom excerpt length
-     * @param HooksLoader $loader The hooks loader
+     * @param WP_Hooks $loader The hooks loader
      * @return void
      */
-    public function setCustomExcerptLength(HooksLoader $loader) {
+    public function setCustomExcerptLength(WP_Hooks $loader) {
         $media_config = $this->app->make('config')->get('app.media');
 
         $excerpt_manager = new ExcerptManager(

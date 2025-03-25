@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Support\Assets;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Enqueue\Asset;
 
 require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
@@ -51,6 +51,6 @@ class Inline extends Asset {
      * @return void
      */
     public function register(): void {
-        $this->app->make(HooksLoader::class)->addAction('wp_head', $this, 'enqueue');
+        $this->app->make(WP_Hooks::class)->addAction('wp_head', $this, 'enqueue');
     }
 }

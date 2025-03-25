@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Styles;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class StylesServiceProvider extends ServiceProvider {
@@ -24,7 +24,7 @@ class StylesServiceProvider extends ServiceProvider {
 
         $scheme = new Scheme($color);
 
-        $this->app->make(HooksLoader::class)->addAction('wp_head', $scheme, 'inlineThemeColor', 0);
+        $this->app->make(WP_Hooks::class)->addAction('wp_head', $scheme, 'inlineThemeColor', 0);
     }
 
     /**

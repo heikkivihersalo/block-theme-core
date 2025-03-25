@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Junk;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Common as CommonUtils;
 
@@ -14,7 +14,7 @@ class JunkServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $loader = $this->app->make(HooksLoader::class);
+        $loader = $this->app->make(WP_Hooks::class);
         $this->setJqueryOptimizations($loader);
         $this->removeWpEmojis($loader);
         $this->removeWpDefaultJunk($loader);
@@ -23,20 +23,20 @@ class JunkServiceProvider extends ServiceProvider {
 
     /**
      * Register all of the hooks related to the optimized jQuery
-     * @param HooksLoader $loader The loader to use
+     * @param WP_Hooks $loader The loader to use
      * @return   void
      */
-    public function setJqueryOptimizations(HooksLoader $loader) {
+    public function setJqueryOptimizations(WP_Hooks $loader) {
         $loader->addAction('wp_default_scripts', Utils::class, 'removeJqueryMigrate');
         $loader->addAction('wp_enqueue_scripts', Utils::class, 'moveJqueryToFooter');
     }
 
     /**
      * Remove WP emojis
-     * @param HooksLoader $loader The loader to use
+     * @param WP_Hooks $loader The loader to use
      * @return   void
      */
-    public function removeWpEmojis(HooksLoader $loader) {
+    public function removeWpEmojis(WP_Hooks $loader) {
         $loader->removeAction('wp_head', 'print_emoji_detection_script', 7);
         $loader->removeAction('admin_print_scripts', 'print_emoji_detection_script');
         $loader->removeAction('wp_print_styles', 'print_emoji_styles');
@@ -51,10 +51,10 @@ class JunkServiceProvider extends ServiceProvider {
 
     /**
      * Remove WP default junk
-     * @param HooksLoader $loader The loader to use
+     * @param WP_Hooks $loader The loader to use
      * @return   void
      */
-    public function removeWpDefaultJunk(HooksLoader $loader) {
+    public function removeWpDefaultJunk(WP_Hooks $loader) {
         /**
          * Remove canonical links
          */
@@ -94,10 +94,10 @@ class JunkServiceProvider extends ServiceProvider {
 
     /**
      * Remove asset and media junk
-     * @param HooksLoader $loader The loader to use
+     * @param WP_Hooks $loader The loader to use
      * @return   void
      */
-    public function removeAssetJunk(HooksLoader $loader) {
+    public function removeAssetJunk(WP_Hooks $loader) {
         $loader->addAction('after_setup_theme', $this, 'removeDuotoneFilters');
     }
 

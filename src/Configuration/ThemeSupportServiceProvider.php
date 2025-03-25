@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Configuration;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class ThemeSupportServiceProvider extends ServiceProvider {
@@ -13,8 +13,8 @@ class ThemeSupportServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->app->make(HooksLoader::class)->addAction('after_setup_theme', $this, 'addThemeSupports');
-        $this->app->make(HooksLoader::class)->addAction('after_setup_theme', $this, 'removeThemeSupports');
+        $this->app->make(WP_Hooks::class)->addAction('after_setup_theme', $this, 'addThemeSupports');
+        $this->app->make(WP_Hooks::class)->addAction('after_setup_theme', $this, 'removeThemeSupports');
     }
 
     /**

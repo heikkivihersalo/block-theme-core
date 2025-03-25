@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Enqueue;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Media as MediaUtils;
 
@@ -37,7 +37,7 @@ class EnqueueServiceProvider extends ServiceProvider {
      * @return   void
      */
     public function registerWpMediaSupport() {
-        $this->app->make(HooksLoader::class)->addAction(
+        $this->app->make(WP_Hooks::class)->addAction(
             'admin_enqueue_scripts',
             MediaUtils::class,
             'addWpMediaSupport'

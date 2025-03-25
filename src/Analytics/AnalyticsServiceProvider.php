@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Analytics;
 
-use Vihersalo\Core\Application\HooksLoader;
+use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class AnalyticsServiceProvider extends ServiceProvider {
@@ -23,7 +23,7 @@ class AnalyticsServiceProvider extends ServiceProvider {
     public function registerTagmanager() {
         $tagmanager = new TagManager();
 
-        $this->app->make(HooksLoader::class)->addAction('wp_head', $tagmanager, 'inlineTagManager', 0);
+        $this->app->make(WP_Hooks::class)->addAction('wp_head', $tagmanager, 'inlineTagManager', 0);
     }
 
     /**
