@@ -30,7 +30,7 @@ final class Utils {
      * @return  void
      */
     public static function removeJqueryMigrate($scripts): void {
-        if (! isAdmin() && isset($scripts->registered['jquery'])) {
+        if (! is_admin() && isset($scripts->registered['jquery'])) {
             $script = $scripts->registered['jquery'];
 
             if ($script->deps) { // Check whether the script has any dependencies

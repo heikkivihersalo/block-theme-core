@@ -19,13 +19,13 @@ class Scheme {
 
     /**
      * Constructor
-     * @param string $themeColor The theme color
-     * @param bool   $darkMode The dark mode
+     * @param string|null $themeColor The theme color
+     * @param bool|null $darkMode The dark mode
      * @return void
      */
-    public function __construct(string $themeColor = 'hsl(0, 0%, 20%)', bool $darkMode = false) {
-        $this->themeColor = $themeColor;
-        $this->darkMode   = $darkMode;
+    public function __construct(string|null $themeColor, bool|null $darkMode) {
+        $this->themeColor = $themeColor ?? '#000000';
+        $this->darkMode   = $darkMode   ?? false;
     }
 
     /**

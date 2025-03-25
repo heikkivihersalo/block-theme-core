@@ -60,7 +60,7 @@ class JunkServiceProvider extends ServiceProvider {
          */
         $loader->removeAction('embed_head', 'rel_canonical');
         $loader->removeAction('wp_head', 'rel_canonical');
-        $loader->addFilter('wpseo_canonical', null, '__returnFalse');
+        $loader->addFilter('wpseo_canonical', CommonUtils::class, 'returnFalse');
 
         /**
          * Remove feed links
@@ -71,8 +71,8 @@ class JunkServiceProvider extends ServiceProvider {
         /**
          * Remove gravatar
          */
-        $loader->addFilter('get_avatar', null, '__returnFalse');
-        $loader->addFilter('option_show_avatars', null, '__returnFalse');
+        $loader->addFilter('get_avatar', CommonUtils::class, 'returnFalse');
+        $loader->addFilter('option_show_avatars', CommonUtils::class, 'returnFalse');
 
         /**
          * Remove next and previous links
@@ -98,7 +98,7 @@ class JunkServiceProvider extends ServiceProvider {
      * @return   void
      */
     public function removeAssetJunk(WP_Hooks $loader) {
-        $loader->addAction('after_setup_theme', $this, 'removeDuotoneFilters');
+        $loader->addAction('after_setup_theme', Utils::class, 'removeDuotoneFilters');
     }
 
     /**

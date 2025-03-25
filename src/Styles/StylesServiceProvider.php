@@ -23,7 +23,7 @@ class StylesServiceProvider extends ServiceProvider {
     public function inlineMetaStyles() {
         $color = $this->app->make('config')->get('app.theme.meta');
 
-        $scheme = new Scheme($color);
+        $scheme = new Scheme($color, false);
 
         $this->app->make(WP_Hooks::class)->addAction('wp_head', $scheme, 'inlineThemeColor', 0);
     }
