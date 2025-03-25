@@ -6,8 +6,8 @@ namespace Vihersalo\Core\Bootstrap;
 
 use Illuminate\Container\Container;
 use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
-use Vihersalo\Core\Configuration\Config;
-use Vihersalo\Core\Configuration\ThemeSupportServiceProvider;
+use Vihersalo\Core\Bootstrap\ThemeSupport\ThemeSupportServiceProvider;
+use Vihersalo\Core\Configuration\FileLoader;
 use Vihersalo\Core\Enqueue\DequeueServiceProvider;
 use Vihersalo\Core\Enqueue\EnqueueServiceProvider;
 use Vihersalo\Core\Navigation\NavigationServiceProvider;
@@ -106,7 +106,7 @@ class Application extends Container {
         $this->singleton(
             'config',
             function () {
-                return new Config($this->basePath . '/config');
+                return new FileLoader($this->basePath . '/config');
             }
         );
 
@@ -137,7 +137,7 @@ class Application extends Container {
      * @return void
      */
     public function registerConfiguredProviders() {
-        $providers = $this->make('config')->get('providers');
+        $providers = require $this->basePath . '/bootstrap/providers.php' ?? [];
 
         foreach ($providers as $provider) {
             $this->registerProvider($this->resolveProvider($provider));
