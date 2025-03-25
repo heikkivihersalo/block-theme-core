@@ -32,12 +32,12 @@ class FileLoader {
      * @return void
      */
     protected function load() {
-        $files = glob($this->configPath . '/*.php');
+        $files = glob($this->path . '/*.php');
 
         foreach ($files as $file) {
             $key = basename($file, '.php');
 
-            $this->config[ $key ] = require $file;
+            $this->container[ $key ] = require $file;
         }
     }
 
@@ -53,11 +53,15 @@ class FileLoader {
         // Get the configuration value from the configuration array using the keys
         switch (count($keys)) {
             case 1:
-                return $this->config[ $keys[0] ] ?? null;
+                return $this->container[ $keys[0] ] ?? null;
             case 2:
-                return $this->config[ $keys[0] ][ $keys[1] ] ?? null;
+                return $this->container[ $keys[0] ][ $keys[1] ] ?? null;
             case 3:
-                return $this->config[ $keys[0] ][ $keys[1] ][ $keys[2] ] ?? null;
+                return $this->container[ $keys[0] ][ $keys[1] ][ $keys[2] ] ?? null;
+            case 4:
+                return $this->container[ $keys[0] ][ $keys[1] ][ $keys[2] ][ $keys[3] ] ?? null;
+            case 5:
+                return $this->container[ $keys[0] ][ $keys[1] ][ $keys[2] ][ $keys[3] ][ $keys[4] ] ?? null;
         }
 
         return null;
