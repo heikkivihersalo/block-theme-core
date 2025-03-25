@@ -7,7 +7,7 @@ namespace Vihersalo\Core\Admin\Duplicate;
 use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 
-class DuplicateProvider extends ServiceProvider {
+class DuplicateServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      */

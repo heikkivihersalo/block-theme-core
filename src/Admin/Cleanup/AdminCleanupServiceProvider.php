@@ -8,7 +8,7 @@ use Vihersalo\Core\Admin\Cleanup\Utils;
 use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 
-class AdminCleanupProvider extends ServiceProvider {
+class AdminCleanupServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      * @return void

@@ -7,7 +7,7 @@ namespace Vihersalo\Core\Analytics;
 use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 
-class AnalyticsProvider extends ServiceProvider {
+class AnalyticsServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      * @return void

@@ -9,7 +9,7 @@ use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Common as Utils;
 
-class SettingsMenuProvider extends ServiceProvider {
+class SettingsMenuServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      */

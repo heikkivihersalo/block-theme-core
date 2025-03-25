@@ -8,7 +8,7 @@ use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Media as MediaUtils;
 
-class EnqueueProvider extends ServiceProvider {
+class EnqueueServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      * @return void

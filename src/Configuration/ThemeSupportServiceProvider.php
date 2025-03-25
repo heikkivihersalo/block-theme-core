@@ -7,7 +7,7 @@ namespace Vihersalo\Core\Configuration;
 use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 
-class ThemeSupportProvider extends ServiceProvider {
+class ThemeSupportServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      * @return void

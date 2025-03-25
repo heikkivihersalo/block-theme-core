@@ -7,7 +7,7 @@ namespace Vihersalo\Core\Enqueue;
 use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 
-class DequeueProvider extends ServiceProvider {
+class DequeueServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      * @return void

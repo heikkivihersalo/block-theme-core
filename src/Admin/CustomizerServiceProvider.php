@@ -8,7 +8,7 @@ use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Common as Utils;
 
-class CustomizerProvider extends ServiceProvider {
+class CustomizerServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      * @return void

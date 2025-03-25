@@ -7,7 +7,7 @@ namespace Vihersalo\Core\Styles;
 use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Support\ServiceProvider;
 
-class StylesProvider extends ServiceProvider {
+class StylesServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      */
