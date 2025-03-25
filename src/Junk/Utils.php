@@ -2,13 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Theme\Common\Utils;
+namespace Vihersalo\Core\Junk;
 
-final class Performance {
+final class Utils {
     /**
-     * This utility class should never be instantiated.
+     * This is a junk utils class and should not be initialized
      */
     private function __construct() {
+    }
+
+    /**
+     * Remove WP duotone filters
+     *
+     * @since    1.0.0
+     * @access   private
+     * @return   void
+     */
+    public static function removeDuotoneFilters() {
+        remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
+        remove_action('in_admin_header', 'wp_global_styles_render_svg_filters');
     }
 
     /**
