@@ -7,7 +7,7 @@ namespace Vihersalo\Core\Translations;
 use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
-class TranslationProvider extends ServiceProvider {
+class TranslationServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      * @return void
