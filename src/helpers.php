@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Application {
+namespace Vihersalo\Core\ {
     use Illuminate\Config\Repository;
     use Illuminate\Container\Container;
     use Illuminate\Foundation\Application;

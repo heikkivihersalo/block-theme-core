@@ -26,7 +26,6 @@ class Inline extends Asset {
 
     /**
      * Enqueue the script
-     *
      * @return void
      */
     public function enqueue() {
@@ -47,7 +46,6 @@ class Inline extends Asset {
 
     /**
      * Register the script
-     *
      * @return void
      */
     public function register(): void {

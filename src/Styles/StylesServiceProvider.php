@@ -10,6 +10,7 @@ use Vihersalo\Core\Support\ServiceProvider;
 class StylesServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
+     * @return void
      */
     public function register() {
         $this->inlineMetaStyles();
@@ -17,7 +18,7 @@ class StylesServiceProvider extends ServiceProvider {
 
     /**
      * Register theme meta styles
-     * @return   void
+     * @return void
      */
     public function inlineMetaStyles() {
         $color = $this->app->make('config')->get('app.theme.meta');
@@ -29,6 +30,7 @@ class StylesServiceProvider extends ServiceProvider {
 
     /**
      * Boot the navigation provider
+     * @return void
      */
     public function boot() {
     }

@@ -7,18 +7,14 @@ namespace Vihersalo\Core\Support;
 class Notice {
     /**
      * The message
-     *
-     * @since    1.0.0
-     * @access   protected
-     * @var      string    $message    The message
+     * @var string $message The message
      */
     protected $message;
 
     /**
      * Constructor
-     *
-     * @since    1.0.0
-     * @access   public
+     * @param string $message The message
+     * @return void
      */
     public function __construct(string $message) {
         $this->message = $message;
@@ -26,7 +22,6 @@ class Notice {
 
     /**
      * Get the HTML for the notice
-     *
      * @return void
      */
     public function getHtml() {
@@ -35,8 +30,7 @@ class Notice {
 
     /**
      * Display the notice
-     *
-     * @since    1.0.0
+     * @return void
      */
     public function display() {
         add_action('admin_notices', [$this, 'getHtml']);

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Enqueue;
 
-use Vihersalo\Core\Application;
+use Vihersalo\Core\Bootstrap\Application;
 use Vihersalo\Core\Support\Notice;
 
 abstract class Asset {
@@ -66,9 +66,6 @@ abstract class Asset {
      * @param int    $priority The priority of the enqueued asset
      * @param bool   $admin Whether the asset is for admin or not
      * @param bool   $editor Whether the asset is for `add_editor_style` function or not
-     *
-     * @since 1.0.0
-     * @access private
      * @return void
      */
     public function __construct(
@@ -92,7 +89,6 @@ abstract class Asset {
 
     /**
      * Get the handle of enqueued asset
-     *
      * @return string
      */
     public function getHandle(): string {
@@ -101,7 +97,6 @@ abstract class Asset {
 
     /**
      * Get the URI of enqueued asset
-     *
      * @return string
      */
     public function getSrc(): string {
@@ -110,7 +105,6 @@ abstract class Asset {
 
     /**
      * Get the path of enqueued asset
-     *
      * @return string
      */
     public function getPath(): string {
@@ -119,7 +113,6 @@ abstract class Asset {
 
     /**
      * Get the priority of enqueued asset
-     *
      * @return int
      */
     public function getPriority(): int {
@@ -128,7 +121,6 @@ abstract class Asset {
 
     /**
      * Get the admin boolean of enqueued asset
-     *
      * @return bool
      */
     public function isAdmin(): bool {
@@ -137,7 +129,6 @@ abstract class Asset {
 
     /**
      * Get the editor boolean of enqueued asset
-     *
      * @return bool
      */
     public function isEditor(): bool {
@@ -146,7 +137,6 @@ abstract class Asset {
 
     /**
      * Get the asset file path
-     *
      * @return string
      */
     public function getAssetPath(): string {
@@ -163,7 +153,6 @@ abstract class Asset {
 
     /**
      * Enqueue the asset in the admin
-     *
      * @return void
      */
     public function addToEditorStyles() {
@@ -172,7 +161,6 @@ abstract class Asset {
 
     /**
      * Check if the asset exists
-     *
      * @return bool
      */
     public function assetExists(): bool {

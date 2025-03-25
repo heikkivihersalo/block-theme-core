@@ -21,7 +21,6 @@ final class Media {
 
     /**
      * Add image support for SVG's
-     *
      * @param array $mimes Mime types
      * @return array
      */

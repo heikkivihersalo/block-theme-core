@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Support;
 
 use Closure;
-use Vihersalo\Core\Application;
+use Vihersalo\Core\Bootstrap\Application;
 
 /**
  * The service provider class.
@@ -139,7 +139,6 @@ abstract class ServiceProvider {
 
     /**
      * Get the default providers for a Laravel application.
-     *
      * @return \Illuminate\Support\DefaultProviders
      */
     public static function defaultProviders() {

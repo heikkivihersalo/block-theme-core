@@ -13,7 +13,6 @@ final class Options {
 
     /**
      * Get transient lifespan based on user role and app state
-     *
      * @return int
      */
     private static function getTransientLifespan(): int {
@@ -22,9 +21,7 @@ final class Options {
 
     /**
      * Get site options from database and store it to cache
-     *
      * @param string $slug The slug of the options
-     *
      * @return mixed
      */
     public static function getOptionsFile(string $slug): mixed {
@@ -43,7 +40,6 @@ final class Options {
 
     /**
      * Purge transient cache
-     *
      * @return void
      */
     public static function purgeTransientCache(): void {

@@ -30,7 +30,6 @@ class ExcerptManager {
 
     /**
      * Override default excerpt length
-     *
      * @return int
      */
     public function customExcerptLength(): int {
@@ -53,7 +52,6 @@ class ExcerptManager {
 
     /**
      * Override default excerpt more
-     *
      * @return string
      */
     public function customExcerptMore(): string {

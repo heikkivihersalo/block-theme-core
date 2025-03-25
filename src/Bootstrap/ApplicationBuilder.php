@@ -7,14 +7,12 @@ namespace Vihersalo\Core\Bootstrap;
 class ApplicationBuilder {
     /**
      * Application instance
-     *
      * @var Application
      */
     protected Application $app;
 
     /**
      * Constructor
-     *
      * @param Application $app The application instance.
      * @return void
      */
@@ -24,7 +22,6 @@ class ApplicationBuilder {
 
     /**
      * Get the application instance.
-     *
      * @return Application
      */
     public function boot() {

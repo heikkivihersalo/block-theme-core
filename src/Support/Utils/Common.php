@@ -15,7 +15,6 @@ final class Common {
 
     /**
      * Return true
-     *
      * @return bool
      */
     public static function returnTrue(): bool {
@@ -24,8 +23,6 @@ final class Common {
 
     /**
      * Return false
-     *
-     * @since 1.0.0
      * @return bool
      */
     public static function returnFalse(): bool {
@@ -34,8 +31,6 @@ final class Common {
 
     /**
      * Check if the current page is the admin page
-     *
-     * @since    1.0.0
      * @return bool
      */
     public static function isAdmin(): bool {
@@ -44,8 +39,6 @@ final class Common {
 
     /**
      * Check if the current page is the plugin's editor page
-     *
-     * @since    1.0.0
      * @param string $hook The current admin page
      * @return bool
      */
@@ -55,8 +48,6 @@ final class Common {
 
     /**
      * Check if the current page is the plugin's editor page
-     *
-     * @since    1.0.0
      * @param string $hook The current admin page
      * @return bool
      */
@@ -66,7 +57,6 @@ final class Common {
 
     /**
      * Check if the asset exists
-     *
      * @param string $path The path to the asset
      * @return bool
      */

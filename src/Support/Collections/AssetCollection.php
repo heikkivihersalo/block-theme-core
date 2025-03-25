@@ -45,7 +45,6 @@ class AssetCollection {
 
     /**
      * Get the assets
-     *
      * @return array The assets
      */
     public function get(): array {

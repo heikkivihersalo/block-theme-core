@@ -49,7 +49,6 @@ class ImageSizeManager {
 
     /**
      * Remove default image sizes from WordPress
-     *
      * @param mixed $sizes Image sizes
      * @return mixed
      */
@@ -62,7 +61,6 @@ class ImageSizeManager {
 
     /**
      * Add custom image options to admin interface
-     *
      * @param mixed $sizes Image sizes
      * @return array
      */
@@ -74,14 +72,5 @@ class ImageSizeManager {
         endforeach;
 
         return array_merge($sizes, $customImages);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function registerHooks() {
-        $this->loader->add_action('after_setup_theme', $this, 'registerImageSizes');
-        $this->loader->add_filter('intermediate_image_sizes', $this, 'removeDefaultImageSizes');
-        $this->loader->add_filter('image_size_names_choose', $this, 'addCustomImageSizesToAdmin');
     }
 }

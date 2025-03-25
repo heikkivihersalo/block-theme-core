@@ -30,9 +30,6 @@ class Scheme {
 
     /**
      * Inline theme color
-     *
-     * @since 1.0.0
-     * @access public
      * @return void
      */
     public function inlineThemeColor(): void {

@@ -19,9 +19,6 @@ class ThemeSupportServiceProvider extends ServiceProvider {
 
     /**
      * Set theme supports
-     *
-     * @since    1.0.0
-     * @access   public
      * @return   void
      */
     public function addThemeSupports() {
@@ -34,9 +31,6 @@ class ThemeSupportServiceProvider extends ServiceProvider {
 
     /**
      * Remove theme supports
-     *
-     * @since    1.0.0
-     * @access   public
      * @return   void
      */
     public function removeThemeSupports() {

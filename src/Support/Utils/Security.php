@@ -37,7 +37,6 @@ final class Security {
 
     /**
      * Disable REST API user endpoints
-     *
      * @param array $endpoints The current REST api endpoints
      * @return array
      */
@@ -54,7 +53,6 @@ final class Security {
 
     /**
      * Disable author pages
-     *
      * @return void
      */
     public static function disableAuthorPages(): void {

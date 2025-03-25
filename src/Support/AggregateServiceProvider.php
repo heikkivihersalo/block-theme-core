@@ -7,21 +7,18 @@ namespace Vihersalo\Core\Support;
 class AggregateServiceProvider extends ServiceProvider {
     /**
      * The provider class names.
-     *
      * @var array
      */
     protected $providers = [];
 
     /**
      * An array of the service provider instances.
-     *
      * @var array
      */
     protected $instances = [];
 
     /**
      * Register the service provider.
-     *
      * @return void
      */
     public function register() {

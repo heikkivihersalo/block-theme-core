@@ -39,9 +39,6 @@ class DequeueServiceProvider extends ServiceProvider {
 
     /**
      * Boot the navigation provider
-     *
-     * @since    1.0.0
-     * @access   public
      * @return void
      */
     public function boot() {
