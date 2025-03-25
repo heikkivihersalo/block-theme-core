@@ -25,7 +25,7 @@ class ThemeSupportProvider extends ServiceProvider {
      * @return   void
      */
     public function addThemeSupports() {
-        $features = $this->app->make('config')->get('app.themeSupports');
+        $features = $this->app->make('config')->get('app.supports');
 
         foreach ($features as $feature) :
             add_theme_support($feature);

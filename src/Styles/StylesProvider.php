@@ -20,7 +20,7 @@ class StylesProvider extends ServiceProvider {
      * @return   void
      */
     public function inlineMetaStyles() {
-        $color = $this->app->make('config')->get('app.color');
+        $color = $this->app->make('config')->get('app.theme.meta');
 
         $scheme = new Scheme($color);
 

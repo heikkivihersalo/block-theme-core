@@ -39,7 +39,7 @@ final class Common {
      * @return bool
      */
     public static function isAdmin(): bool {
-        return isAdmin();
+        return is_admin();
     }
 
     /**
