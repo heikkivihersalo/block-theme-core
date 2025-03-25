@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Vihersalo\Core;
 
 use Illuminate\Container\Container;
-use Vihersalo\Core\Admin\Duplicate\DuplicateProvider;
+use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
 use Vihersalo\Core\Application\ApplicationBuilder;
 use Vihersalo\Core\Application\HooksLoader;
 use Vihersalo\Core\Configuration\Config;
-use Vihersalo\Core\Configuration\ThemeSupportProvider;
-use Vihersalo\Core\Enqueue\DequeueProvider;
-use Vihersalo\Core\Enqueue\EnqueueProvider;
-use Vihersalo\Core\Navigation\NavigationProvider;
+use Vihersalo\Core\Configuration\ThemeSupportServiceProvider;
+use Vihersalo\Core\Enqueue\DequeueServiceProvider;
+use Vihersalo\Core\Enqueue\EnqueueServiceProvider;
+use Vihersalo\Core\Navigation\NavigationServiceProvider;
 use Vihersalo\Core\Support\ServiceProvider;
-use Vihersalo\Core\Translations\TranslationProvider;
+use Vihersalo\Core\Translations\TranslationServiceProvider;
 
 class Application extends Container {
     /**
@@ -126,12 +126,12 @@ class Application extends Container {
      * @return void
      */
     protected function registerBaseServiceProviders() {
-        $this->registerProvider(new DequeueProvider($this));
-        $this->registerProvider(new EnqueueProvider($this));
-        $this->registerProvider(new NavigationProvider($this));
-        $this->registerProvider(new ThemeSupportProvider($this));
-        $this->registerProvider(new TranslationProvider($this));
-        $this->registerProvider(new DuplicateProvider($this));
+        $this->registerProvider(new DequeueServiceProvider($this));
+        $this->registerProvider(new EnqueueServiceProvider($this));
+        $this->registerProvider(new NavigationServiceProvider($this));
+        $this->registerProvider(new ThemeSupportServiceProvider($this));
+        $this->registerProvider(new TranslationServiceProvider($this));
+        $this->registerProvider(new DuplicateServiceProvider($this));
     }
 
     /**
