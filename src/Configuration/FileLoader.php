@@ -4,40 +4,40 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Configuration;
 
-class Config {
+class FileLoader {
     /**
      * The path to the configuration files.
      * @var string
      */
-    protected $configPath;
+    protected $path;
 
     /**
-     * The configuration values.
+     * The container for the configuration values.
      * @var array
      */
-    protected $config = [];
+    protected $container = [];
 
     /**
      * Constructor
-     * @param string $configPath The path to the configuration files
+     * @param string $path The path to the configuration files
      * @return void
      */
-    public function __construct($configPath) {
-        $this->configPath = $configPath;
-        $this->loadConfigFiles();
+    public function __construct($path) {
+        $this->path = $path;
+        $this->load();
     }
 
     /**
      * Load the configuration files.
      * @return void
      */
-    protected function loadConfigFiles() {
-        $config_files = glob($this->configPath . '/*.php');
+    protected function load() {
+        $files = glob($this->configPath . '/*.php');
 
-        foreach ($config_files as $config_file) {
-            $config_key = basename($config_file, '.php');
+        foreach ($files as $file) {
+            $key = basename($file, '.php');
 
-            $this->config[ $config_key ] = require $config_file;
+            $this->config[ $key ] = require $file;
         }
     }
 
