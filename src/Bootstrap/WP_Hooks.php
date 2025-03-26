@@ -119,7 +119,7 @@ class WP_Hooks {
      */
     public function run() {
         foreach ($this->removeFilters as $hook) {
-            remove_filter(
+            \remove_filter(
                 $hook['hook'],
                 null !== $hook['component'] ? [$hook['component'], $hook['callback']] : $hook['callback'],
                 $hook['priority']
@@ -127,7 +127,7 @@ class WP_Hooks {
         }
 
         foreach ($this->removeActions as $hook) {
-            remove_action(
+            \remove_action(
                 $hook['hook'],
                 null !== $hook['component'] ? [$hook['component'], $hook['callback']] : $hook['callback'],
                 $hook['priority']
@@ -135,7 +135,7 @@ class WP_Hooks {
         }
 
         foreach ($this->filters as $hook) {
-            add_filter(
+            \add_filter(
                 $hook['hook'],
                 null !== $hook['component'] ? [$hook['component'], $hook['callback']] : $hook['callback'],
                 $hook['priority'],
@@ -144,7 +144,7 @@ class WP_Hooks {
         }
 
         foreach ($this->actions as $hook) {
-            add_action(
+            \add_action(
                 $hook['hook'],
                 null !== $hook['component'] ? [$hook['component'], $hook['callback']] : $hook['callback'],
                 $hook['priority'],
