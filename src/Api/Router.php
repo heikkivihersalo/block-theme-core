@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Api;
 
+use Closure;
 use Vihersalo\Core\Bootstrap\Application;
 
 class Router {
@@ -48,6 +49,8 @@ class Router {
         $this->app            = $app;
         $this->routePath      = $routePath;
         $this->routeNamespace = $routeNamespace;
+
+        $this->routes = new RouteCollection();
     }
 
     /**
@@ -127,16 +130,6 @@ class Router {
         return $this->addRoute(self::$verbs, $uri, $action);
     }
 
-
-    /**
-     * Load the provided routes from the provided file.
-     * @return void
-     */
-    protected function loadRouteFile() {
-        var_dump($this->routePath);
-        require $this->routePath;
-    }
-
     /**
      * Add a route to the underlying route collection.
      *
@@ -162,15 +155,6 @@ class Router {
     }
 
     /**
-     * Prefix the given URI with the prefix.
-     * @param  string  $uri
-     * @return string
-     */
-    public function prefix($uri) {
-        return trim(trim($this->prefix, '/') . '/' . trim($uri, '/'), '/') ?: '/';
-    }
-
-    /**
      * Get the underlying route collection.
      * @return RouteCollection
      */
@@ -179,17 +163,38 @@ class Router {
     }
 
     /**
+     * Resolve the permission callback for a route.
+     *
+     * @param  Route  $route
+     * @return Closure|bool
+     */
+    public function resolvePermissionCallback(Route $route) {
+        $auth = $route->getAuthPermission();
+
+        if ($auth === null) {
+            return true;
+        }
+
+        return $auth->callback();
+    }
+
+    /**
      * Register the routes in the collection.
      * @return void
      */
     public function registerRoutes() {
-        foreach ($this->routes as $route) {
+        require $this->routePath;
+
+        $routes = $this->routes->get();
+
+        foreach ($routes as $route) {
             register_rest_route(
                 $this->routeNamespace,
-                $route->getUri(),
+                $route->uri(),
                 [
-                    'methods'  => $route->getMethods(),
-                    'callback' => $route->getAction(),
+                    'methods'             => $route->methods(),
+                    'callback'            => [$route->resolveClass(), $route->resolveMethod()],
+                    'permission_callback' => $this->resolvePermissionCallback($route)
                 ]
             );
         }

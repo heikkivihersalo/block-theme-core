@@ -17,7 +17,11 @@ class RouteCollection {
      * @return void
      */
     public function add(Route $route) {
+        // Add the route to the collection
         $this->routes[] = $route;
+
+        // We need to pass the route back to the router to allow for chaining
+        return $route;
     }
 
     /**
