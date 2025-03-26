@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Enqueue;
 
-use Vihersalo\Core\Bootstrap\WP_Hooks;
+use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class DequeueServiceProvider extends ServiceProvider {

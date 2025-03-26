@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Bootstrap\ThemeSupport;
+namespace Vihersalo\Core\Foundation\Providers;
 
-use Vihersalo\Core\Bootstrap\WP_Hooks;
+use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class ThemeSupportServiceProvider extends ServiceProvider {

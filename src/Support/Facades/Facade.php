@@ -1,27 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vihersalo\Core\Support\Facades;
 
 use Closure;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Js;
-use Illuminate\Support\Number;
-use Illuminate\Support\Str;
-use Illuminate\Support\Testing\Fakes\Fake;
-use Illuminate\Support\Uri;
-use Mockery;
-use Mockery\LegacyMockInterface;
 use RuntimeException;
-
-use Vihersalo\Core\Bootstrap\Application;
+use Vihersalo\Core\Foundation\Application;
 
 abstract class Facade {
     /**
      * The application instance being facaded.
      *
-     * @var \Vihersalo\Core\Bootstrap\Application|null
+     * @var Application|null
      */
     protected static $app;
 
@@ -35,7 +27,7 @@ abstract class Facade {
     /**
      * Run a Closure when the facade has been resolved.
      *
-     * @param  \Closure  $callback
+     * @param  Closure  $callback
      * @return void
      */
     public static function resolved(Closure $callback) {
@@ -64,7 +56,7 @@ abstract class Facade {
      *
      * @return string
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected static function getFacadeAccessor() {
         throw new RuntimeException('Facade does not implement getFacadeAccessor method.');
@@ -112,11 +104,11 @@ abstract class Facade {
     /**
      * Get the application default aliases.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function defaultAliases() {
         return [
-            'App' => App::class,
+            'App'   => App::class,
             'Route' => Route::class,
         ];
     }
@@ -147,7 +139,7 @@ abstract class Facade {
      * @param  array  $args
      * @return mixed
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public static function __callStatic($method, $args) {
         $instance = static::getFacadeRoot();

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Bootstrap;
+namespace Vihersalo\Core\Foundation;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
 use Vihersalo\Core\Api\Router;
-use Vihersalo\Core\Bootstrap\ThemeSupport\ThemeSupportServiceProvider;
-use Vihersalo\Core\Configuration\FileLoader;
 use Vihersalo\Core\Enqueue\DequeueServiceProvider;
 use Vihersalo\Core\Enqueue\EnqueueServiceProvider;
+use Vihersalo\Core\Foundation\Configuration\FileLoader;
+use Vihersalo\Core\Foundation\Providers\ThemeSupportServiceProvider;
 use Vihersalo\Core\Navigation\NavigationServiceProvider;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Translations\TranslationServiceProvider;

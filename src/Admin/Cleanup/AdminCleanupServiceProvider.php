@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Admin\Duplicate;
 
 use Vihersalo\Core\Admin\Cleanup\Utils;
-use Vihersalo\Core\Bootstrap\WP_Hooks;
+use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class AdminCleanupServiceProvider extends ServiceProvider {

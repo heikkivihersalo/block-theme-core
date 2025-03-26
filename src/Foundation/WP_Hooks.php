@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Bootstrap;
+namespace Vihersalo\Core\Foundation;
 
 // phpcs:disable
 class WP_Hooks {

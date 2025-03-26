@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Support\Assets;
 
-use Vihersalo\Core\Bootstrap\WP_Hooks;
 use Vihersalo\Core\Enqueue\Asset;
+use Vihersalo\Core\Foundation\WP_Hooks;
 
 class Style extends Asset {
     /**

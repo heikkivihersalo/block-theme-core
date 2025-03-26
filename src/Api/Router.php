@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Api;
 
 use Closure;
-use Vihersalo\Core\Bootstrap\Application;
+use Vihersalo\Core\Foundation\Application;
 
 class Router {
     /**

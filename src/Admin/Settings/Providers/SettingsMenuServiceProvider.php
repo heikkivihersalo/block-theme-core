@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Admin\Settings\Providers;
 
 use Vihersalo\Core\Admin\Settings\SettingsMenuManager;
-use Vihersalo\Core\Bootstrap\WP_Hooks;
+use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Common as Utils;
 

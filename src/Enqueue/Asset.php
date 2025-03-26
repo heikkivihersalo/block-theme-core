@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Enqueue;
 
-use Vihersalo\Core\Bootstrap\Application;
+use Vihersalo\Core\Foundation\Application;
 use Vihersalo\Core\Support\Notice;
 
 abstract class Asset {

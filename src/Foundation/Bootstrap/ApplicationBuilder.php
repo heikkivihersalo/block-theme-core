@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Bootstrap;
+namespace Vihersalo\Core\Foundation\Bootstrap;
 
 use Vihersalo\Core\Api\Router;
 
 class ApplicationBuilder {
     /**
      * Application instance
-     * @var Application
+     * @var \Vihersalo\Core\Foundation\Application
      */
-    protected Application $app;
+    protected $app;
 
     /**
      * Constructor
@@ -42,7 +42,7 @@ class ApplicationBuilder {
 
     /**
      * Get the application instance.
-     * @return Application
+     * @return \Vihersalo\Core\Foundation\Application
      */
     public function boot() {
         // Boot the application instance

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Support;
 
 use Closure;
-use Vihersalo\Core\Bootstrap\Application;
+use Vihersalo\Core\Foundation\Application;
 
 /**
  * The service provider class.

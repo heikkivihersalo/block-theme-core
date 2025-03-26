@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Configuration;
+namespace Vihersalo\Core\Foundation\Configuration;
 
 class FileLoader {
     /**

@@ -1,6 +1,8 @@
 <?php
 
-namespace Vihersalo\Core\Bootstrap;
+declare(strict_types=1);
+
+namespace Vihersalo\Core\Foundation;
 
 class AliasLoader {
     /**
@@ -27,7 +29,7 @@ class AliasLoader {
     /**
      * The singleton instance of the loader.
      *
-     * @var \Vihersalo\Core\Bootstrap\AliasLoader
+     * @var AliasLoader
      */
     protected static $instance;
 
@@ -44,10 +46,10 @@ class AliasLoader {
      * Get or create the singleton alias loader instance.
      *
      * @param  array  $aliases
-     * @return \Vihersalo\Core\Bootstrap\AliasLoader
+     * @return AliasLoader
      */
     public static function getInstance(array $aliases = []) {
-        if (is_null(static::$instance)) {
+        if (null === static::$instance) {
             return static::$instance = new static($aliases);
         }
 
@@ -210,7 +212,7 @@ class AliasLoader {
     /**
      * Set the value of the singleton alias loader.
      *
-     * @param  \Vihersalo\Core\Bootstrap\AliasLoader  $loader
+     * @param  AliasLoader  $loader
      * @return void
      */
     public static function setInstance($loader) {

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Bootstrap;
+namespace Vihersalo\Core\Foundation\Bootstrap;
 
+use Vihersalo\Core\Foundation\AliasLoader;
 use Vihersalo\Core\Support\Facades\Facade;
 
 class RegisterFacades {

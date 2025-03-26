@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Translations;
 
-use Vihersalo\Core\Bootstrap\WP_Hooks;
+use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class TranslationServiceProvider extends ServiceProvider {
