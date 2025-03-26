@@ -21,6 +21,24 @@ class ApplicationBuilder {
     }
 
     /**
+     * Build the API for the application instance.
+     * @param string $routePath Path to the API route file (e.g. 'routes/api.php')
+     * @param string $prefix The API prefix (e.g. 'api/v1')
+     * @return self
+     */
+    public function withApi(string $routePath, string $routeNamespace = 'api/v1') {
+        // Register routes to the application
+        $this->app->singleton(Router::class, function ($app) use ($routePath, $routeNamespace) {
+            return new Router($app, $routePath, $routeNamespace);
+        });
+
+        // Register the API routes to hooks loader
+        $this->app->make(WP_Hooks::class)->addAction('rest_api_init', Router::class, 'registerRoutes');
+
+        return $this;
+    }
+
+    /**
      * Get the application instance.
      * @return Application
      */
