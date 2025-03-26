@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Bootstrap;
 
+use Vihersalo\Core\Api\Router;
+
 class ApplicationBuilder {
     /**
      * Application instance
