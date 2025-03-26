@@ -8,7 +8,6 @@ use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
 use Vihersalo\Core\Api\Router;
-use Vihersalo\Core\Contracts\Foundation\Application as ApplicationContract;
 use Vihersalo\Core\Enqueue\DequeueServiceProvider;
 use Vihersalo\Core\Enqueue\EnqueueServiceProvider;
 use Vihersalo\Core\Foundation\Bootstrap\ApplicationBuilder;
@@ -19,7 +18,7 @@ use Vihersalo\Core\Navigation\NavigationServiceProvider;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Translations\TranslationServiceProvider;
 
-class Application extends Container implements ApplicationContract {
+class Application extends Container {
     /**
      * The instance of the container
      * @var Container
