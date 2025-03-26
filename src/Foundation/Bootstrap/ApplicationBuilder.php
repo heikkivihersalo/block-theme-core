@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Foundation\Bootstrap;
 
 use Vihersalo\Core\Api\Router;
+use Vihersalo\Core\Foundation\WP_Hooks;
 
 class ApplicationBuilder {
     /**

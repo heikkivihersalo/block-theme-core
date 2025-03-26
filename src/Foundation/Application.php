@@ -10,6 +10,8 @@ use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
 use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Enqueue\DequeueServiceProvider;
 use Vihersalo\Core\Enqueue\EnqueueServiceProvider;
+use Vihersalo\Core\Foundation\Bootstrap\ApplicationBuilder;
+use Vihersalo\Core\Foundation\Bootstrap\RegisterFacades;
 use Vihersalo\Core\Foundation\Configuration\FileLoader;
 use Vihersalo\Core\Foundation\Providers\ThemeSupportServiceProvider;
 use Vihersalo\Core\Navigation\NavigationServiceProvider;

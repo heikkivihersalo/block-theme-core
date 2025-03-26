@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Foundation\Bootstrap;
 
 use Vihersalo\Core\Foundation\AliasLoader;
+use Vihersalo\Core\Foundation\Application;
 use Vihersalo\Core\Support\Facades\Facade;
 
 class RegisterFacades {
