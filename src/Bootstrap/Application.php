@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Bootstrap;
 
 use Illuminate\Container\Container;
+use Psr\Container\ContainerInterface;
 use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
+use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Bootstrap\ThemeSupport\ThemeSupportServiceProvider;
 use Vihersalo\Core\Configuration\FileLoader;
 use Vihersalo\Core\Enqueue\DequeueServiceProvider;
@@ -82,6 +84,8 @@ class Application extends Container {
         $this->registerBaseBindings();
         $this->registerBaseServiceProviders();
         $this->registerConfiguredProviders();
+        $this->registerFacades();
+        $this->registerCoreContainerAliases();
     }
 
     /**
@@ -120,6 +124,14 @@ class Application extends Container {
     }
 
     /**
+     * Register the facades for the application
+     * @return void
+     */
+    protected function registerFacades() {
+        (new RegisterFacades())->bootstrap($this);
+    }
+
+    /**
      * Register the base service providers
      * @return void
      */
@@ -130,6 +142,16 @@ class Application extends Container {
         $this->registerProvider(new ThemeSupportServiceProvider($this));
         $this->registerProvider(new TranslationServiceProvider($this));
         $this->registerProvider(new DuplicateServiceProvider($this));
+    }
+
+    /**
+     * Configure the real-time facade namespace.
+     *
+     * @param  string  $namespace
+     * @return void
+     */
+    public function provideFacades($namespace) {
+        AliasLoader::setFacadeNamespace($namespace);
     }
 
     /**
@@ -152,7 +174,7 @@ class Application extends Container {
     public function getProvider($provider) {
         $name = is_string($provider) ? $provider : get_class($provider);
 
-        return $this->serviceProviders[ $name ] ?? null;
+        return $this->serviceProviders[$name] ?? null;
     }
 
     /**
@@ -230,9 +252,9 @@ class Application extends Container {
     protected function markAsRegistered($provider) {
         $class = get_class($provider);
 
-        $this->serviceProviders[ $class ] = $provider;
+        $this->serviceProviders[$class] = $provider;
 
-        $this->loadedProviders[ $class ] = true;
+        $this->loadedProviders[$class] = true;
     }
 
     /**
@@ -244,7 +266,7 @@ class Application extends Container {
         $index = 0;
 
         while ($index < count($callbacks)) {
-            $callbacks[ $index ]($this);
+            $callbacks[$index]($this);
 
             ++$index;
         }
@@ -319,5 +341,23 @@ class Application extends Container {
         $this->booted = true;
 
         $this->fireAppCallbacks($this->bootedCallbacks);
+    }
+
+    /**
+     * Register the core class aliases in the container.
+     *
+     * @return void
+     */
+    public function registerCoreContainerAliases() {
+        foreach (
+            [
+                'app'    => [self::class, ContainerInterface::class],
+                'router' => [Router::class],
+            ] as $key => $aliases
+        ) {
+            foreach ($aliases as $alias) {
+                $this->alias($key, $alias);
+            }
+        }
     }
 }
