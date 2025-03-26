@@ -8,6 +8,7 @@ use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
 use Vihersalo\Core\Api\Router;
+use Vihersalo\Core\Contracts\Foundation\Application as ApplicationContract;
 use Vihersalo\Core\Enqueue\DequeueServiceProvider;
 use Vihersalo\Core\Enqueue\EnqueueServiceProvider;
 use Vihersalo\Core\Foundation\Bootstrap\ApplicationBuilder;
@@ -18,7 +19,7 @@ use Vihersalo\Core\Navigation\NavigationServiceProvider;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Translations\TranslationServiceProvider;
 
-class Application extends Container {
+class Application extends Container implements ApplicationContract {
     /**
      * The instance of the container
      * @var Container
@@ -91,18 +92,16 @@ class Application extends Container {
     }
 
     /**
-     * Configure the application
-     * @return ApplicationBuilder
+     * @inheritDoc
      */
     public static function configure() {
         return (new ApplicationBuilder(new static()));
     }
 
     /**
-     * Get the instance of the container
-     * @return void
+     * @inheritDoc
      */
-    protected function registerBaseBindings() {
+    public function registerBaseBindings() {
         static::$container = static::setInstance($this);
 
         $this->instance('app', $this);
@@ -126,18 +125,16 @@ class Application extends Container {
     }
 
     /**
-     * Register the facades for the application
-     * @return void
+     * @inheritDoc
      */
-    protected function registerFacades() {
+    public function registerFacades() {
         (new RegisterFacades())->bootstrap($this);
     }
 
     /**
-     * Register the base service providers
-     * @return void
+     * @inheritDoc
      */
-    protected function registerBaseServiceProviders() {
+    public function registerBaseServiceProviders() {
         $this->registerProvider(new DequeueServiceProvider($this));
         $this->registerProvider(new EnqueueServiceProvider($this));
         $this->registerProvider(new NavigationServiceProvider($this));
@@ -147,18 +144,14 @@ class Application extends Container {
     }
 
     /**
-     * Configure the real-time facade namespace.
-     *
-     * @param  string  $namespace
-     * @return void
+     * @inheritDoc
      */
-    public function provideFacades($namespace) {
+    public function provideFacades(string $namespace) {
         AliasLoader::setFacadeNamespace($namespace);
     }
 
     /**
-     * Register all of the configured providers.
-     * @return void
+     * @inheritDoc
      */
     public function registerConfiguredProviders() {
         $providers = require $this->basePath . '/bootstrap/providers.php' ?? [];
@@ -169,9 +162,7 @@ class Application extends Container {
     }
 
     /**
-     * Get the registered service provider instance if it exists.
-     * @param  ServiceProvider|string $provider The provider to get
-     * @return ServiceProvider|null
+     * @inheritDoc
      */
     public function getProvider($provider) {
         $name = is_string($provider) ? $provider : get_class($provider);
@@ -180,19 +171,14 @@ class Application extends Container {
     }
 
     /**
-     * Resolve a service provider instance from the class name.
-     * @param  string $provider The provider to resolve
-     * @return ServiceProvider $provider
+     * @inheritDoc
      */
     public function resolveProvider($provider) {
         return new $provider($this);
     }
 
     /**
-     * Register a service provider with the application.
-     * @param  Vihersalo\Core\Support\ServiceProvider|string $provider The provider to register
-     * @param  bool $force If true, the provider will be registered even if it has already been registered
-     * @return Vihersalo\Core\Support\ServiceProvider
+     * @inheritDoc
      */
     public function registerProvider($provider, $force = false) {
         if (($registered = $this->getProvider($provider)) && ! $force) {
@@ -238,9 +224,7 @@ class Application extends Container {
     }
 
     /**
-     * Register a new registered listener.
-     * @param  callable $callback The callback to run when a provider is registered
-     * @return void
+     * @inheritDoc
      */
     public function registered($callback) {
         $this->registeredCallbacks[] = $callback;
@@ -251,7 +235,7 @@ class Application extends Container {
      * @param  ServiceProvider $provider The provider to mark as registered
      * @return void
      */
-    protected function markAsRegistered($provider) {
+    public function markAsRegistered($provider) {
         $class = get_class($provider);
 
         $this->serviceProviders[$class] = $provider;
@@ -260,11 +244,9 @@ class Application extends Container {
     }
 
     /**
-     * Call the booting callbacks for the application.
-     * @param  callable[] $callbacks The callbacks to run
-     * @return void
+     * @inheritDoc
      */
-    protected function fireAppCallbacks(array &$callbacks) {
+    public function fireAppCallbacks(array &$callbacks) {
         $index = 0;
 
         while ($index < count($callbacks)) {
@@ -275,26 +257,21 @@ class Application extends Container {
     }
 
     /**
-     * Determine if the application has booted.
-     * @return bool
+     * @inheritDoc
      */
     public function isBooted() {
         return $this->booted;
     }
 
     /**
-     * Register a new boot listener.
-     * @param  callable $callback The callback to run when the application is booting
-     * @return void
+     * @inheritDoc
      */
     public function booting($callback) {
         $this->bootingCallbacks[] = $callback;
     }
 
     /**
-     * Register a new "booted" listener.
-     * @param  callable $callback The callback to run when the application has booted
-     * @return void
+     * @inheritDoc
      */
     public function booted($callback) {
         $this->bootedCallbacks[] = $callback;
@@ -305,11 +282,9 @@ class Application extends Container {
     }
 
     /**
-     * Boot the given service provider.
-     * @param  ServiceProvider $provider The provider to boot
-     * @return void
+     * @inheritDoc
      */
-    protected function bootProvider($provider) {
+    public function bootProvider($provider) {
         $provider->callBootingCallbacks();
 
         if (method_exists($provider, 'boot')) {
@@ -320,8 +295,7 @@ class Application extends Container {
     }
 
     /**
-     * Boot the application's service providers.
-     * @return void
+     * @inheritDoc
      */
     public function boot() {
         if ($this->isBooted()) {
@@ -346,9 +320,7 @@ class Application extends Container {
     }
 
     /**
-     * Register the core class aliases in the container.
-     *
-     * @return void
+     * @inheritDoc
      */
     public function registerCoreContainerAliases() {
         foreach (
