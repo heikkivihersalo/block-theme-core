@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Admin\Duplicate;
+namespace Vihersalo\Core\Admin\Providers;
 
 use Vihersalo\Core\Admin\Cleanup\Utils;
 use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
-class AdminCleanupServiceProvider extends ServiceProvider {
+class CleanupServiceProvider extends ServiceProvider {
     /**
      * Register the navigation provider
      * @return void

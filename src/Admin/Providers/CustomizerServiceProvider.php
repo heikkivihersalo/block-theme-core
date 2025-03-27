@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Admin;
+namespace Vihersalo\Core\Admin\Providers;
 
 use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;

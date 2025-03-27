@@ -6,7 +6,7 @@ namespace Vihersalo\Core\Foundation;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
-use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
+use Vihersalo\Core\Admin\Providers\DuplicateServiceProvider;
 use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Contracts\Foundation\Application as ApplicationContract;
 use Vihersalo\Core\Enqueue\AssetLoader;
