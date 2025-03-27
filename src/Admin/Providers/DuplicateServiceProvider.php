@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Admin\Providers;
 
+use Vihersalo\Core\Admin\Duplicate\Utils;
 use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 
