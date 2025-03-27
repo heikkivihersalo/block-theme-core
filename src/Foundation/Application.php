@@ -8,6 +8,7 @@ use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
 use Vihersalo\Core\Api\Router;
+use Vihersalo\Core\Contracts\Foundation\Application as ApplicationContract;
 use Vihersalo\Core\Enqueue\DequeueServiceProvider;
 use Vihersalo\Core\Enqueue\EnqueueServiceProvider;
 use Vihersalo\Core\Foundation\Bootstrap\ApplicationBuilder;
@@ -18,7 +19,7 @@ use Vihersalo\Core\Navigation\NavigationServiceProvider;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Translations\TranslationServiceProvider;
 
-class Application extends Container {
+class Application extends Container implements ApplicationContract {
     /**
      * The instance of the container
      * @var Container
@@ -91,16 +92,19 @@ class Application extends Container {
     }
 
     /**
-     * @inheritDoc
+     * Configure the application
+     * @return ApplicationBuilder
      */
     public static function configure() {
         return (new ApplicationBuilder(new static()));
     }
 
     /**
-     * @inheritDoc
+     * Get the instance of the container
+     * !NOTE: We need to keep this method protected to avoid conflicts with the container
+     * @return void
      */
-    public function registerBaseBindings() {
+    protected function registerBaseBindings() {
         static::$container = static::setInstance($this);
 
         $this->instance('app', $this);
@@ -124,16 +128,19 @@ class Application extends Container {
     }
 
     /**
-     * @inheritDoc
+     * Register the facades for the application
+     * @return void
      */
-    public function registerFacades() {
+    protected function registerFacades() {
         (new RegisterFacades())->bootstrap($this);
     }
 
     /**
-     * @inheritDoc
+     * Register the base service providers
+     * !NOTE: We need to keep this method protected to avoid conflicts with the container
+     * @return void
      */
-    public function registerBaseServiceProviders() {
+    protected function registerBaseServiceProviders() {
         $this->registerProvider(new DequeueServiceProvider($this));
         $this->registerProvider(new EnqueueServiceProvider($this));
         $this->registerProvider(new NavigationServiceProvider($this));
@@ -143,16 +150,11 @@ class Application extends Container {
     }
 
     /**
-     * @inheritDoc
+     * Register all of the configured providers.
+     * !NOTE: We need to keep this method protected to avoid conflicts with the container
+     * @return void
      */
-    public function provideFacades(string $namespace) {
-        AliasLoader::setFacadeNamespace($namespace);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function registerConfiguredProviders() {
+    protected function registerConfiguredProviders() {
         $providers = require $this->basePath . '/bootstrap/providers.php' ?? [];
 
         foreach ($providers as $provider) {
@@ -231,10 +233,11 @@ class Application extends Container {
 
     /**
      * Mark the given provider as registered.
+     * !NOTE: We need to keep this method protected to avoid conflicts with the container
      * @param  ServiceProvider $provider The provider to mark as registered
      * @return void
      */
-    public function markAsRegistered($provider) {
+    protected function markAsRegistered($provider) {
         $class = get_class($provider);
 
         $this->serviceProviders[$class] = $provider;
@@ -253,6 +256,16 @@ class Application extends Container {
 
             ++$index;
         }
+    }
+
+    /**
+     * Configure the real-time facade namespace.
+     *
+     * @param  string  $namespace
+     * @return void
+     */
+    public function provideFacades(string $namespace) {
+        AliasLoader::setFacadeNamespace($namespace);
     }
 
     /**
@@ -281,9 +294,12 @@ class Application extends Container {
     }
 
     /**
-     * @inheritDoc
+     * Boot the given service provider.
+     * !NOTE: We need to keep this method protected to avoid conflicts with the container
+     * @param  ServiceProvider $provider The provider to boot
+     * @return void
      */
-    public function bootProvider($provider) {
+    protected function bootProvider($provider) {
         $provider->callBootingCallbacks();
 
         if (method_exists($provider, 'boot')) {

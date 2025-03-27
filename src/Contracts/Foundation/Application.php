@@ -5,42 +5,9 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Contracts\Foundation;
 
 use Illuminate\Contracts\Container\Container;
-use Vihersalo\Core\Foundation\Bootstrap\ApplicationBuilder;
 use Vihersalo\Core\Support\ServiceProvider;
 
 interface Application extends Container {
-    /**
-     * Configure the application
-     *
-     * @return ApplicationBuilder
-     */
-    public static function configure();
-
-    /**
-     * Register all of the configured providers.
-     *
-     * @return void
-     */
-    public function registerConfiguredProviders();
-
-    /**
-     * Get the instance of the container
-     * @return void
-     */
-    public function registerBaseBindings();
-
-    /**
-     * Register the facades for the application
-     * @return void
-     */
-    public function registerFacades();
-
-    /**
-     * Register the base service providers
-     * @return void
-     */
-    public function registerBaseServiceProviders();
-
     /**
      * Configure the real-time facade namespace.
      * @param  string  $namespace
@@ -78,13 +45,6 @@ interface Application extends Container {
     public function registered($callback);
 
     /**
-     * Mark the given provider as registered.
-     * @param  ServiceProvider $provider The provider to mark as registered
-     * @return void
-     */
-    public function markAsRegistered($provider);
-
-    /**
      * Call the booting callbacks for the application.
      * @param  callable[] $callbacks The callbacks to run
      * @return void
@@ -113,13 +73,6 @@ interface Application extends Container {
      * @return void
      */
     public function booted($callback);
-
-    /**
-     * Boot the given service provider.
-     * @param  ServiceProvider $provider The provider to boot
-     * @return void
-     */
-    public function bootProvider($provider);
 
     /**
      * Register the core class aliases in the container.
