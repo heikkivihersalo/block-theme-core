@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Enqueue\Providers;
 
+use Vihersalo\Core\Enqueue\AssetLoader;
 use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Media as MediaUtils;
