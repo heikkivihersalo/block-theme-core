@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Enqueue;
+namespace Vihersalo\Core\Enqueue\Providers;
 
 use Vihersalo\Core\Foundation\WP_Hooks;
 use Vihersalo\Core\Support\ServiceProvider;
@@ -23,13 +23,11 @@ class EnqueueServiceProvider extends ServiceProvider {
      * @return   void
      */
     public function registerAssets() {
-        $assets = $this->app->make('config')->get('app.assets');
+        $this->app->singleton('assets', function ($app) {
+            return new AssetLoader($app);
+        });
 
-        foreach ($assets as $asset) :
-            if (method_exists($asset, 'register')) {
-                call_user_func([$asset, 'register']);
-            }
-        endforeach;
+        $this->app->make('assets')->register();
     }
 
     /**

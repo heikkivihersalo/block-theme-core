@@ -69,6 +69,7 @@ abstract class Asset {
      * @return void
      */
     public function __construct(
+        Application $app,
         string $handle = '',
         string $src = '',
         string $path = '',
@@ -77,6 +78,7 @@ abstract class Asset {
         bool $admin = false,
         bool $editor = false
     ) {
+        $this->app      = $app;
         $this->handle   = $handle;
         $this->src      = $src;
         $this->path     = $path;
@@ -84,7 +86,6 @@ abstract class Asset {
         $this->priority = $priority;
         $this->admin    = $admin;
         $this->editor   = $editor;
-        $this->app      = Application::getInstance();
     }
 
     /**
@@ -156,7 +157,7 @@ abstract class Asset {
      * @return void
      */
     public function addToEditorStyles() {
-        add_editor_style($this->app->make('config')->get('uri') . '/' . $this->getSrc());
+        add_editor_style($this->app->make('uri') . '/' . $this->getSrc());
     }
 
     /**
@@ -164,7 +165,7 @@ abstract class Asset {
      * @return bool
      */
     public function assetExists(): bool {
-        $path = $this->app->make('config')->get('app.path');
+        $path = $this->app->make('path');
 
         if (! file_exists(trailingslashit($path) . $this->asset)) :
             $message = sprintf(
