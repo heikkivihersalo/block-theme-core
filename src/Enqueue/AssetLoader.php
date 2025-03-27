@@ -38,7 +38,14 @@ class AssetLoader {
      * @param bool $editor Whether the asset is for `add_editor_style` function or not
      * @return Script
      */
-    public function script(string $handle, string $src, string $asset, int $priority = 10, bool $admin = false, bool $editor = false) {
+    public function script(
+        string $handle,
+        string $src,
+        string $asset,
+        int $priority = 10,
+        bool $admin = false,
+        bool $editor = false
+    ) {
         return $this->assets->add(
             Script::create(
                 $this->app,
@@ -62,7 +69,14 @@ class AssetLoader {
      * @param bool $editor Whether the asset is for `add_editor_style` function or not
      * @return Style
      */
-    public function style(string $handle, string $src, string $asset, int $priority = 10, bool $admin = false, bool $editor = false) {
+    public function style(
+        string $handle,
+        string $src,
+        string $asset,
+        int $priority = 10,
+        bool $admin = false,
+        bool $editor = false
+    ) {
         return $this->assets->add(
             Style::create(
                 $this->app,
