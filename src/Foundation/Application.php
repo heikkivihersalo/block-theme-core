@@ -9,6 +9,7 @@ use Psr\Container\ContainerInterface;
 use Vihersalo\Core\Admin\Duplicate\DuplicateServiceProvider;
 use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Contracts\Foundation\Application as ApplicationContract;
+use Vihersalo\Core\Enqueue\AssetLoader;
 use Vihersalo\Core\Enqueue\DequeueServiceProvider;
 use Vihersalo\Core\Enqueue\EnqueueServiceProvider;
 use Vihersalo\Core\Foundation\Bootstrap\ApplicationBuilder;
@@ -80,23 +81,35 @@ class Application extends Container implements ApplicationContract {
      * @param string $baseUri The URI to the application "app" base directory
      * @return void
      */
-    public function __construct($basePath = null, $baseUri = null) {
-        $this->basePath = $basePath ?? get_template_directory();
-        $this->baseUri  = $baseUri  ?? get_template_directory_uri();
+    public function __construct(?string $path = null, ?string $uri = null) {
+        if ($path) {
+            $this->setBasePath($path);
+        }
 
+        if ($uri) {
+            $this->setBaseUri($uri);
+        }
+
+        // First register the base bindings and paths in the container
+        $this->bindPathsInContainer();
         $this->registerBaseBindings();
-        $this->registerBaseServiceProviders();
-        $this->registerConfiguredProviders();
         $this->registerFacades();
         $this->registerCoreContainerAliases();
+
+        // Register the the service providers
+        $this->registerBaseServiceProviders();
+        $this->registerConfiguredProviders();
     }
 
     /**
      * Configure the application
      * @return ApplicationBuilder
      */
-    public static function configure() {
-        return (new ApplicationBuilder(new static()));
+    public static function configure(?string $path = null, ?string $uri = null) {
+        $basePath = $path ?? get_template_directory();
+        $baseUri  = $uri  ?? get_template_directory_uri();
+
+        return (new ApplicationBuilder(new static($basePath, $baseUri)));
     }
 
     /**
@@ -125,6 +138,16 @@ class Application extends Container implements ApplicationContract {
                 return new WP_Hooks();
             }
         );
+    }
+
+    /**
+     * Bind all of the application paths in the container.
+     *
+     * @return void
+     */
+    protected function bindPathsInContainer() {
+        $this->instance('path', $this->basePath);
+        $this->instance('uri', $this->baseUri);
     }
 
     /**
@@ -259,6 +282,24 @@ class Application extends Container implements ApplicationContract {
     }
 
     /**
+     * Set the path to the application "app" base directory.
+     * @param  string  $path
+     * @return void
+     */
+    public function setBasePath(string $path) {
+        $this->basePath = rtrim($path, '\/');
+    }
+
+    /**
+     * Set the URI to the application "app" base directory.
+     * @param  string  $uri
+     * @return void
+     */
+    public function setBaseUri(string $uri) {
+        $this->baseUri = rtrim($uri, '\/');
+    }
+
+    /**
      * Configure the real-time facade namespace.
      *
      * @param  string  $namespace
@@ -342,6 +383,7 @@ class Application extends Container implements ApplicationContract {
             [
                 'app'    => [self::class, ContainerInterface::class],
                 'router' => [Router::class],
+                'assets' => [AssetLoader::class],
             ] as $key => $aliases
         ) {
             foreach ($aliases as $alias) {
