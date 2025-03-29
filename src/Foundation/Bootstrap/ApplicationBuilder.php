@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Foundation\Bootstrap;
 
 use Vihersalo\Core\Api\Router;
-use Vihersalo\Core\Foundation\WP_Hooks;
+use Vihersalo\Core\Foundation\HooksStore;
 
 class ApplicationBuilder {
     /**
@@ -36,7 +36,7 @@ class ApplicationBuilder {
         });
 
         // Register the API routes to hooks loader
-        $this->app->make(WP_Hooks::class)->addAction('rest_api_init', $this->app->make('router'), 'registerRoutes');
+        $this->app->make(HooksStore::class)->addAction('rest_api_init', $this->app->make('router'), 'registerRoutes');
 
         return $this;
     }
@@ -50,7 +50,7 @@ class ApplicationBuilder {
         $this->app->boot();
 
         // Boot the hooks loader
-        $this->app->make(WP_Hooks::class)->run();
+        $this->app->make(HooksStore::class)->run();
 
         return $this->app;
     }

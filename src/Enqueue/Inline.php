@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Enqueue;
 
 use Vihersalo\Core\Foundation\Application;
-use Vihersalo\Core\Foundation\WP_Hooks;
+use Vihersalo\Core\Foundation\HooksStore;
 
 require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
 require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
@@ -50,6 +50,6 @@ class Inline extends Asset {
      * @return void
      */
     public function register(): void {
-        $this->app->make(WP_Hooks::class)->addAction('wp_head', $this, 'enqueue', $this->getPriority());
+        $this->app->make(HooksStore::class)->addAction('wp_head', $this, 'enqueue', $this->getPriority());
     }
 }

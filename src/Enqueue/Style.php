@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Enqueue;
 
 use Vihersalo\Core\Foundation\Application;
-use Vihersalo\Core\Foundation\WP_Hooks;
+use Vihersalo\Core\Foundation\HooksStore;
 
 class Style extends Asset {
     /**
@@ -63,6 +63,6 @@ class Style extends Asset {
             $this->loader->add_action('admin_init', $this, 'addToEditorStyles');
         }
 
-        $this->app->make(WP_Hooks::class)->addAction($action, $this, 'enqueue', $this->getPriority());
+        $this->app->make(HooksStore::class)->addAction($action, $this, 'enqueue', $this->getPriority());
     }
 }

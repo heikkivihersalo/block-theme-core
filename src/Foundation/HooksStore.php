@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Foundation;
 
 // phpcs:disable
-class WP_Hooks {
+class HooksStore {
     /**
      * The array of actions registered with WordPress.
      * @var      array    $actions    The actions registered with WordPress to fire when the theme loads.

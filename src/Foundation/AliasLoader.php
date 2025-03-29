@@ -212,11 +212,11 @@ class AliasLoader {
     /**
      * Set the value of the singleton alias loader.
      *
-     * @param  AliasLoader  $loader
+     * @param  AliasLoader  $store
      * @return void
      */
-    public static function setInstance($loader) {
-        static::$instance = $loader;
+    public static function setInstance($store) {
+        static::$instance = $store;
     }
 
     /**

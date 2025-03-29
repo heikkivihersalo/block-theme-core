@@ -11,12 +11,12 @@ use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Contracts\Foundation\Application as ApplicationContract;
 use Vihersalo\Core\Enqueue\AssetLoader;
 use Vihersalo\Core\Enqueue\Providers\DequeueServiceProvider;
-use Vihersalo\Core\Enqueue\Providers\EnqueueServiceProvider;
 use Vihersalo\Core\Foundation\Bootstrap\ApplicationBuilder;
 use Vihersalo\Core\Foundation\Bootstrap\RegisterFacades;
 use Vihersalo\Core\Foundation\Configuration\FileLoader;
 use Vihersalo\Core\Foundation\Providers\ThemeSupportServiceProvider;
 use Vihersalo\Core\Navigation\NavigationServiceProvider;
+use Vihersalo\Core\Security\SecurityServiceProvider;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Translations\TranslationServiceProvider;
 
@@ -133,9 +133,9 @@ class Application extends Container implements ApplicationContract {
 
         // Bind the application loader to the container
         $this->singleton(
-            WP_Hooks::class,
+            HooksStore::class,
             function () {
-                return new WP_Hooks();
+                return new HooksStore();
             }
         );
     }
@@ -165,9 +165,9 @@ class Application extends Container implements ApplicationContract {
      */
     protected function registerBaseServiceProviders() {
         $this->registerProvider(new DequeueServiceProvider($this));
-        $this->registerProvider(new EnqueueServiceProvider($this));
         $this->registerProvider(new NavigationServiceProvider($this));
         $this->registerProvider(new ThemeSupportServiceProvider($this));
+        $this->registerProvider(new SecurityServiceProvider($this));
         $this->registerProvider(new TranslationServiceProvider($this));
         $this->registerProvider(new DuplicateServiceProvider($this));
     }
