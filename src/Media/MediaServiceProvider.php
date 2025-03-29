@@ -60,8 +60,8 @@ class MediaServiceProvider extends ServiceProvider {
             $media_config['excerpt']['more']
         );
 
-        $store->addFilter('excerpt_length', $this, 'customExcerptLength', 999);
-        $store->addFilter('excerpt_more', $this, 'customExcerptMore');
+        $store->addFilter('excerpt_length', $excerpt_manager, 'customExcerptLength', 999);
+        $store->addFilter('excerpt_more', $excerpt_manager, 'customExcerptMore');
     }
 
     /**
