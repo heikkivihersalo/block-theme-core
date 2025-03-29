@@ -22,8 +22,6 @@ class BlockGroup {
     public function __construct(protected string $source_path, protected string $build_path) {
         $this->source_path = $source_path;
         $this->build_path  = $build_path;
-
-        $this->blocks = $this->resolveBlocksFromDirectory();
     }
 
     /**
@@ -54,10 +52,11 @@ class BlockGroup {
 
     /**
      * Resolve blocks from directory
-     * @return array
+     * @param string $basePath The base path of the block group
+     * @return void
      */
-    public function resolveBlocksFromDirectory(): array {
-        return DirectoriesUtils::getBlockDirectories('ksd', $this->source_path);
+    public function resolveBlocksFromDirectory(string $basePath) {
+        $this->blocks = DirectoriesUtils::getBlockDirectories('ksd', $basePath . '/' . $this->getSourcePath());
     }
 
     /**
