@@ -37,6 +37,8 @@ final class Directories {
             }
 
             // Add block to array
+            // To allow more flexibility with conditional checks
+            // Add namespace to block name
             $blocks[] = $namespace . '/' . $block;
 
             // Check if block is core block and has child blocks
