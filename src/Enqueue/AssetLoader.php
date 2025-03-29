@@ -113,8 +113,6 @@ class AssetLoader {
      * @return void
      */
     public function register() {
-        require $this->app->make('path') . '/bootstrap/assets.php';
-
         $assets = $this->assets->get();
 
         foreach ($assets as $asset) {
