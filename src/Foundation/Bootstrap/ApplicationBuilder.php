@@ -6,6 +6,7 @@ namespace Vihersalo\Core\Foundation\Bootstrap;
 
 use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Foundation\HooksStore;
+use Vihersalo\Core\Support\Collections;
 
 class ApplicationBuilder {
     /**
@@ -37,6 +38,30 @@ class ApplicationBuilder {
 
         // Register the API routes to hooks loader
         $this->app->make(HooksStore::class)->addAction('rest_api_init', $this->app->make('router'), 'registerRoutes');
+
+        return $this;
+    }
+
+    /**
+     * Register the application handlers.
+     * @param callable|null $callback The callback to register the handlers.
+     * @return self
+     */
+    public function withHandlers(?callable $callback = null) {
+        $handlers = new Collections\HandlerCollection();
+
+        if (! $callback) {
+            return $this;
+        }
+
+        $callback($handlers);
+
+        foreach ($handlers->all() as $handler) {
+            // Run the handlers `handle` method
+            if (method_exists($handler, 'handle')) {
+                $handler->handle();
+            }
+        }
 
         return $this;
     }
