@@ -18,8 +18,15 @@ final class Directories {
      * @param string $namespace Namespace of block (e.g. core, ksd, custom)
      * @return array
      */
-    public static function getBlockDirectories(?string $path = null, string $namespace): array {
+    public static function getBlockDirectories(string $namespace, ?string $path = null): array {
         if (null === $path) {
+            return [];
+        }
+
+        // Check if path exists
+        if (!is_dir($path)) {
+            // TODO: Add notice
+
             return [];
         }
 
@@ -48,7 +55,7 @@ final class Directories {
             endif;
         }
 
-        return $blocks;
+        return $blocks ?? [];
     }
 
     /**
