@@ -15,6 +15,7 @@ use Vihersalo\Core\Foundation\Bootstrap\ApplicationBuilder;
 use Vihersalo\Core\Foundation\Bootstrap\RegisterFacades;
 use Vihersalo\Core\Foundation\Configuration\FileLoader;
 use Vihersalo\Core\Foundation\Providers\ThemeSupportServiceProvider;
+use Vihersalo\Core\Gutenberg\GutenbergServiceProvider;
 use Vihersalo\Core\Navigation\NavigationServiceProvider;
 use Vihersalo\Core\Security\SecurityServiceProvider;
 use Vihersalo\Core\Support\ServiceProvider;
@@ -170,6 +171,7 @@ class Application extends Container implements ApplicationContract {
         $this->registerProvider(new SecurityServiceProvider($this));
         $this->registerProvider(new TranslationServiceProvider($this));
         $this->registerProvider(new DuplicateServiceProvider($this));
+        $this->registerProvider(new GutenbergServiceProvider($this));
     }
 
     /**
