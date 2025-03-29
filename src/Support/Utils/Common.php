@@ -34,7 +34,15 @@ final class Common {
      * @return bool
      */
     public static function isAdmin(): bool {
-        return is_admin();
+        return \is_admin();
+    }
+
+    /**
+     * Check if the current user is logged in
+     * @return bool
+     */
+    public static function isLoggedIn(): bool {
+        return \is_user_logged_in();
     }
 
     /**
