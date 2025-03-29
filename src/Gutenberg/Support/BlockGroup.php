@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Gutenberg;
+namespace Vihersalo\Core\Gutenberg\Support;
 
 use Vihersalo\Core\Gutenberg\Utils\Directories as DirectoriesUtils;
 
@@ -57,7 +57,7 @@ class BlockGroup {
      * @return array
      */
     public function resolveBlocksFromDirectory(): array {
-        return DirectoriesUtils::getBlockDirectories($this->source_path, 'ksd');
+        return DirectoriesUtils::getBlockDirectories('ksd', $this->source_path);
     }
 
     /**

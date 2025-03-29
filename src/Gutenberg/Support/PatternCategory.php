@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Gutenberg;
+namespace Vihersalo\Core\Gutenberg\Support;
 
 class PatternCategory {
     /**
