@@ -33,10 +33,6 @@ class BlockLoader {
      * @return array|false
      */
     public function groups(): array|false {
-        if (count($this->groups) === 0) {
-            return false;
-        }
-
         return $this->groups;
     }
 
@@ -57,9 +53,16 @@ class BlockLoader {
             return;
         }
 
+        $basePath = $this->app->make('path');
+
         foreach ($this->groups() as $group) :
+            // Resolve all blocks from the directory
+            // This will add all blocks dynamically to the block group
+            $group->resolveBlocksFromDirectory($basePath);
+
+            // Register the block group
             foreach ($group->blocks() as $block) :
-                \register_block_type($this->path . '/' . explode('/', $block)[1]);
+                \register_block_type($basePath . '/' . $group->getBuildPath() . '/' . explode('/', $block)[1]);
 
                 // $this->set_block_translation(
                 //     'ksd-' . explode('/', $block)[1],
