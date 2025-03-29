@@ -5,32 +5,52 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Admin\Providers;
 
 use Vihersalo\Core\Admin\Cleanup\Utils;
-use Vihersalo\Core\Foundation\WP_Hooks;
+use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\Support\ServiceProvider;
+use Vihersalo\Core\Support\Utils\Common as CommonUtils;
 
 class CleanupServiceProvider extends ServiceProvider {
     /**
-     * Register the navigation provider
+     * Register the provider
      * @return void
      */
     public function register() {
-        $this->registerCleanupFunctions($this->app->make(WP_Hooks::class));
+        $store = $this->app->make(HooksStore::class);
+        $this->registerAdminBar($store);
+        $this->registerDashboardMetaboxes($store);
     }
 
     /**
-     * Enable customizer
-     * @param WP_Hooks $loader The loader to use
+     * Clean the admin bar
+     * @param HooksStore $store The store to use
      * @return void
      */
-    protected function registerCleanupFunctions(WP_Hooks $loader) {
-        $loader->addAction('admin_bar_menu', Utils::class, 'removeAdminBarItems');
-        $loader->addAction('admin_menu', Utils::class, 'setDefaultDashboardMetaboxes');
+    protected function registerAdminBar(HooksStore $store) {
+        if (! CommonUtils::isLoggedIn()) {
+            return;
+        }
+
+        $store->addAction('admin_bar_menu', Utils::class, 'removeAdminBarItems');
     }
 
     /**
-     * Boot the navigation provider
+     * Clean the dashboard metaboxes
+     * @param HooksStore $store The store to use
+     * @return void
+     */
+    protected function registerDashboardMetaboxes(HooksStore $store) {
+        if (! CommonUtils::isAdmin()) {
+            return;
+        }
+
+        $store->addAction('admin_menu', Utils::class, 'setDefaultDashboardMetaboxes');
+    }
+
+    /**
+     * Boot the provider
      * @return void
      */
     public function boot() {
+        // Nothing to do here
     }
 }

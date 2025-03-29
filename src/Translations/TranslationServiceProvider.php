@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Translations;
 
-use Vihersalo\Core\Foundation\WP_Hooks;
+use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class TranslationServiceProvider extends ServiceProvider {
     /**
-     * Register the navigation provider
+     * Register the provider
      * @return void
      */
     public function register() {
-        $this->app->make(WP_Hooks::class)->addAction('after_setup_theme', $this, 'loadTextdomain');
+        $this->app->make(HooksStore::class)->addAction('after_setup_theme', $this, 'loadTextdomain');
     }
 
     /**
@@ -29,9 +29,10 @@ class TranslationServiceProvider extends ServiceProvider {
     }
 
     /**
-     * Boot the navigation provider
+     * Boot the provider
      * @return void
      */
     public function boot() {
+        // Nothing to do here
     }
 }

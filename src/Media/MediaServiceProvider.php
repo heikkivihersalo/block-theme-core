@@ -4,55 +4,55 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Media;
 
-use Vihersalo\Core\Foundation\WP_Hooks;
+use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\Support\ServiceProvider;
 use Vihersalo\Core\Support\Utils\Media as MediaUtils;
 
 class MediaServiceProvider extends ServiceProvider {
     /**
-     * Register the navigation provider
+     * Register the provider
      * @return void
      */
     public function register() {
-        $loader = $this->app->make(WP_Hooks::class);
+        $store = $this->app->make(HooksStore::class);
 
-        $this->registerImageSizes($loader);
-        $this->allowSvgFileUploads($loader);
-        $this->setCustomExcerptLength($loader);
+        $this->registerImageSizes($store);
+        $this->allowSvgFileUploads($store);
+        $this->setCustomExcerptLength($store);
     }
 
     /**
      * Register image sizes
-     * @param WP_Hooks $loader The hooks loader
+     * @param HooksStore $store The hooks loader
      * @return void
      */
-    public function registerImageSizes(WP_Hooks $loader) {
+    public function registerImageSizes(HooksStore $store) {
         $media_config       = $this->app->make('config')->get('app.media');
         $image_size_manager = new ImageSizeManager(
             $media_config['sizes']['default'],
             $media_config['sizes']['custom']
         );
 
-        $loader->addAction('after_setup_theme', $image_size_manager, 'registerImageSizes');
-        $loader->addFilter('intermediate_image_sizes', $image_size_manager, 'removeDefaultImageSizes');
-        $loader->addFilter('image_size_names_choose', $image_size_manager, 'addCustomImageSizesToAdmin');
+        $store->addAction('after_setup_theme', $image_size_manager, 'registerImageSizes');
+        $store->addFilter('intermediate_image_sizes', $image_size_manager, 'removeDefaultImageSizes');
+        $store->addFilter('image_size_names_choose', $image_size_manager, 'addCustomImageSizesToAdmin');
     }
 
     /**
      * Set file uploads
-     * @param WP_Hooks $loader The hooks loader
+     * @param HooksStore $store The hooks loader
      * @return void
      */
-    public function allowSvgFileUploads(WP_Hooks $loader) {
-        $loader->addFilter('upload_mimes', MediaUtils::class, 'allowSvgUploads');
+    public function allowSvgFileUploads(HooksStore $store) {
+        $store->addFilter('upload_mimes', MediaUtils::class, 'allowSvgUploads');
     }
 
     /**
      * Set custom excerpt length
-     * @param WP_Hooks $loader The hooks loader
+     * @param HooksStore $store The hooks loader
      * @return void
      */
-    public function setCustomExcerptLength(WP_Hooks $loader) {
+    public function setCustomExcerptLength(HooksStore $store) {
         $media_config = $this->app->make('config')->get('app.media');
 
         $excerpt_manager = new ExcerptManager(
@@ -60,14 +60,15 @@ class MediaServiceProvider extends ServiceProvider {
             $media_config['excerpt']['more']
         );
 
-        $loader->addFilter('excerpt_length', $this, 'customExcerptLength', 999);
-        $loader->addFilter('excerpt_more', $this, 'customExcerptMore');
+        $store->addFilter('excerpt_length', $this, 'customExcerptLength', 999);
+        $store->addFilter('excerpt_more', $this, 'customExcerptMore');
     }
 
     /**
-     * Boot the navigation provider
+     * Boot the provider
      * @return void
      */
     public function boot() {
+        // Nothing to do here
     }
 }

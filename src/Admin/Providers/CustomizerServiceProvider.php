@@ -4,31 +4,37 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Admin\Providers;
 
-use Vihersalo\Core\Foundation\WP_Hooks;
+use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\Support\ServiceProvider;
-use Vihersalo\Core\Support\Utils\Common as Utils;
+use Vihersalo\Core\Support\Utils\Common as CommonUtils;
 
 class CustomizerServiceProvider extends ServiceProvider {
     /**
-     * Register the navigation provider
+     * Register the provider
      * @return void
      */
     public function register() {
-        $this->enableCustomizer();
+        if (! CommonUtils::isAdmin()) {
+            return;
+        }
+
+        $store = $this->app->make(HooksStore::class);
+        $this->enableCustomizer($store);
     }
 
     /**
      * Enable customizer
      * @return void
      */
-    private function enableCustomizer() {
-        $this->app->make(WP_Hooks::class)->addAction('customize_register', Utils::class, 'returnTrue');
+    private function enableCustomizer(HooksStore $store) {
+        $store->addAction('customize_register', CommonUtils::class, 'returnTrue');
     }
 
     /**
-     * Boot the navigation provider
+     * Boot the provider
      * @return void
      */
     public function boot() {
+        // Nothing to do here
     }
 }

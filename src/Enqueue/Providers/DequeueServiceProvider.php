@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Enqueue\Providers;
 
-use Vihersalo\Core\Foundation\WP_Hooks;
+use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\Support\ServiceProvider;
 
 class DequeueServiceProvider extends ServiceProvider {
     /**
-     * Register the navigation provider
+     * Register the provider
      * @return void
      */
     public function register() {
-        $this->app->make(WP_Hooks::class)->addAction(
+        $this->app->make(HooksStore::class)->addAction(
             'wp_enqueue_scripts',
             $this,
             'dequeueAssets'
@@ -38,9 +38,10 @@ class DequeueServiceProvider extends ServiceProvider {
     }
 
     /**
-     * Boot the navigation provider
+     * Boot the provider
      * @return void
      */
     public function boot() {
+        // Nothing to do here
     }
 }
