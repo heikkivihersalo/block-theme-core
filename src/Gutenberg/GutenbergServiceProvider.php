@@ -45,12 +45,17 @@ class GutenbergServiceProvider extends ServiceProvider {
         $store->addAction('allowed_block_types_all', $loader, 'setAllowedBlocks', 10, 2);
     }
 
+    /**
+     * Register custom block categories
+     * @param HooksStore $store The WordPress hooks loader
+     * @return void
+     */
     protected function registerCustomBlockCategories(HooksStore $store, BlockLoader $loader): void {
         if (! CommonUtils::isAdmin()) {
             return;
         }
 
-        $this->loader->add_action('init', $loader, 'setCustomBlockCategories');
+        $store->addAction('init', $loader, 'setCustomBlockCategories');
     }
 
     /**
@@ -59,7 +64,7 @@ class GutenbergServiceProvider extends ServiceProvider {
      * @return void
      */
     protected function setSeparateCoreBlockAssets(HooksStore $store): void {
-        $store->addAction('should_load_separate_core_block_assets', CommonUtils::class, 'return_true');
+        $store->addAction('should_load_separate_core_block_assets', CommonUtils::class, 'returnTrue');
     }
 
     // /**
