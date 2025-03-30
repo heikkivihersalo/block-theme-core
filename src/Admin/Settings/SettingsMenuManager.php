@@ -27,12 +27,9 @@ class SettingsMenuManager {
 
     /**
      * Constructor
-     * @param SettingsMenu $page The settings menu
-     * @param string $path The base path
-     * @param string $uri The base URI
      * @return void
      */
-    public function __construct(SettingsMenu $page, string $path, string $uri) {
+    public function __construct($page, $path, $uri) {
         $this->page = $page;
         $this->path = $path;
         $this->uri  = $uri;

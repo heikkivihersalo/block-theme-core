@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Admin\Settings;
 
 use Vihersalo\Core\Support\Assets\Localize;
+use Vihersalo\Core\Collections\Collection;
 
 class SettingsMenu {
     /**
@@ -57,7 +58,6 @@ class SettingsMenu {
 
     /**
      * The assets
-     * @var array $assets The assets
      */
     private $assets;
 
@@ -114,9 +114,9 @@ class SettingsMenu {
      * @param string $capability The capability required to view the page
      * @param string $icon The icon of the menu
      * @param int    $position The position of the menu
-     * @return SettingsMenuBuilder
+     * @return self
      */
-    public static function configure(
+    public static function create(
         string $slug,
         string $pageTitle,
         string $menuTitle,
@@ -125,9 +125,15 @@ class SettingsMenu {
         string $icon = 'dashicons-admin-generic',
         int $position = 50,
     ) {
-        return (new SettingsMenuBuilder(
-            new static($slug, $pageTitle, $menuTitle, $path, $capability, $icon, $position)
-        ));
+        return new self(
+            $slug,
+            $pageTitle,
+            $menuTitle,
+            $path,
+            $capability,
+            $icon,
+            $position
+        );
     }
 
     /**
@@ -212,7 +218,6 @@ class SettingsMenu {
 
     /**
      * Set submenu pages
-     * @param Vihersalo\Core\Support\Collections\MenuCollection $submenu The submenu pages
      * @return void
      */
     public function setSubmenu($submenu) {
@@ -221,7 +226,6 @@ class SettingsMenu {
 
     /**
      * Set assets
-     * @param Vihersalo\Core\Support\Collections\AssetCollection $assets The assets
      * @return void
      */
     public function setAssets($assets) {
@@ -235,5 +239,55 @@ class SettingsMenu {
      */
     public function setLocalize($localize) {
         $this->localize = $localize;
+    }
+
+    /**
+     * Build the submenu from the user callback function
+     * @param callable|null $callback The user callback function
+     * @return self
+     */
+    public function withSubmenu(?callable $callback = null) {
+        $submenu = new Collection();
+
+        if (! $callback) {
+            return $this;
+        }
+
+        $callback($submenu);
+
+        $this->setSubmenu($submenu->all());
+
+        return $this;
+    }
+
+    /**
+     * Build the assets from the user callback function
+     * @param callable|null $callback The user callback function
+     * @return self
+     */
+    public function withAssets(?callable $callback = null) {
+        $assets = new Collection();
+
+        if (! $callback) {
+            return $this;
+        }
+
+        $callback($assets);
+
+        $this->setAssets($assets->all());
+
+        return $this;
+    }
+
+    /**
+     * Build the localize from the user callback function
+     * @param string $handle The script handle to allow the data to be attached to
+     * @param string $objectName The name of the object (this is the name you will use to access the data in JavaScript)
+     * @param array  $l10n The data to localize the script with
+     * @return self
+     */
+    public function withLocalize(string $handle, string $objectName, array $l10n) {
+        $this->setLocalize(Localize::create($handle, $objectName, $l10n));
+        return $this;
     }
 }
