@@ -4,27 +4,17 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Enqueue;
 
-class AssetCollection {
-    /**
-     * The assets in the collection.
-     * @var array
-     */
-    protected $assets = [];
+use Vihersalo\Core\Collections\Collection;
 
+/**
+ * @template T of \Vihersalo\Core\Enqueue\Asset
+ * @template-implements \Vihersalo\Core\Contracts\Collections\Collection<T>
+ */
+class AssetCollection extends Collection {
     /**
-     * Add a asset to the collection.
-     * @param Asset $asset
+     * Constructor
      * @return void
      */
-    public function add(Asset $asset) {
-        $this->assets[] = $asset;
-    }
-
-    /**
-     * Get all of the assets in the collection.
-     * @return array
-     */
-    public function get() {
-        return $this->assets;
+    public function __construct() {
     }
 }
