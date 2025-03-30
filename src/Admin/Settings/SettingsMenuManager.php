@@ -140,17 +140,10 @@ class SettingsMenuManager {
      * @param string $hook The current admin page
      * @return void
      */
-    public function enqueueAssets($hook) {
+    public function localize($hook) {
         if (! $this->isCustomAdminPage($hook)) {
             return;
         }
-        $assets = $this->page->getAssets();
-
-        foreach ($assets as $asset) :
-            if (method_exists($asset, 'register')) {
-                call_user_func([$asset, 'register']);
-            }
-        endforeach;
 
         /**
          * Localize the script with the data needed for the REST API

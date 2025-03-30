@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Admin\Settings;
 
-use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\Foundation\Application;
+use Vihersalo\Core\Foundation\HooksStore;
 
 class SettingsMenuLoader {
     /**
@@ -25,7 +25,7 @@ class SettingsMenuLoader {
      * @param Application|null  $app
      */
     public function __construct(Application $app) {
-        $this->app    = $app;
+        $this->app           = $app;
         $this->settingsMenus = new SettingsMenuCollection();
     }
 
@@ -38,9 +38,17 @@ class SettingsMenuLoader {
      * @param string $capability The capability required to view the page
      * @param string $icon The icon of the menu
      * @param int $position The position of the menu
-     * @return \Vihersalo\Core\Admin\Settings\SettingsMenu
+     * @return SettingsMenu
      */
-    public function create(string $slug, string $pageTitle, string $menuTitle, string $path, string $capability, string $icon, int $position) {
+    public function create(
+        string $slug,
+        string $pageTitle,
+        string $menuTitle,
+        string $path,
+        string $capability,
+        string $icon,
+        int $position
+    ) {
         // First create the menu
         $menu = SettingsMenu::create(
             $slug,
@@ -72,7 +80,7 @@ class SettingsMenuLoader {
         foreach ($menus as $menu) {
             $manager = new SettingsMenuManager($menu, $path, $uri);
             $store->addAction('admin_menu', $manager, 'addMenu');
-            $store->addAction('admin_enqueue_scripts', $manager, 'enqueueAssets');
+            $store->addAction('admin_enqueue_scripts', $manager, 'localize');
         }
     }
 }

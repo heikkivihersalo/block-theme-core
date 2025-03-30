@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Admin\Settings;
 
-use Vihersalo\Core\Support\Assets\Localize;
 use Vihersalo\Core\Collections\Collection;
+use Vihersalo\Core\Support\Assets\Localize;
 
 class SettingsMenu {
     /**
@@ -57,11 +57,6 @@ class SettingsMenu {
     private $submenu;
 
     /**
-     * The assets
-     */
-    private $assets;
-
-    /**
      * The localize
      * @var Localize|bool $localize The localize
      */
@@ -90,7 +85,6 @@ class SettingsMenu {
         $icon = 'dashicons-admin-generic',
         $position = 50,
         $subPages = [],
-        $assets = [],
         $localize = false
     ) {
         $this->slug       = $slug;
@@ -101,7 +95,6 @@ class SettingsMenu {
         $this->icon       = $icon;
         $this->position   = $position;
         $this->submenu    = $subPages;
-        $this->assets     = $assets;
         $this->localize   = $localize;
     }
 
@@ -201,14 +194,6 @@ class SettingsMenu {
     }
 
     /**
-     * Get assets
-     * @return array
-     */
-    public function getAssets() {
-        return $this->assets;
-    }
-
-    /**
      * Get localize
      * @return Localize|bool
      */
@@ -222,14 +207,6 @@ class SettingsMenu {
      */
     public function setSubmenu($submenu) {
         $this->submenu = $submenu;
-    }
-
-    /**
-     * Set assets
-     * @return void
-     */
-    public function setAssets($assets) {
-        $this->assets = $assets;
     }
 
     /**
@@ -266,15 +243,12 @@ class SettingsMenu {
      * @return self
      */
     public function withAssets(?callable $callback = null) {
-        $assets = new Collection();
-
         if (! $callback) {
             return $this;
         }
 
-        $callback($assets);
-
-        $this->setAssets($assets->all());
+        // Run the callback function to register the assets
+        $callback();
 
         return $this;
     }
