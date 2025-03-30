@@ -7,6 +7,7 @@ namespace Vihersalo\Core\Foundation;
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use Vihersalo\Core\Admin\Providers\DuplicateServiceProvider;
+use Vihersalo\Core\Admin\Settings\SettingsMenuLoader;
 use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Contracts\Foundation\Application as ApplicationContract;
 use Vihersalo\Core\Enqueue\AssetLoader;
@@ -383,9 +384,10 @@ class Application extends Container implements ApplicationContract {
     public function registerCoreContainerAliases() {
         foreach (
             [
-                'app'    => [self::class, ContainerInterface::class],
-                'router' => [Router::class],
-                'assets' => [AssetLoader::class],
+                'app'      => [self::class, ContainerInterface::class],
+                'router'   => [Router::class],
+                'assets'   => [AssetLoader::class],
+                'settings' => [SettingsMenuLoader::class],
             ] as $key => $aliases
         ) {
             foreach ($aliases as $alias) {

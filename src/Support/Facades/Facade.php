@@ -108,9 +108,10 @@ abstract class Facade {
      */
     public static function defaultAliases() {
         return [
-            'App'   => App::class,
-            'Asset' => Asset::class,
-            'Route' => Route::class,
+            'App'      => App::class,
+            'Asset'    => Asset::class,
+            'Route'    => Route::class,
+            'Settings' => Settings::class
         ];
     }
 
