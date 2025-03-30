@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Foundation\Bootstrap;
 
+use Exception;
 use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\Support\Collections;
+use Vihersalo\Core\Support\Handler;
 
 class ApplicationBuilder {
     /**
@@ -57,10 +59,21 @@ class ApplicationBuilder {
         $callback($handlers);
 
         foreach ($handlers->all() as $handler) {
-            // Run the handlers `handle` method
-            if (method_exists($handler, 'handle')) {
-                $handler->handle();
+            if (! class_exists($handler)) {
+                throw new Exception(
+                    sprintf('Handler %s does not exist', $handler)
+                );
             }
+
+            $class = new $handler($this->app);
+
+            if (! $class instanceof Handler) {
+                throw new Exception(
+                    sprintf('Handler %s must extend %s', $handler, Handler::class)
+                );
+            }
+
+            $class->handle();
         }
 
         return $this;
