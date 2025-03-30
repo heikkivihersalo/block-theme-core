@@ -113,7 +113,7 @@ class AssetLoader {
      * @return void
      */
     public function register() {
-        $assets = $this->assets->get();
+        $assets = $this->assets->all()
 
         foreach ($assets as $asset) {
             $asset->register();
