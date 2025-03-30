@@ -20,4 +20,10 @@ interface Collection {
      * @return T[]
      */
     public function all();
+
+    /**
+     * Get the amount if items in the collection
+     * @return int
+     */
+    public function count();
 }
