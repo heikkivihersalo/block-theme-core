@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Api;
 
 use Closure;
+use Exception;
+use Vihersalo\Core\Contracts\Enums\Permission;
 use Vihersalo\Core\Foundation\Application;
 
 class Router {
@@ -171,10 +173,19 @@ class Router {
     public function resolvePermissionCallback(Route $route) {
         $auth = $route->getAuthPermission();
 
+        // If no auth is set, return true
         if ($auth === null) {
-            return true;
+            return fn () => true;
         }
 
+        // Auth must implement the Permission interface
+        if (! $auth instanceof Permission) {
+            throw new Exception(
+                sprintf('Auth must implement %s', Permission::class)
+            );
+        }
+
+        // If auth is set, return the user defined callback
         return $auth->callback();
     }
 

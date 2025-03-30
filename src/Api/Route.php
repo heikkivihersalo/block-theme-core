@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Api;
 
-use Vihersalo\Core\Api\Enums\Permission;
+use Vihersalo\Core\Contracts\Enums\Permission;
+use Vihersalo\Core\Support\Utils\Common as CommonUtils;
 
 class Route {
     /**
@@ -43,7 +44,7 @@ class Route {
         $this->uri     = $uri;
         $this->action  = $action;
 
-        $this->auth = Permission::PUBLIC; // Default to public
+        $this->auth = null;
     }
 
     public function getAuthPermission() {
@@ -107,13 +108,11 @@ class Route {
      * @return Route
      */
     public function auth(?Permission $auth = null) {
-
         // If user enables auth and does not set permission level, set the permission to ADMIN by default
         // This is security enforcement to make sure that there is no accidental public routes that
         // should be private or vice versa
-
         if ($auth === null) {
-            $this->auth = Permission::ADMIN;
+            $this->auth = fn () => CommonUtils::isUserAdmin();
         } else {
             $this->auth = $auth; // If user sets permission level, use that instead
         }
