@@ -46,6 +46,20 @@ final class Common {
     }
 
     /**
+     * Check if the current user is an administrator
+     * @return bool
+     */
+    public static function isUserAdmin(): bool {
+        $user = wp_get_current_user();
+
+        if (0 === $user->ID) {
+            return false;
+        }
+
+        return in_array('administrator', (array) $user->roles, true);
+    }
+
+    /**
      * Check if the current page is the plugin's editor page
      * @param string $hook The current admin page
      * @return bool
