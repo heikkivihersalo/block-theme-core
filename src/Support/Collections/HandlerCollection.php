@@ -4,50 +4,17 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Support\Collections;
 
-use Vihersalo\Core\Support\Handler;
+use Vihersalo\Core\Collections\Collection;
 
-class HandlerCollection {
-    /**
-     * Array of handlers to be executed
-     * @var array $handlers The handlers
-     */
-    private $handlers = [];
-
+/**
+ * @template T of \Vihersalo\Core\Support\Handler
+ * @template-implements \Vihersalo\Core\Contracts\Collections\Collection<T>
+ */
+class HandlerCollection extends Collection {
     /**
      * Constructor
      * @return void
      */
     public function __construct() {
-    }
-
-    /**
-     * Add new handler to the collection. Can be either a single handler or an array of handlers.
-     * @param Handler|array
-     * @return self
-     */
-    public function add($handler) {
-        if (is_array($handler)) {
-            foreach ($handler as $a) {
-                if ($a instanceof Asset) {
-                    $this->assets[] = $a;
-                }
-            }
-
-            return $this;
-        }
-
-        if ($handler instanceof Handler) {
-            $this->handlers[] = $handler;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get all handlers
-     * @return Handler[] The handlers
-     */
-    public function all() {
-        return $this->handlers;
     }
 }
