@@ -39,4 +39,11 @@ class Collection implements CollectionContract {
     public function all() {
         return $this->items;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function count() {
+        return count($this->items);
+    }
 }
