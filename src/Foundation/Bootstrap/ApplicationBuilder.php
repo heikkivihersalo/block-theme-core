@@ -39,7 +39,11 @@ class ApplicationBuilder {
         });
 
         // Register the API routes to hooks loader
-        $this->app->make(HooksStore::class)->addAction('rest_api_init', $this->app->make('router'), 'registerRoutes');
+        $this->app->make(HooksStore::class)->addAction(
+            'rest_api_init',
+            $this->app->make('router'),
+            'loadRouteFile'
+        );
 
         return $this;
     }
