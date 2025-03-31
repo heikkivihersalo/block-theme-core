@@ -6,6 +6,7 @@ namespace Vihersalo\Core\Api;
 
 use Closure;
 use Exception;
+use Vihersalo\Core\Collections\Arr;
 use Vihersalo\Core\Contracts\Enums\Permission;
 use Vihersalo\Core\Foundation\Application;
 
@@ -27,6 +28,13 @@ class Router {
      * @var string
      */
     protected $routeNamespace;
+
+    /**
+     * The route group attribute stack.
+     *
+     * @var array
+     */
+    protected $groupAttributeStack = [];
 
     /**
      * The route collection instance.
@@ -133,6 +141,60 @@ class Router {
     }
 
     /**
+     * Create a route group with shared attributes.
+     *
+     * @param  array  $attributes
+     * @param  Closure|array|string  $routes
+     * @return $this
+     */
+    public function group(array $attributes, $routes) {
+        foreach (Arr::wrap($routes) as $groupRoutes) {
+            $this->updateGroupAttributeStack($attributes);
+
+            // Once we have updated the group stack, we'll load the provided routes and
+            // merge in the group's attributes when the routes are created. After we
+            // have created the routes, we will pop the attributes off the stack.
+            $this->loadRoutes($groupRoutes);
+
+            array_pop($this->groupAttributeStack);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Update the group stack with the given attributes.
+     *
+     * @param  array  $attributes
+     * @return void
+     */
+    protected function updateGroupAttributeStack(array $attributes) {
+        // if ($this->hasGroupAttributeStack()) {
+        //     $attributes = $this->mergeWithLastGroup($attributes);
+        // }
+
+        $this->groupAttributeStack[] = $attributes;
+    }
+
+    /**
+     * Determine if the router currently has a group stack.
+     *
+     * @return bool
+     */
+    public function hasGroupAttributeStack() {
+        return ! empty($this->groupAttributeStack);
+    }
+
+    /**
+     * Get the current group stack for the router.
+     *
+     * @return array
+     */
+    public function getGroupAttributeStack() {
+        return $this->groupAttributeStack;
+    }
+
+    /**
      * Add a route to the underlying route collection.
      *
      * @param  array|string  $methods
@@ -189,13 +251,29 @@ class Router {
         return $auth->callback();
     }
 
+    public function resolveGroupController() {
+        $groupAttributes = $this->getGroupAttributeStack();
+
+        if (empty($groupAttributes)) {
+            return null;
+        }
+
+        $groupAttributes = array_reverse($groupAttributes);
+
+        foreach ($groupAttributes as $attributes) {
+            if (array_key_exists('controller', $attributes)) {
+                return new $attributes['controller']();
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Register the routes in the collection.
      * @return void
      */
-    public function registerRoutes() {
-        require $this->routePath;
-
+    public function registerRestRoutes() {
         $routes = $this->routes->get();
 
         foreach ($routes as $route) {
@@ -204,10 +282,52 @@ class Router {
                 $route->uri(),
                 [
                     'methods'             => $route->methods(),
-                    'callback'            => [$route->resolveClass(), $route->resolveMethod()],
+                    'callback'            => [$this->resolveGroupController(), $route->resolveMethod()],
                     'permission_callback' => $this->resolvePermissionCallback($route)
                 ]
             );
         }
+    }
+
+
+    /**
+     * Load the route file.
+     *
+     * @return void
+     * @throws Exception
+     */
+    public function loadRouteFile() {
+        $this->loadRoutes($this->routePath);
+    }
+
+    /**
+     * Load the provided routes.
+     *
+     * @param  Closure|string  $routes
+     * @return void
+     */
+    protected function loadRoutes($routes) {
+        if ($routes instanceof Closure) {
+            // This will load the routes from the closure
+            $routes($this);
+
+            // Then we can register the routes to the WP REST API
+            $this->registerRestRoutes();
+        } else {
+            (new RouteFileRegistrar($this))->register($routes);
+        }
+    }
+
+    /**
+     * Dynamically handle calls into the router instance.
+     *
+     * @param  string  $method
+     * @param  array  $parameters
+     * @return mixed
+     */
+    public function __call($method, $parameters) {
+        return (
+            new RouteRegistrar($this)
+            )->attribute($method, array_key_exists(0, $parameters) ? $parameters[0] : true);
     }
 }

@@ -21,6 +21,13 @@ class Route {
     protected $uri;
 
     /**
+     * The controller instance.
+     *
+     * @var mixed
+     */
+    public $controller;
+
+    /**
      * The action the route responds to
      * @var array|string|callable|null
      */
@@ -90,17 +97,7 @@ class Route {
      * @return string|null
      */
     public function resolveMethod() {
-        $action = $this->action;
-
-        if (is_array($action)) {
-            if (! method_exists($action[0], $action[1])) {
-                return null;
-            }
-
-            return $action[1];
-        }
-
-        return null;
+        return $this->action ?? null;
     }
 
     /**
