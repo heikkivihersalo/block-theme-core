@@ -1,5 +1,5 @@
 {
-    "name": "heikkivihersalo/block-theme-core",
+    "name": "vihersalo/block-theme-core",
     "description": "Opionated WordPress block theme core feature library",
     "type": "library",
 	"license": "GPL-2.0-or-later",
@@ -11,7 +11,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
 	},
-	"version": "1.0.0",
+	"version": "0.1.0",
     "autoload": {
         "psr-4": {
             "Vihersalo\\Core\\": "src/",
