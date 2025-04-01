@@ -133,6 +133,16 @@ class Application extends Container implements ApplicationContract {
             }
         );
 
+        // Bind the core assets to the container
+        $this->app->singleton('assets', function () {
+            return new AssetLoader($this);
+        });
+
+        // Bind the application settings to the container
+        $this->app->singleton('settings', function ($app) {
+            return new SettingsMenuLoader($app);
+        });
+
         // Bind the application loader to the container
         $this->singleton(
             HooksStore::class,

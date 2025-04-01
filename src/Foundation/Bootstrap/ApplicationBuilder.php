@@ -91,6 +91,12 @@ class ApplicationBuilder {
         // Boot the application instance
         $this->app->boot();
 
+        // Boot the assets
+        $this->app->make('assets')->register();
+
+        // Register the settings menu
+        $this->app->make('settings')->register();
+
         // Boot the hooks loader
         $this->app->make(HooksStore::class)->run();
 
