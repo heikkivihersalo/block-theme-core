@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Admin\Settings;
 
-use Vihersalo\Core\Collections\Collection;
+use Vihersalo\Core\Support\Collection;
 
 /**
  * @template T of \Vihersalo\Core\Admin\Settings\SettingsMenu

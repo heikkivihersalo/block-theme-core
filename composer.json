@@ -15,7 +15,9 @@
     "autoload": {
         "psr-4": {
             "Vihersalo\\Core\\": "src/",
-            "Vihersalo\\Core\\Support\\": "src/Collections/"
+            "Vihersalo\\Core\\Support\\": [
+                "src/Collections/"
+            ]
         }
     },
     "authors": [

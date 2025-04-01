@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Enqueue;
 
-use Vihersalo\Core\Collections\Collection;
+use Vihersalo\Core\Support\Collection;
 
 /**
  * @template T of \Vihersalo\Core\Enqueue\Asset
