@@ -111,7 +111,8 @@ abstract class Facade {
             'App'      => App::class,
             'Asset'    => Asset::class,
             'Route'    => Route::class,
-            'Settings' => Settings::class
+            'Settings' => Settings::class,
+            'Store'    => Store::class,
         ];
     }
 
