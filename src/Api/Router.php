@@ -6,9 +6,9 @@ namespace Vihersalo\Core\Api;
 
 use Closure;
 use Exception;
-use Vihersalo\Core\Collections\Arr;
 use Vihersalo\Core\Contracts\Enums\Permission;
 use Vihersalo\Core\Foundation\Application;
+use Vihersalo\Core\Support\Arr;
 
 class Router {
     /**
