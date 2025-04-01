@@ -7,7 +7,7 @@ namespace Vihersalo\Core\Foundation\Bootstrap;
 use Exception;
 use Vihersalo\Core\Api\Router;
 use Vihersalo\Core\Foundation\HooksStore;
-use Vihersalo\Core\Support\Collections;
+use Vihersalo\Core\Support\Collection;
 use Vihersalo\Core\Support\Handler;
 
 class ApplicationBuilder {
@@ -54,7 +54,7 @@ class ApplicationBuilder {
      * @return self
      */
     public function withHandlers(?callable $callback = null) {
-        $handlers = new Collections\HandlerCollection();
+        $handlers = new Collection();
 
         if (! $callback) {
             return $this;
