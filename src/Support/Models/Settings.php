@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Support;
+namespace Vihersalo\Core\Support\Models;
 
-abstract class SettingsModel {
+abstract class Settings {
     /**
      * The database ID for the settings.
      *
