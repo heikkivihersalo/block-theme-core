@@ -77,15 +77,21 @@ abstract class Settings {
     /**
      * Sanitize the array values.
      *
-     * @param array $body The request body to sanitize.
+     * @param array $values The request body to sanitize.
      * @return array Sanitized array
      */
-    public function sanitize(array $body): array {
+    public function sanitize(array $values): array {
         $sanitized = [];
 
         foreach ($this->keys() as $key) {
-            if (isset($data[$key])) {
-                $sanitized[$key] = \sanitize_text_field($data[$key]);
+            if (isset($values[$key])) {
+                // Check for boolean values
+                if (\is_bool($values[$key])) {
+                    $sanitized[$key] = (int) $values[$key] === 1;
+                } else {
+                    // Sanitize string values
+                    $sanitized[$key] = \sanitize_text_field($values[$key]);
+                }
             }
         }
 
