@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Collections;
+namespace Vihersalo\Core\Support;
 
 class Arr {
     /**
@@ -12,7 +12,7 @@ class Arr {
      * @return array
      */
     public static function wrap($value) {
-        if (is_null($value)) {
+        if (null === $value) {
             return [];
         }
 

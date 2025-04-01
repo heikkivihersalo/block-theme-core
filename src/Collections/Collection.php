@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Collections;
+namespace Vihersalo\Core\Support;
 
 use Vihersalo\Core\Contracts\Collections\Collection as CollectionContract;
 
