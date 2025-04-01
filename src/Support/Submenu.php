@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Vihersalo\Core\Admin\Settings;
+namespace Vihersalo\Core\Support;
 
 class Submenu {
     /**
