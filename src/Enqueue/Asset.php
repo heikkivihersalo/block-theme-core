@@ -59,13 +59,13 @@ abstract class Asset {
     /**
      * Constructor
      *
-     * @param string $handle The handle of enqueued asset
-     * @param string $src The src of enqueued asset
-     * @param string $path The path of enqueued asset
-     * @param string $asset The asset file path
-     * @param int    $priority The priority of the enqueued asset
-     * @param bool   $admin Whether the asset is for admin or not
-     * @param bool   $editor Whether the asset is for `add_editor_style` function or not
+     * @param string       $handle The handle of enqueued asset
+     * @param string       $src The src of enqueued asset
+     * @param string       $path The path of enqueued asset
+     * @param string|array $asset The asset file path
+     * @param int          $priority The priority of the enqueued asset
+     * @param bool         $admin Whether the asset is for admin or not
+     * @param bool         $editor Whether the asset is for `add_editor_style` function or not
      * @return void
      */
     public function __construct(
@@ -73,7 +73,7 @@ abstract class Asset {
         string $handle = '',
         string $src = '',
         string $path = '',
-        string $asset = '',
+        string|array $asset = '',
         int $priority = 10,
         bool $admin = false,
         bool $editor = false
@@ -184,6 +184,31 @@ abstract class Asset {
         endif;
 
         return true;
+    }
+
+    /**
+     * Resolve the asset
+     * @return array
+     */
+    public function resolveAsset(): array|bool {
+        // Check if asset is a path to a file
+        if (is_string($this->asset)) :
+            if ($this->assetExists()) :
+                $this->asset = require $this->app->make('path') . '/' . $this->asset;
+            else :
+                return false;
+            endif;
+        endif;
+
+        // Check if asset is an array and build the asset array
+        if (is_array($this->asset)) :
+            $this->asset = [
+                'dependencies' => $this->asset['dependencies'] ?? [],
+                'version'      => $this->asset['version']      ?? false,
+            ];
+        endif;
+
+        return $this->asset;
     }
 
     /**

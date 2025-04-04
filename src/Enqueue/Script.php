@@ -13,7 +13,7 @@ class Script extends Asset {
      * @param Application $app The application instance
      * @param string $handle The handle of enqueued asset
      * @param string $src The URI of enqueued asset
-     * @param string $asset The asset file path
+     * @param string|array $asset The asset file path
      * @param int    $priority The priority of the enqueued asset
      * @param bool   $admin Whether the asset is for admin or not
      * @return self
@@ -22,7 +22,7 @@ class Script extends Asset {
         Application $app,
         string $handle,
         string $src,
-        string $asset,
+        string|array $asset,
         int $priority = 10,
         bool $admin = false
     ): self {
@@ -34,13 +34,11 @@ class Script extends Asset {
      * @return void
      */
     public function enqueue() {
-        $asset_path = $this->getAssetPath();
+        $assets = $this->resolveAsset();
 
-        if ('' === $asset_path) {
+        if (! $assets) {
             return;
         }
-
-        $assets = require $this->app->make('path') . '/' . $asset_path;
 
         wp_enqueue_script(
             $this->getHandle(),

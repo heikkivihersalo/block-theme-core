@@ -21,8 +21,8 @@ class Inline extends Asset {
      * @param int    $priority The priority of the enqueued asset
      * @return self
      */
-    public static function create($app, string $handle, string $path, int $priority = 10): self {
-        return new self($app, $handle, '', $path, '', $priority, false);
+    public static function create($app, string $handle, string $path, int $priority = 10, bool $admin = false): self {
+        return new self($app, $handle, '', $path, '', $priority, $admin, false);
     }
 
     /**
@@ -51,5 +51,9 @@ class Inline extends Asset {
      */
     public function register(): void {
         $this->app->make(HooksStore::class)->addAction('wp_head', $this, 'enqueue', $this->getPriority());
+
+        if ($this->isAdmin()) {
+            $this->app->make(HooksStore::class)->addAction('admin_head', $this, 'enqueue', $this->getPriority());
+        }
     }
 }

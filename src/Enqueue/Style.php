@@ -12,7 +12,7 @@ class Style extends Asset {
      * Create a new style asset
      * @param string $handle The handle of enqueued asset
      * @param string $src The src of enqueued asset
-     * @param string $asset The asset file path
+     * @param string|array $asset The asset file path
      * @param int    $priority The priority of the enqueued asset
      * @param bool   $admin Whether the asset is for admin or not
      * @param bool   $editor Whether the asset is for `add_editor_style` function or not
@@ -22,7 +22,7 @@ class Style extends Asset {
         Application $app,
         string $handle,
         string $src,
-        string $asset,
+        string|array $asset,
         int $priority = 10,
         bool $admin = false,
         bool $editor = false
@@ -35,13 +35,11 @@ class Style extends Asset {
      * @return void
      */
     public function enqueue() {
-        $assetPath = $this->getAssetPath();
+        $assets = $this->resolveAsset();
 
-        if ('' === $assetPath) {
+        if (! $assets) {
             return;
         }
-
-        $assets = require  $this->app->make('path') . '/' . $assetPath;
 
         wp_enqueue_style(
             $this->getHandle(),
@@ -60,7 +58,7 @@ class Style extends Asset {
         $action = $this->isAdmin() ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts';
 
         if ($this->isEditor()) {
-            $this->loader->add_action('admin_init', $this, 'addToEditorStyles');
+            $this->app->make(HooksStore::class)->addAction('admin_init', $this, 'addToEditorStyles');
         }
 
         $this->app->make(HooksStore::class)->addAction($action, $this, 'enqueue', $this->getPriority());

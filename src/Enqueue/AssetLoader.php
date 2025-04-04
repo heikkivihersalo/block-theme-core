@@ -41,7 +41,7 @@ class AssetLoader {
     public function script(
         string $handle,
         string $src,
-        string $asset,
+        string|array $asset,
         int $priority = 10,
         bool $admin = false,
         bool $editor = false
@@ -63,7 +63,7 @@ class AssetLoader {
      * Register a new style asset to the collection.
      * @param string $handle The handle of enqueued asset
      * @param string $src The src of enqueued asset
-     * @param string $asset The asset file path
+     * @param string|array $asset The asset file path
      * @param int $priority The priority of the enqueued asset
      * @param bool $admin Whether the asset is for admin or not
      * @param bool $editor Whether the asset is for `add_editor_style` function or not
@@ -72,7 +72,7 @@ class AssetLoader {
     public function style(
         string $handle,
         string $src,
-        string $asset,
+        string|array $asset,
         int $priority = 10,
         bool $admin = false,
         bool $editor = false
