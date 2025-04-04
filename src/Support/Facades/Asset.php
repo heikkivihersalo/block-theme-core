@@ -8,9 +8,9 @@ use Vihersalo\Core\Enqueue;
 
 // phpcs:disable
 /**
- * @method static \Vihersalo\Core\Enqueue script(string $handle, string $src, string $asset, int $priority = 10, bool $admin = false, bool $editor = false)
+ * @method static \Vihersalo\Core\Enqueue script(string $handle, string $src, string $asset, int $priority = 10, bool $admin = false)
  * @method static \Vihersalo\Core\Enqueue style(string $handle, string $src, string $asset, int $priority = 10, bool $admin = false, bool $editor = false)
- * @method static \Vihersalo\Core\Enqueue inline(string $handle, string $path, int $priority = 10)
+ * @method static \Vihersalo\Core\Enqueue inline(string $handle, string $path, int $priority = 10, bool $admin = false)
  *
  * @see Enqueue
  */
