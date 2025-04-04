@@ -6,7 +6,7 @@ namespace Vihersalo\Core\Navigation\Walkers;
 
 use Walker_Nav_Menu;
 
-class MenuWalker extends Walker_Nav_Menu {
+class DefaultWalker extends Walker_Nav_Menu {
     /**
      * Start element
      * @param string $output Used to append additional content (passed by reference).
