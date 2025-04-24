@@ -8,6 +8,20 @@ use Vihersalo\Core\Support\Utils\Common as Utils;
 
 class Enqueue {
     /**
+     * The base path
+     *
+     * @var string
+     */
+    protected string $path;
+
+    /**
+     * The base URI
+     *
+     * @var string
+     */
+    protected string $uri;
+
+    /**
      * Constructor
      *
      * @param string $path The base path
