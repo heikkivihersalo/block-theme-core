@@ -120,14 +120,14 @@ abstract class PostType implements PostTypeContract {
      * @inheritDoc
      */
     public function rewrite(): array {
-        if (empty(get_option($this->fields . $this->slug))) {
+        if (empty(get_option($this->prefix . $this->slug))) {
             return [
                 'slug' => $this->slug
             ];
         }
 
         return [
-            'slug' => get_option($this->fields . $this->slug),
+            'slug' => get_option($this->prefix . $this->slug),
         ];
     }
 
@@ -177,7 +177,7 @@ abstract class PostType implements PostTypeContract {
      *
      * @return void
      */
-    protected function registerPostType() {
+    public function registerPostType() {
         \register_post_type(
             $this->slug,
             [
@@ -198,7 +198,10 @@ abstract class PostType implements PostTypeContract {
      *
      * @return void
      */
-    protected function registerCustomFields() {
+    public function registerCustomFields() {
+        // Initialize the fields
+        $this->fields($this->fields);
+
         if ($this->fields->isEmpty()) {
             return;
         }
