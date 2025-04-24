@@ -110,7 +110,7 @@ class FieldRegistrar {
         add_meta_box(
             preg_replace('/\s+/', '-', strtolower($this->title)),
             $this->title,
-            [$this, 'render_html'],
+            [$this, 'renderHTML'],
             $this->postTypes,
             $this->position,
             $this->priority
