@@ -18,6 +18,7 @@ use Vihersalo\Core\Foundation\Configuration\FileLoader;
 use Vihersalo\Core\Foundation\Providers\ThemeSupportServiceProvider;
 use Vihersalo\Core\Gutenberg\GutenbergServiceProvider;
 use Vihersalo\Core\Navigation\NavigationServiceProvider;
+use Vihersalo\Core\PostTypes\PostTypesLoader;
 use Vihersalo\Core\PostTypes\PostTypesServiceProvider;
 use Vihersalo\Core\Security\SecurityServiceProvider;
 use Vihersalo\Core\Support\ServiceProvider;
@@ -140,8 +141,8 @@ class Application extends Container implements ApplicationContract {
         });
 
         // Bind the application settings to the container
-        $this->app->singleton('settings', function ($app) {
-            return new SettingsMenuLoader($app);
+        $this->app->singleton('settings', function () {
+            return new SettingsMenuLoader($this);
         });
 
         // Bind the application loader to the container
@@ -149,6 +150,13 @@ class Application extends Container implements ApplicationContract {
             HooksStore::class,
             function () {
                 return new HooksStore();
+            }
+        );
+
+        $this->singleton(
+            PostTypesLoader::class,
+            function () {
+                return new PostTypesLoader($this);
             }
         );
     }
