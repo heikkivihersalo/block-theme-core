@@ -7,6 +7,7 @@ namespace Vihersalo\Core\Support\Models;
 // use HeikkiVihersalo\CustomPostTypes\Traits\CustomPermalink;
 use Vihersalo\Core\Contracts\PostTypes\PostType as PostTypeContract;
 use Vihersalo\Core\PostTypes\FieldCollection;
+use Vihersalo\Core\PostTypes\FieldRegistrar;
 
 /**
  * Abstract class for registering custom post types
@@ -16,8 +17,6 @@ use Vihersalo\Core\PostTypes\FieldCollection;
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 abstract class PostType implements PostTypeContract {
-    // use CustomPermalink;
-
     /**
      * Prefix for the database entry
      * @var string
@@ -58,60 +57,9 @@ abstract class PostType implements PostTypeContract {
             $this->prefix = $this->resolvePrefix();
         }
 
-        /**
-         * Handle post type registration
-         */
-        $this->registerCustomPostType();
-
-        /**
-         * Handle custom fields
-         */
         if (empty($this->fields)) {
             $this->fields = new FieldCollection();
         }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function registerCustomPostType(): void {
-        /**
-         * Register post type
-         */
-        register_post_type(
-            $this->slug,
-            [
-                'labels'       => $this->labels(),
-                'public'       => $this->public(),
-                'has_archive'  => $this->hasArchive(),
-                'taxonomies'   => $this->taxonomies(),
-                'rewrite'      => $this->rewrite(),
-                'supports'     => $this->supports(),
-                'show_in_rest' => $this->showInRest(),
-                'menu_icon'    => $this->icon(),
-            ]
-        );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function resolvePostTypeSlug(): string {
-        return \strtolower(\str_replace('\\', '-', \get_class($this)));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function resolvePostTypeName(): string {
-        return \ucwords(\str_replace('-', ' ', $this->slug));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function resolvePrefix(): string {
-        return 'app-cpt-';
     }
 
     /**
@@ -173,7 +121,9 @@ abstract class PostType implements PostTypeContract {
      */
     public function rewrite(): array {
         if (empty(get_option($this->fields . $this->slug))) {
-            return $this->slug;
+            return [
+                'slug' => $this->slug
+            ];
         }
 
         return [
@@ -199,5 +149,66 @@ abstract class PostType implements PostTypeContract {
      * @inheritDoc
      */
     public function fields(FieldCollection $fields): void {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function resolvePostTypeSlug(): string {
+        return \strtolower(\str_replace('\\', '-', \get_class($this)));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function resolvePostTypeName(): string {
+        return \ucwords(\str_replace('-', ' ', $this->slug));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function resolvePrefix(): string {
+        return 'app-cpt-';
+    }
+
+    /**
+     * Register post type
+     *
+     * @return void
+     */
+    protected function registerPostType() {
+        \register_post_type(
+            $this->slug,
+            [
+                'labels'       => $this->labels(),
+                'public'       => $this->public(),
+                'has_archive'  => $this->hasArchive(),
+                'taxonomies'   => $this->taxonomies(),
+                'rewrite'      => $this->rewrite(),
+                'supports'     => $this->supports(),
+                'show_in_rest' => $this->showInRest(),
+                'menu_icon'    => $this->icon(),
+            ]
+        );
+    }
+
+    /**
+     * Register custom fields
+     *
+     * @return void
+     */
+    protected function registerCustomFields() {
+        if ($this->fields->isEmpty()) {
+            return;
+        }
+
+        $customFields = new FieldRegistrar(
+            $this->fields,
+            'Custom Fields',
+            [$this->slug],
+        );
+
+        $customFields->register();
     }
 }
