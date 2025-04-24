@@ -361,7 +361,7 @@ class FieldRegistrar {
      * @return void
      */
     public function register(): void {
-        add_action('add_meta_boxes', [$this, 'add_metabox']);
-        add_action('save_post', [$this, 'save_metabox']);
+        add_action('add_meta_boxes', [$this, 'addMetabox']);
+        add_action('save_post', [$this, 'saveMetabox']);
     }
 }
