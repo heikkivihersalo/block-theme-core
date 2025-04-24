@@ -47,7 +47,7 @@ class Enqueue {
 
         wp_enqueue_script(
             'app-post-type',
-            $this->uri . '/vendor/vihersalo/block-theme-core/src/PostTypes/Assets/main.js',
+            $this->uri . '/vendor/vihersalo/block-theme-core/src/PostTypes/Assets/post-types.js',
             [],
             null,
             true
@@ -55,7 +55,7 @@ class Enqueue {
 
         wp_enqueue_style(
             'app-post-type',
-            $this->uri . '/vendor/vihersalo/block-theme-core/src/PostTypes/Assets/main.js',
+            $this->uri . '/vendor/vihersalo/block-theme-core/src/PostTypes/Assets/post-types.js',
             [],
             null,
             'all'
