@@ -6,7 +6,6 @@ namespace Vihersalo\Core\PostTypes;
 
 use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\Support\ServiceProvider;
-use Vihersalo\Core\Support\Utils\Formatting as Utils;
 
 class PostTypesServiceProvider extends ServiceProvider {
     /**
@@ -21,39 +20,26 @@ class PostTypesServiceProvider extends ServiceProvider {
     }
 
     /**
-     * Load custom post type classes dynamically
-     *
-     * @since 0.1.0
-     * @access public
+     * Load custom post types
      * @return void
-     * @throws WP_Error If the class file does not exist.
      */
     public function registerCustomPostTypes(): void {
-        $path    = rtrim($this->app->make('config')->get('app.cpt.path'), '/\\');
-        $classes = $path;
+        $postTypes = $this->app->make(PostTypesLoader::class)->all();
 
-        foreach ($classes as $class) {
-            // Remove unnecessary files (e.g. .gitignore, .DS_Store, ., .. etc.)
-            if ('.' === $class || '..' === $class || '.DS_Store' === $class || strpos($class, '.') === true) {
+        foreach ($postTypes as $postType) {
+            if (! class_exists($postType)) {
                 continue;
             }
 
-            $path  = $path . '/' . $class;
-            $class = Utils::removeFileExtension($class);
-            $slug  = Utils::camelcaseToKebabcase($class);
+            $instance = new $postType();
 
-            $classname = 'Vihersalo\Core\PostTypes' . '\\' . $class;
-
-            // Get the class file, only try to require if not already imported
-            if (! class_exists($classname)) {
-                require $path;
+            if (method_exists($instance, 'registerPostType')) {
+                $instance->registerPostType();
             }
 
-            if (! class_exists($classname)) {
-                return;
+            if (method_exists($instance, 'registerCustomFields')) {
+                $instance->registerCustomFields();
             }
-
-            $class_instance = new $classname();
         }
     }
 
