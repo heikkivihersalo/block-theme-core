@@ -247,6 +247,7 @@ class FieldCollection {
     public function all(): array {
         return $this->items;
     }
+
     /**
      * Get the number of items in the collection.
      *
@@ -254,5 +255,14 @@ class FieldCollection {
      */
     public function count(): int {
         return count($this->items);
+    }
+
+    /**
+     * Check if the collection is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty(): bool {
+        return empty($this->items);
     }
 }
