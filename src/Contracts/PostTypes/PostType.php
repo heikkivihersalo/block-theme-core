@@ -14,27 +14,6 @@ use Vihersalo\Core\PostTypes\FieldCollection;
  */
 interface PostType {
     /**
-     * Register post type
-     *
-     * @return void
-     */
-    public function registerCustomPostType(): void;
-
-    /**
-     * Resolve post type slug from the class name
-     *
-     * @return string
-     */
-    public function resolvePostTypeSlug(): string;
-
-    /**
-     * Resolve post type name from the class name
-     *
-     * @return string
-     */
-    public function resolvePostTypeName(): string;
-
-    /**
      * Custom Post Type Labels for post type
      *
      * @return array
