@@ -24,15 +24,6 @@ final class Formatting {
     }
 
     /**
-     * Get URI for file
-     * @param  string $path Path to append to base path
-     * @return string
-     */
-    public static function trimFilePath(string $path = ''): string {
-        return rtrim($this->base_uri, '/\\') . '/' . $path;
-    }
-
-    /**
      * Write code on Method
      * @param  string $file String to convert
      * @return string
