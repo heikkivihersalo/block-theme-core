@@ -9,6 +9,7 @@ namespace Vihersalo\Core\Support\Models;
 use Vihersalo\Core\Contracts\PostTypes\PostType as PostTypeContract;
 use Vihersalo\Core\PostTypes\FieldCollection;
 use Vihersalo\Core\PostTypes\FieldRegistrar;
+use Vihersalo\Core\PostTypes\Utils as PostTypeUtils;
 
 /**
  * Abstract class for registering custom post types
