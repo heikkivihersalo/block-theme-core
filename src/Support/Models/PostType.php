@@ -231,7 +231,7 @@ abstract class PostType implements PostTypeContract {
 
             // Check if the field is hidden
             // We want to hide the field from the REST API
-            if (\in_array($metaKey, $this->hidden, true)) {
+            if (\in_array($metaKey, $this->hidden(), true)) {
                 continue;
             }
 
