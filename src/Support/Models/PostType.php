@@ -21,12 +21,6 @@ use WP_Block_Bindings_Registry;
  */
 abstract class PostType implements PostTypeContract {
     /**
-     * Prefix for the database entry
-     * @var string
-     */
-    protected $prefix;
-
-    /**
      * Post type slug.
      * @var string
      */
@@ -45,6 +39,12 @@ abstract class PostType implements PostTypeContract {
     protected $fields;
 
     /**
+     * Hidden fields.
+     * @var array
+     */
+    protected $hidden = [];
+
+    /**
      * Constructor
      */
     public function __construct() {
@@ -54,10 +54,6 @@ abstract class PostType implements PostTypeContract {
 
         if (empty($this->name)) {
             $this->name = $this->resolvePostTypeName();
-        }
-
-        if (empty($this->prefix)) {
-            $this->prefix = $this->resolvePrefix();
         }
 
         if (empty($this->fields)) {
@@ -123,14 +119,14 @@ abstract class PostType implements PostTypeContract {
      * @inheritDoc
      */
     public function rewrite(): array {
-        if (empty(get_option($this->prefix . $this->slug))) {
+        if (empty(get_option('cpt-permalink-' . $this->slug))) {
             return [
                 'slug' => $this->slug
             ];
         }
 
         return [
-            'slug' => get_option($this->prefix . $this->slug),
+            'slug' => get_option('cpt-permalink-' . $this->slug),
         ];
     }
 
@@ -157,6 +153,13 @@ abstract class PostType implements PostTypeContract {
     /**
      * @inheritDoc
      */
+    public function hidden(): array {
+        return $this->hidden;
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected function resolvePostTypeSlug(): string {
         return \strtolower(\str_replace('\\', '-', \get_class($this)));
     }
@@ -166,13 +169,6 @@ abstract class PostType implements PostTypeContract {
      */
     protected function resolvePostTypeName(): string {
         return \ucwords(\str_replace('-', ' ', $this->slug));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function resolvePrefix(): string {
-        return 'app-cpt-';
     }
 
     /**
@@ -233,6 +229,13 @@ abstract class PostType implements PostTypeContract {
             $type    = $field['type']    ?? null;
             $options = $field['options'] ?? null;
 
+            // Check if the field is hidden
+            // We want to hide the field from the REST API
+            if (\in_array($metaKey, $this->hidden, true)) {
+                continue;
+            }
+
+            // Continue to check the type so we can format the meta
             switch ($type) {
                 case 'text':
                 case 'textarea':
