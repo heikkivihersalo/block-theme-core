@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Vihersalo\Core\Support\Models;
 
 // use HeikkiVihersalo\CustomPostTypes\Traits\CustomPermalink;
+
+use Vihersalo\Core\Contracts\Foundation\Application;
 use Vihersalo\Core\Contracts\PostTypes\PostType as PostTypeContract;
 use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\PostTypes\FieldCollection;
@@ -18,6 +20,12 @@ use Vihersalo\Core\PostTypes\FieldRegistrar;
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 abstract class PostType implements PostTypeContract {
+    /**
+     * The application instance
+     * @var Application
+     */
+    protected $app;
+
     /**
      * Prefix for the database entry
      * @var string
@@ -45,7 +53,9 @@ abstract class PostType implements PostTypeContract {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct(Application $app) {
+        $this->app = $app;
+
         if (empty($this->slug)) {
             $this->slug = $this->resolvePostTypeSlug();
         }
@@ -216,23 +226,30 @@ abstract class PostType implements PostTypeContract {
         $customFields->register();
     }
 
+    protected function registerFieldsToRest() {
+        $this->app->make(HooksStore::class)->addAction(
+            'rest_api_init',
+            $this,
+            'registerRestField'
+        );
+    }
+
     /**
      * Register post type custom fields to REST API
      *
      * @return void
      */
-    public function registerCustomFieldsToRestApi(): void {
-        register_rest_field(
+    public function registerRestField(): void {
+        \register_rest_field(
             $this->slug,
             'metadata',
             [
                 'get_callback' => function ($data) {
-                    $meta = get_post_meta($data['id'], '', '');
+                    $meta['fields'] = get_post_meta($data['id'], '', '');
                     return $meta;
                 },
             ]
         );
-
     }
 
     /**
@@ -241,13 +258,8 @@ abstract class PostType implements PostTypeContract {
      * @return void
      */
     public function register(): void {
-        $this->app->make(HooksStore::class)->addAction(
-            'rest_api_init',
-            $this,
-            'registerCustomFieldsToRestApi'
-        );
-
         $this->registerPostType();
         $this->registerCustomFields();
+        $this->registerFieldsToRest();
     }
 }
