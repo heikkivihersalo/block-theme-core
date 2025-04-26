@@ -309,7 +309,7 @@ abstract class PostType implements PostTypeContract {
                 case 'url':
                 case 'select':
                 case 'radio':
-                    register_block_bindings_source(
+                    \register_block_bindings_source(
                         $namespace,
                         [
                             'label'              => $label,
