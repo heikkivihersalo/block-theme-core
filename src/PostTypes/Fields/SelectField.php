@@ -31,12 +31,12 @@ class SelectField extends CustomField implements CustomFieldContract {
             </th>
             <td>
                 <select name="<?php echo $this->id; ?>" id="<?php echo $this->id; ?>">
-                    <?php foreach ($this->options as $option) : ?>
+                    <?php foreach ($this->options as $key => $label) : ?>
                         <option 
-                            value="<?php echo $option['value']; ?>" 
-                            <?php echo selected($this->getValue(), $option['value']); ?>
+                            value="<?php echo $key; ?>" 
+                            <?php echo selected($this->getValue(), $key); ?>
                         >
-                            <?php echo $option['label']; ?>
+                            <?php echo $label; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

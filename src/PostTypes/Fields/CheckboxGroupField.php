@@ -35,16 +35,16 @@ class CheckboxGroupField extends CustomField implements CustomFieldContract {
                     <?php if (! $this->options) : ?>
                         <p><?php _e('No options', 'heikkivihersalo-custom-post-types'); ?></p>
                     <?php else : ?>
-                        <?php foreach ($this->options as $option) : ?>
-                            <label for="<?php echo $this->id . '_' . $option['value']; ?>">
+                        <?php foreach ($this->options as $key => $label) : ?>
+                            <label for="<?php echo $this->id . '_' . $key; ?>">
                                 <input 
-                                    id="<?php echo $this->id . '_' . $option['value']; ?>" 
+                                    id="<?php echo $this->id . '_' . $key; ?>" 
                                     type="checkbox" 
                                     class="regular-text" 
-                                    name="<?php echo $this->id . '_' . $option['value']; ?>" 
-                                    value="1" <?php checked(1, get_post_meta($this->post->ID, $this->id . '_' . $option['value'], true)); ?> <?php // phpcs:ignore?>
+                                    name="<?php echo $this->id . '_' . $key; ?>" 
+                                    value="1" <?php checked(1, get_post_meta($this->post->ID, $this->id . '_' . $key, true)); ?> <?php // phpcs:ignore?>
                                 >
-                                <?php echo $option['label']; ?>
+                                <?php echo $label; ?>
                             </label>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -60,12 +60,12 @@ class CheckboxGroupField extends CustomField implements CustomFieldContract {
      * @inheritDoc
      */
     public function save(int $post_id, array $options = []): void {
-        foreach ($options as $option) {
+        foreach ($options as $key => $label) {
             // Nonce verification is done in the parent class so we can safely ignore it here.
-            if (isset($_POST[ $this->id . '_' . $option['value'] ])) {
-                update_post_meta($post_id, $this->id . '_' . $option['value'], '1');
+            if (isset($_POST[ $this->id . '_' . $key ])) {
+                update_post_meta($post_id, $this->id . '_' . $key, '1');
             } else {
-                delete_post_meta($post_id, $this->id . '_' . $option['value']);
+                delete_post_meta($post_id, $this->id . '_' . $key);
             }
         }
     }

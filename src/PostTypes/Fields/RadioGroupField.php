@@ -35,16 +35,16 @@ class RadioGroupField extends CustomField implements CustomFieldContract {
                     <?php if (! $this->options) : ?>
                         <p><?php _e('No options', 'heikkivihersalo-custom-post-types'); ?></p>
                     <?php else : ?>
-                        <?php foreach ($this->options as $option) : ?>
-                            <label for="<?php echo $this->id . '_' . $option['value']; ?>">
+                        <?php foreach ($this->options as $key => $label) : ?>
+                            <label for="<?php echo $this->id . '_' . $key; ?>">
                                 <input 
-                                    id="<?php echo $this->id . '_' . $option['value']; ?>" 
+                                    id="<?php echo $this->id . '_' . $key; ?>" 
                                     type="radio" class="regular-text" 
                                     name="<?php echo $this->id; ?>" 
-                                    value="<?php echo $option['value']; ?>" 
-                                    <?php checked($this->getValue(), $option['value']); ?>
+                                    value="<?php echo $key; ?>" 
+                                    <?php checked($this->getValue(), $key); ?>
                                 >
-                                <?php echo $option['label']; ?>
+                                <?php echo $label; ?>
                             </label>
                         <?php endforeach; ?>
                     <?php endif; ?>
