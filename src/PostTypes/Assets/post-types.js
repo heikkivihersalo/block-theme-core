@@ -53,9 +53,9 @@ function handleSelectImage(e) {
         }
 
         frame = wp.media({
-            title: __('Select or Upload Media', 'heikkivihersalo-custom-post-types'),
+            title: 'Select or Upload Media',
             button: {
-                text: __('Use this media', 'heikkivihersalo-custom-post-types'),
+                text: 'Use this media',
             },
             multiple: false,
         });
