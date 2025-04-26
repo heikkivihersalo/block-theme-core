@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\Contracts\PostTypes;
 
-use Vihersalo\Core\PostTypes\FieldCollection;
-
 /**
  * Post Type Interface
  *
@@ -73,8 +71,7 @@ interface PostType {
     /**
      * Set custom post type fields
      *
-     * @param FieldCollection $fields Post type fields
      * @return void
      */
-    public function fields(FieldCollection $fields): void;
+    public function fields(): void;
 }
