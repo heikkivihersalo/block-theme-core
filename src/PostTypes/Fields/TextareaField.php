@@ -30,9 +30,7 @@ class TextareaField extends CustomField implements CustomFieldContract {
                     class="regular-text" 
                     name="<?php echo $this->id; ?>" 
                     value="<?php echo $this->getValue(); ?>"
-                >
-                    <?php echo $this->getValue(); ?>
-                </textarea>
+                ><?php echo $this->getValue(); ?></textarea>
             </td>
         </tr>
 
