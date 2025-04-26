@@ -38,6 +38,8 @@ class PostTypesServiceProvider extends ServiceProvider {
             $loader->addAction('init', $instance, 'registerCustomFields');
             $loader->addAction('init', $instance, 'registerBlockBindings');
             $loader->addAction('rest_api_init', $instance, 'registerRestFields');
+
+            $this->registerPermalink($loader, $instance);
         }
     }
 
@@ -50,6 +52,23 @@ class PostTypesServiceProvider extends ServiceProvider {
     public function registerEnqueue(HooksStore $loader): void {
         $enqueue = new Enqueue($this->app->make('path'), $this->app->make('uri'));
         $loader->addAction('admin_enqueue_scripts', $enqueue, 'enqueueEditorAssets');
+    }
+
+    /**
+     * Register permalink settings
+     *
+     * @param HooksStore $loader The loader instance
+     * @param object $postType The post type instance
+     * @return void
+     */
+    public function registerPermalink(HooksStore $loader, $postType): void {
+        if (method_exists($postType, 'addPermalinkField')) {
+            $loader->addAction('admin_init', $postType, 'addPermalinkField');
+        }
+
+        if (method_exists($postType, 'savePermalink')) {
+            $loader->addAction('admin_init', $postType, 'savePermalink');
+        }
     }
 
     /**
