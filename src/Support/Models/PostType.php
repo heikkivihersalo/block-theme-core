@@ -9,8 +9,6 @@ namespace Vihersalo\Core\Support\Models;
 use Vihersalo\Core\Contracts\PostTypes\PostType as PostTypeContract;
 use Vihersalo\Core\PostTypes\FieldCollection;
 use Vihersalo\Core\PostTypes\FieldRegistrar;
-use Vihersalo\Core\PostTypes\Utils as PostTypeUtils;
-use WP_Block_Bindings_Registry;
 
 /**
  * Abstract class for registering custom post types
@@ -75,6 +73,14 @@ abstract class PostType implements PostTypeContract {
      */
     protected function getSlug(): string {
         return $this->slug;
+    }
+
+    /**
+     * Get the post type fields
+     * @return FieldCollection
+     */
+    protected function getFields(): FieldCollection {
+        return $this->fields;
     }
 
     /**
@@ -228,62 +234,5 @@ abstract class PostType implements PostTypeContract {
         );
 
         $customFields->register();
-    }
-
-    /**
-     * Register block bindings for the custom fields
-     *
-     * @return void
-     */
-    public function registerBlockBindings(): void {
-        $this->fields(); // Initialize the fields
-        $fields = $this->fields->all();
-
-        foreach ($fields as $field) {
-            $metaKey   = $field['id']      ?? null;
-            $type      = $field['type']    ?? null;
-            $label     = $field['label']   ?? null;
-            $options   = $field['options'] ?? null;
-            $namespace = 'app/' . str_replace('_', '-', $metaKey);
-
-            if (WP_Block_Bindings_Registry::get_instance()->is_registered($namespace)) {
-                continue;
-            }
-
-            if (empty($metaKey) || empty($type)) {
-                continue;
-            }
-
-            if (empty($label)) {
-                $label = \ucwords(\str_replace(['-', '_'], ' ', $metaKey));
-            }
-
-            switch ($type) {
-                case 'text':
-                case 'textarea':
-                case 'email':
-                case 'url':
-                case 'select':
-                case 'radio':
-                    \register_block_bindings_source(
-                        $namespace,
-                        [
-                            'label'              => $label,
-                            'get_value_callback' => function (array $source_args, $block_instance) use ($metaKey) {
-                                if (empty($block_instance->context['postId'])) {
-                                    return null;
-                                }
-
-                                return PostTypeUtils::formatPostMetaText($block_instance->context['postId'], $metaKey);
-                            },
-                            'uses_context' => ['postId']
-                        ]
-                    );
-                    break;
-
-                default:
-                    break;
-            }
-        }
     }
 }
