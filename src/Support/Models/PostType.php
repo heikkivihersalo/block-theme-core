@@ -285,4 +285,45 @@ abstract class PostType implements PostTypeContract {
             ]
         );
     }
+
+    /**
+     * Register block bindings for the custom fields
+     *
+     * @return void
+     */
+    public function registerBlockBindings(): void {
+        $this->fields(); // Initialize the fields
+        $fields = $this->fields->all();
+
+        foreach ($fields as $field) {
+            $metaKey   = $field['id']      ?? null;
+            $type      = $field['type']    ?? null;
+            $label     = $field['label']   ?? null;
+            $options   = $field['options'] ?? null;
+            $namespace = 'app/' . str_replace('_', '-', $metaKey);
+
+            switch ($type) {
+                case 'text':
+                case 'textarea':
+                case 'email':
+                case 'url':
+                case 'select':
+                case 'radio':
+                    register_block_bindings_source(
+                        $namespace,
+                        [
+                            'label'              => $label,
+                            'get_value_callback' => function (array $source_args, $block_instance) use ($metaKey) {
+                                return PostTypeUtils::formatPostMetaText($block_instance->context['postId'], $metaKey);
+                            },
+                            'uses_context' => ['postId']
+                        ]
+                    );
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
 }
