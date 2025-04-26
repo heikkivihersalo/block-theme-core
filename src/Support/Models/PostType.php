@@ -247,6 +247,24 @@ abstract class PostType implements PostTypeContract {
                     $meta[$id] = \get_post_meta($postId, $id, true) ? true : false;
                     break;
 
+                    /**
+                     * Checkbox values are stored to the database with each enabled
+                     * value to its own row (naming convention: {id}_{key}).
+                     * We need to get all the values and return them as an array.
+                     */
+                case 'checkbox-group':
+                    $arr = [];
+
+                    foreach ($field['options'] as $key => $value) {
+                        $dbValue = \get_post_meta($postId, $id . '_' . $key, true);
+                        if ($dbValue) {
+                            $arr[] = $key;
+                        }
+                    }
+
+                    $meta[$id] = $arr;
+
+                    break;
                 case 'select':
                     $meta[$id] = \get_post_meta($postId, $id, true);
                     break;
