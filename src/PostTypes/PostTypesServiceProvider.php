@@ -35,9 +35,9 @@ class PostTypesServiceProvider extends ServiceProvider {
 
             $instance = new $postType();
             $loader->addAction('after_setup_theme', $instance, 'registerPostType');
-            $loader->addAction('admin_init', $instance, 'registerCustomFields');
-            $loader->addAction('rest_api_init', $instance, 'registerRestFields');
+            $loader->addAction('init', $instance, 'registerCustomFields');
             $loader->addAction('init', $instance, 'registerBlockBindings');
+            $loader->addAction('rest_api_init', $instance, 'registerRestFields');
         }
     }
 
