@@ -6,9 +6,7 @@ namespace Vihersalo\Core\Support\Models;
 
 // use HeikkiVihersalo\CustomPostTypes\Traits\CustomPermalink;
 
-use Vihersalo\Core\Contracts\Foundation\Application;
 use Vihersalo\Core\Contracts\PostTypes\PostType as PostTypeContract;
-use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\PostTypes\FieldCollection;
 use Vihersalo\Core\PostTypes\FieldRegistrar;
 
@@ -20,12 +18,6 @@ use Vihersalo\Core\PostTypes\FieldRegistrar;
  * @author     Heikki Vihersalo <heikki@vihersalo.fi>
  */
 abstract class PostType implements PostTypeContract {
-    /**
-     * The application instance
-     * @var Application
-     */
-    protected $app;
-
     /**
      * Prefix for the database entry
      * @var string
@@ -53,9 +45,7 @@ abstract class PostType implements PostTypeContract {
     /**
      * Constructor
      */
-    public function __construct(Application $app) {
-        $this->app = $app;
-
+    public function __construct() {
         if (empty($this->slug)) {
             $this->slug = $this->resolvePostTypeSlug();
         }
@@ -188,7 +178,7 @@ abstract class PostType implements PostTypeContract {
      *
      * @return void
      */
-    protected function registerPostType() {
+    public function registerPostType() {
         \register_post_type(
             $this->slug,
             [
@@ -209,7 +199,7 @@ abstract class PostType implements PostTypeContract {
      *
      * @return void
      */
-    protected function registerCustomFields() {
+    public function registerCustomFields() {
         // Initialize the fields
         $this->fields($this->fields);
 
@@ -226,20 +216,12 @@ abstract class PostType implements PostTypeContract {
         $customFields->register();
     }
 
-    protected function registerFieldsToRest() {
-        $this->app->make(HooksStore::class)->addAction(
-            'rest_api_init',
-            $this,
-            'registerRestField'
-        );
-    }
-
     /**
      * Register post type custom fields to REST API
      *
      * @return void
      */
-    public function registerRestField(): void {
+    public function registerRestFields(): void {
         \register_rest_field(
             $this->slug,
             'metadata',
@@ -250,16 +232,5 @@ abstract class PostType implements PostTypeContract {
                 },
             ]
         );
-    }
-
-    /**
-     * Register the post type
-     *
-     * @return void
-     */
-    public function register(): void {
-        $this->registerPostType();
-        $this->registerCustomFields();
-        $this->registerFieldsToRest();
     }
 }
