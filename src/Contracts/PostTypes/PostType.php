@@ -74,4 +74,11 @@ interface PostType {
      * @return void
      */
     public function fields(): void;
+
+    /**
+     * Hidden fields
+     *
+     * @return array
+     */
+    public function hidden(): array;
 }
