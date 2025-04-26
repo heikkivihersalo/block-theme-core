@@ -201,7 +201,7 @@ abstract class PostType implements PostTypeContract {
      */
     public function registerCustomFields() {
         // Initialize the fields
-        $this->fields($this->fields);
+        $this->fields();
 
         if ($this->fields->isEmpty()) {
             return;
@@ -217,17 +217,69 @@ abstract class PostType implements PostTypeContract {
     }
 
     /**
+     * Format the post meta for REST API based on the defined fields
+     *
+     * @param int   $id    The post ID
+     * @param array $fields The fields to format
+     * @return array The formatted post meta
+     */
+    public function getPostMeta(int $postId, array $fields): array {
+        $meta = [];
+
+        foreach ($fields as $field) {
+            $id   = $field['id']   ?? null;
+            $type = $field['type'] ?? null;
+
+            switch ($type) {
+                case 'text':
+                case 'textarea':
+                case 'email':
+                case 'url':
+                    $meta[$id] = \get_post_meta($postId, $id, true);
+                    break;
+
+                case 'number':
+                    $meta[$id] = (int) \get_post_meta($postId, $id, true);
+                    break;
+
+                case 'checkbox':
+                    $meta[$id] = \get_post_meta($postId, $id, true) ? true : false;
+                    break;
+
+                case 'select':
+                    $meta[$id] = \get_post_meta($postId, $id, true);
+                    break;
+
+                case 'radio':
+                    $meta[$id] = \get_post_meta($postId, $id, true);
+                    break;
+
+                case 'image':
+                    $meta[$id] = PostTypeUtils::formatPostMetaImage($postId, $id);
+                    break;
+
+                default:
+                    $meta[$id] = \get_post_meta($postId, $id, true);
+                    break;
+            }
+        }
+
+        return $meta;
+    }
+
+    /**
      * Register post type custom fields to REST API
      *
      * @return void
      */
     public function registerRestFields(): void {
+        $this->fields(); // Initialize the fields
         \register_rest_field(
             $this->slug,
             'metadata',
             [
                 'get_callback' => function ($data) {
-                    $meta['fields'] = get_post_meta($data['id'], '', '');
+                    $meta['fields'] = $this->getPostMeta($data['id'], $this->fields->all());
                     return $meta;
                 },
             ]
