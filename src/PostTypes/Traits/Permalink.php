@@ -11,9 +11,16 @@ trait Permalink {
      */
     public function addPermalinkField() {
         \add_settings_field(
-            'cpt-permalink-' . $this->this->slug,
-            $this->name . 'Base',
-            [$this, 'generate'],
+            'cpt-permalink-' . parent::getSlug(),
+            parent::getName() . ' Base',
+            function () {
+                printf(
+                    '<input name="%s" type="text" class="regular-text code" value="%s" placeholder="%s" />',
+                    'cpt-permalink-' . parent::getSlug(),
+                    esc_attr(\get_option('cpt-permalink-' . parent::getSlug())),
+                    parent::getSlug()
+                );
+            },
             'permalink',
             'optional'
         );
@@ -25,27 +32,14 @@ trait Permalink {
      */
     public function savePermalink() {
         if (isset($_POST['permalink_structure'])) {
-            if (! isset($_POST[ 'cpt-permalink-' . $this->slug ])) {
+            if (! isset($_POST[ 'cpt-permalink-' . parent::getSlug() ])) {
                 return;
             }
 
             \update_option(
-                'cpt-permalink-' . $this->slug,
-                trim(sanitize_title(wp_unslash($_POST[ 'cpt-permalink-' . $this->slug ])))
+                'cpt-permalink-' . parent::getSlug(),
+                trim(sanitize_title(wp_unslash($_POST[ 'cpt-permalink-' . parent::getSlug() ])))
             );
         }
-    }
-
-    /**
-     * Generate setting output for permalink settings
-     * @return void
-     */
-    public function generatePermalinkInput(): void {
-        printf(
-            '<input name="%s" type="text" class="regular-text code" value="%s" placeholder="%s" />',
-            'cpt-permalink-' . $this->slug,
-            esc_attr(\get_option('cpt-permalink-' . $this->slug)),
-            $this->slug
-        );
     }
 }
