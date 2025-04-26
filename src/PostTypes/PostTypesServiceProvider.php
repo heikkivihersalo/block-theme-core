@@ -31,7 +31,7 @@ class PostTypesServiceProvider extends ServiceProvider {
                 continue;
             }
 
-            $instance = (new $postType())->register();
+            $instance = (new $postType($this->app))->register();
         }
     }
 
