@@ -31,15 +31,7 @@ class PostTypesServiceProvider extends ServiceProvider {
                 continue;
             }
 
-            $instance = new $postType();
-
-            if (method_exists($instance, 'registerPostType')) {
-                $instance->registerPostType();
-            }
-
-            if (method_exists($instance, 'registerCustomFields')) {
-                $instance->registerCustomFields();
-            }
+            $instance = (new $postType())->register();
         }
     }
 
