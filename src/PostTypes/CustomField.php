@@ -138,12 +138,12 @@ abstract class CustomField implements CustomFieldContract {
      * @inheritDoc
      */
     public function saveGroup(int $post_id, array $options): void {
-        foreach ($options as $option) {
+        foreach ($options as $key => $label) {
             // Nonce verification is done in the parent class so we can safely ignore it here.
-            if (isset($_POST[ $this->id . '_' . $option['value'] ])) {
-                update_post_meta($post_id, $this->id . '_' . $option['value'], '1');
+            if (isset($_POST[ $this->id . '_' . $key ])) {
+                update_post_meta($post_id, $this->id . '_' . $key, '1');
             } else {
-                delete_post_meta($post_id, $this->id . '_' . $option['value']);
+                delete_post_meta($post_id, $this->id . '_' . $key);
             }
         }
     }
