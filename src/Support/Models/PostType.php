@@ -6,6 +6,7 @@ namespace Vihersalo\Core\Support\Models;
 
 // use HeikkiVihersalo\CustomPostTypes\Traits\CustomPermalink;
 use Vihersalo\Core\Contracts\PostTypes\PostType as PostTypeContract;
+use Vihersalo\Core\Foundation\HooksStore;
 use Vihersalo\Core\PostTypes\FieldCollection;
 use Vihersalo\Core\PostTypes\FieldRegistrar;
 
@@ -177,7 +178,7 @@ abstract class PostType implements PostTypeContract {
      *
      * @return void
      */
-    public function registerPostType() {
+    protected function registerPostType() {
         \register_post_type(
             $this->slug,
             [
@@ -198,7 +199,7 @@ abstract class PostType implements PostTypeContract {
      *
      * @return void
      */
-    public function registerCustomFields() {
+    protected function registerCustomFields() {
         // Initialize the fields
         $this->fields($this->fields);
 
@@ -213,5 +214,40 @@ abstract class PostType implements PostTypeContract {
         );
 
         $customFields->register();
+    }
+
+    /**
+     * Register post type custom fields to REST API
+     *
+     * @return void
+     */
+    public function registerCustomFieldsToRestApi(): void {
+        register_rest_field(
+            $this->slug,
+            'metadata',
+            [
+                'get_callback' => function ($data) {
+                    $meta = get_post_meta($data['id'], '', '');
+                    return $meta;
+                },
+            ]
+        );
+
+    }
+
+    /**
+     * Register the post type
+     *
+     * @return void
+     */
+    public function register(): void {
+        $this->app->make(HooksStore::class)->addAction(
+            'rest_api_init',
+            $this,
+            'registerCustomFieldsToRestApi'
+        );
+
+        $this->registerPostType();
+        $this->registerCustomFields();
     }
 }
