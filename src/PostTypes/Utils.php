@@ -42,6 +42,78 @@ final class Utils {
         return str_replace('.php', '', $file);
     }
 
+
+    /**
+     * Format post meta text
+     *
+     * @param int $postId Post ID
+     * @param string $metaKey Meta key
+     * @return string|null
+     */
+    public static function formatPostMetaText($postId, $metaKey): string|null {
+        $text = \get_post_meta($postId, $metaKey, true);
+
+        if (! $text) {
+            return null;
+        }
+
+        return $text;
+    }
+
+    /**
+     * Format post meta number
+     *
+     * @param int $postId Post ID
+     * @param string $metaKey Meta key
+     * @return int|null
+     */
+    public static function formatPostMetaNumber($postId, $metaKey): int|null {
+        $number = \get_post_meta($postId, $metaKey, true);
+
+        if (! $number) {
+            return null;
+        }
+
+        return (int) $number;
+    }
+
+    /**
+     * Format post meta checkbox
+     *
+     * @param int $postId Post ID
+     * @param string $metaKey Meta key
+     * @return bool
+     */
+    public static function formatPostMetaCheckbox($postId, $metaKey): bool {
+        return \get_post_meta($postId, $metaKey, true) ? true : false;
+    }
+
+    /**
+     * Format post meta checkbox group
+     *
+     * @param int $postId Post ID
+     * @param string $metaKey Meta key
+     * @param array $options Options
+     * @return array
+     */
+    public static function formatPostMetaCheckboxGroup($postId, $metaKey, $options): array {
+        $arr = [];
+
+        /**
+         * Checkbox values are stored to the database with each enabled
+         * value to its own row (naming convention: {id}_{key}).
+         * We need to get all the values and return them as an array.
+         */
+        foreach ($options as $key => $value) {
+            $dbValue = \get_post_meta($postId, $metaKey . '_' . $key, true);
+            if ($dbValue) {
+                $arr[] = $key;
+            }
+        }
+
+        return $arr;
+    }
+
     /**
      * Format post meta image
      *

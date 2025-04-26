@@ -228,57 +228,38 @@ abstract class PostType implements PostTypeContract {
         $meta = [];
 
         foreach ($fields as $field) {
-            $id   = $field['id']   ?? null;
-            $type = $field['type'] ?? null;
+            $metaKey = $field['id']      ?? null;
+            $type    = $field['type']    ?? null;
+            $options = $field['options'] ?? null;
 
             switch ($type) {
                 case 'text':
                 case 'textarea':
                 case 'email':
                 case 'url':
-                    $meta[$id] = \get_post_meta($postId, $id, true);
+                case 'select':
+                case 'radio':
+                    $meta[$metaKey] = PostTypeUtils::formatPostMetaText($postId, $metaKey);
                     break;
 
                 case 'number':
-                    $meta[$id] = (int) \get_post_meta($postId, $id, true);
+                    $meta[$metaKey] = PostTypeUtils::formatPostMetaNumber($postId, $metaKey);
                     break;
 
                 case 'checkbox':
-                    $meta[$id] = \get_post_meta($postId, $id, true) ? true : false;
+                    $meta[$metaKey] = PostTypeUtils::formatPostMetaCheckbox($postId, $metaKey);
                     break;
 
-                    /**
-                     * Checkbox values are stored to the database with each enabled
-                     * value to its own row (naming convention: {id}_{key}).
-                     * We need to get all the values and return them as an array.
-                     */
                 case 'checkbox-group':
-                    $arr = [];
-
-                    foreach ($field['options'] as $key => $value) {
-                        $dbValue = \get_post_meta($postId, $id . '_' . $key, true);
-                        if ($dbValue) {
-                            $arr[] = $key;
-                        }
-                    }
-
-                    $meta[$id] = $arr;
-
-                    break;
-                case 'select':
-                    $meta[$id] = \get_post_meta($postId, $id, true);
-                    break;
-
-                case 'radio':
-                    $meta[$id] = \get_post_meta($postId, $id, true);
+                    $meta[$metaKey] = PostTypeUtils::formatPostMetaCheckboxGroup($postId, $metaKey, $options);
                     break;
 
                 case 'image':
-                    $meta[$id] = PostTypeUtils::formatPostMetaImage($postId, $id);
+                    $meta[$metaKey] = PostTypeUtils::formatPostMetaImage($postId, $metaKey);
                     break;
 
                 default:
-                    $meta[$id] = \get_post_meta($postId, $id, true);
+                    $meta[$metaKey] = PostTypeUtils::formatPostMetaText($postId, $metaKey);
                     break;
             }
         }
