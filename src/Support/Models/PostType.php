@@ -60,30 +60,6 @@ abstract class PostType implements PostTypeContract {
     }
 
     /**
-     * Get the post type name
-     * @return string
-     */
-    protected function getName(): string {
-        return $this->name;
-    }
-
-    /**
-     * Get the post type slug
-     * @return string
-     */
-    protected function getSlug(): string {
-        return $this->slug;
-    }
-
-    /**
-     * Get the post type fields
-     * @return FieldCollection
-     */
-    protected function getFields(): FieldCollection {
-        return $this->fields;
-    }
-
-    /**
      * @inheritDoc
      */
     public function labels(): array {
@@ -180,22 +156,7 @@ abstract class PostType implements PostTypeContract {
     }
 
     /**
-     * @inheritDoc
-     */
-    protected function resolvePostTypeSlug(): string {
-        return \strtolower(\str_replace('\\', '-', \get_class($this)));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    protected function resolvePostTypeName(): string {
-        return \ucwords(\str_replace('-', ' ', $this->slug));
-    }
-
-    /**
      * Register post type
-     *
      * @return void
      */
     public function registerPostType() {
@@ -216,7 +177,6 @@ abstract class PostType implements PostTypeContract {
 
     /**
      * Register custom fields
-     *
      * @return void
      */
     public function registerCustomFields() {
@@ -234,5 +194,45 @@ abstract class PostType implements PostTypeContract {
         );
 
         $customFields->register();
+    }
+
+    /**
+     * Get the post type name
+     * @return string
+     */
+    protected function getName(): string {
+        return $this->name;
+    }
+
+    /**
+     * Get the post type slug
+     * @return string
+     */
+    protected function getSlug(): string {
+        return $this->slug;
+    }
+
+    /**
+     * Get the post type fields
+     * @return FieldCollection
+     */
+    protected function getFields(): FieldCollection {
+        return $this->fields;
+    }
+
+    /**
+     * Resolve the post type slug
+     * @return string
+     */
+    protected function resolvePostTypeSlug(): string {
+        return \strtolower(\str_replace('\\', '-', \get_class($this)));
+    }
+
+    /**
+     * Resolve the post type name
+     * @return string
+     */
+    protected function resolvePostTypeName(): string {
+        return \ucwords(\str_replace('-', ' ', $this->slug));
     }
 }
