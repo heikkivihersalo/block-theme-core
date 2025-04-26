@@ -148,7 +148,7 @@ abstract class PostType implements PostTypeContract {
     /**
      * @inheritDoc
      */
-    public function fields(FieldCollection $fields): void {
+    public function fields(): void {
     }
 
     /**
