@@ -13,25 +13,30 @@ class PostTypesServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $loader = $this->app->make(HooksStore::class);
-        $loader->addAction('after_setup_theme', $this, 'registerCustomPostTypes');
+        $loader    = $this->app->make(HooksStore::class);
+        $postTypes = $this->app->make(PostTypesLoader::class)->all();
 
+        $this->registerCustomPostTypes($loader, $postTypes);
         $this->registerEnqueue($loader);
     }
 
     /**
      * Load custom post types
+     *
+     * @param HooksStore $loader The loader instance
+     * @param array $postTypes The post types to load
      * @return void
      */
-    public function registerCustomPostTypes(): void {
-        $postTypes = $this->app->make(PostTypesLoader::class)->all();
-
+    public function registerCustomPostTypes(HooksStore $loader, array $postTypes): void {
         foreach ($postTypes as $postType) {
             if (! class_exists($postType)) {
                 continue;
             }
 
-            $instance = (new $postType($this->app))->register();
+            $instance = new $postType();
+            $loader->addAction('after_setup_theme', $instance, 'registerPostType');
+            $loader->addAction('admin_init', $instance, 'registerCustomFields');
+            $loader->addAction('rest_api_init', $instance, 'registerRestFields');
         }
     }
 
