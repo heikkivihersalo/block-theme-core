@@ -10,6 +10,7 @@ use Vihersalo\Core\Contracts\PostTypes\PostType as PostTypeContract;
 use Vihersalo\Core\PostTypes\FieldCollection;
 use Vihersalo\Core\PostTypes\FieldRegistrar;
 use Vihersalo\Core\PostTypes\Utils as PostTypeUtils;
+use WP_Block_Bindings_Registry;
 
 /**
  * Abstract class for registering custom post types
@@ -302,6 +303,18 @@ abstract class PostType implements PostTypeContract {
             $options   = $field['options'] ?? null;
             $namespace = 'app/' . str_replace('_', '-', $metaKey);
 
+            if (WP_Block_Bindings_Registry::get_instance()->is_registered($namespace)) {
+                continue;
+            }
+
+            if (empty($metaKey) || empty($type)) {
+                continue;
+            }
+
+            if (empty($label)) {
+                $label = \ucwords(\str_replace(['-', '_'], ' ', $metaKey));
+            }
+
             switch ($type) {
                 case 'text':
                 case 'textarea':
@@ -314,6 +327,10 @@ abstract class PostType implements PostTypeContract {
                         [
                             'label'              => $label,
                             'get_value_callback' => function (array $source_args, $block_instance) use ($metaKey) {
+                                if (empty($block_instance->context['postId'])) {
+                                    return null;
+                                }
+
                                 return PostTypeUtils::formatPostMetaText($block_instance->context['postId'], $metaKey);
                             },
                             'uses_context' => ['postId']
