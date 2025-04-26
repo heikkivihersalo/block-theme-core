@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\PostTypes\Traits;
 
+use Vihersalo\Core\PostTypes\Utils;
+
 trait RestAPI {
     /**
     * Format the post meta for REST API based on the defined fields
@@ -34,27 +36,27 @@ trait RestAPI {
                 case 'url':
                 case 'select':
                 case 'radio':
-                    $meta[$metaKey] = PostTypeUtils::formatPostMetaText($postId, $metaKey);
+                    $meta[$metaKey] = Utils::formatPostMetaText($postId, $metaKey);
                     break;
 
                 case 'number':
-                    $meta[$metaKey] = PostTypeUtils::formatPostMetaNumber($postId, $metaKey);
+                    $meta[$metaKey] = Utils::formatPostMetaNumber($postId, $metaKey);
                     break;
 
                 case 'checkbox':
-                    $meta[$metaKey] = PostTypeUtils::formatPostMetaCheckbox($postId, $metaKey);
+                    $meta[$metaKey] = Utils::formatPostMetaCheckbox($postId, $metaKey);
                     break;
 
                 case 'checkbox-group':
-                    $meta[$metaKey] = PostTypeUtils::formatPostMetaCheckboxGroup($postId, $metaKey, $options);
+                    $meta[$metaKey] = Utils::formatPostMetaCheckboxGroup($postId, $metaKey, $options);
                     break;
 
                 case 'image':
-                    $meta[$metaKey] = PostTypeUtils::formatPostMetaImage($postId, $metaKey);
+                    $meta[$metaKey] = Utils::formatPostMetaImage($postId, $metaKey);
                     break;
 
                 default:
-                    $meta[$metaKey] = PostTypeUtils::formatPostMetaText($postId, $metaKey);
+                    $meta[$metaKey] = Utils::formatPostMetaText($postId, $metaKey);
                     break;
             }
         }
@@ -74,7 +76,7 @@ trait RestAPI {
             'metadata',
             [
                 'get_callback' => function ($data) {
-                    $meta['fields'] = $this->getPostMeta($data['id'], parent::$fields->all());
+                    $meta['fields'] = $this->getPostMeta($data['id'], parent::getFields()->all());
                     return $meta;
                 },
             ]
