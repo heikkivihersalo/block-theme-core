@@ -70,7 +70,7 @@ class PostTypesServiceProvider extends ServiceProvider {
      */
     public function registerBlockBindings(HooksStore $loader, $postType): void {
         if (method_exists($postType, 'registerBlockBindings')) {
-            $loader->addAction('rest_api_init', $postType, 'registerBlockBindings');
+            $loader->addAction('init', $postType, 'registerBlockBindings');
         }
     }
 
