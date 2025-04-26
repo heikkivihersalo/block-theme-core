@@ -62,6 +62,22 @@ abstract class PostType implements PostTypeContract {
     }
 
     /**
+     * Get the post type name
+     * @return string
+     */
+    protected function getName(): string {
+        return $this->name;
+    }
+
+    /**
+     * Get the post type slug
+     * @return string
+     */
+    protected function getSlug(): string {
+        return $this->slug;
+    }
+
+    /**
      * @inheritDoc
      */
     public function labels(): array {
