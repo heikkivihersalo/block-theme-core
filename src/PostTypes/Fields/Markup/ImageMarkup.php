@@ -5,23 +5,28 @@ namespace Vihersalo\Core\PostTypes\Fields\Markup;
 class ImageMarkup {
     /**
      * ID of the field
+     * @var string
      */
     protected $id;
 
     /**
      * Label of the field
+     * @var string
      */
     protected $label;
 
     /**
      * Value of the field
+     * @var string
      */
     protected $value;
 
     /**
-     * Image src
+     * Image
+     * @var array|false
+     * @see https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/
      */
-    protected $src;
+    protected $image;
 
     /**
      * Constructor
@@ -31,11 +36,11 @@ class ImageMarkup {
      * @param string $value Value of the field
      * @param array|false $src   Image src
      */
-    public function __construct($id, $label, $value, $src) {
+    public function __construct(string $id, string $label, string $value, array|false $image) {
         $this->id    = $id;
         $this->label = $label;
         $this->value = $value;
-        $this->src   = $src;
+        $this->image = $image;
     }
 
     /**
@@ -67,8 +72,8 @@ class ImageMarkup {
      * @return array|false
      * @see https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/
      */
-    public function getSrc() {
-        return $this->src;
+    public function getImage() {
+        return $this->image;
     }
 
     /**
@@ -76,7 +81,10 @@ class ImageMarkup {
      * @return string
      */
     public function markup(): string {
+        $src      = ($this->getImage())[0] ?? false;
+        $hasImage = $src !== false;
         ob_start();
+
         ?>
 
         <tr>
@@ -93,14 +101,25 @@ class ImageMarkup {
                         value="<?php echo $this->getValue(); ?>" 
                     />
                     <img 
-                        src="<?php echo ($this->getSrc())[0]; ?>" 
+                        src="<?php echo $src; ?>" 
                         style="width: 300px;" 
                         alt="" 
-                        class="app-post-type-image-uploader__preview<?php echo false === $this->getSrc() ? ' hide-app-post-type-image-uploader' : ''; ?>" <?php // phpcs:ignore?>
+                        class="app-post-type-image-uploader__preview"
+                        data-hidden="<?php echo !$hasImage; ?>"
                         />
                     <div class="app-post-type-image-uploader__buttons">
-                        <button class="app-post-type-image-uploader__button app-post-type-image-uploader__button--choose<?php echo false === $this->getSrc() ? '' : ' hide-app-post-type-image-uploader'; ?>"><?php _e('Choose image', 'app'); ?></button> <?php // phpcs:ignore?>
-                        <button class="app-post-type-image-uploader__button app-post-type-image-uploader__button--remove<?php echo false === $this->getSrc() ? ' hide-app-post-type-image-uploader' : ''; ?>"><?php _e('Remove Image', 'app'); ?></button> <?php // phpcs:ignore?>
+                        <button 
+                            class="app-post-type-image-uploader__button app-post-type-image-uploader__button--choose"
+                            data-hidden="<?php echo $hasImage; ?>"
+                        >
+                            <?php _e('Choose image', 'app'); ?>
+                        </button>
+                        <button 
+                            class="app-post-type-image-uploader__button app-post-type-image-uploader__button--remove"
+                            data-hidden="<?php echo !$hasImage; ?>"
+                        >
+                            <?php _e('Remove Image', 'app'); ?>
+                        </button>
                     </div>
                 </div>
             </td>
