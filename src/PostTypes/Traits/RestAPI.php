@@ -73,10 +73,10 @@ trait RestAPI {
         parent::fields(); // Initialize the fields
         \register_rest_field(
             parent::getSlug(),
-            'metadata',
+            'meta',
             [
                 'get_callback' => function ($data) {
-                    $meta['fields'] = $this->getPostMeta($data['id'], parent::getRegisteredFields());
+                    $meta = $this->getPostMeta($data['id'], parent::getRegisteredFields());
                     return $meta;
                 },
             ]
