@@ -94,7 +94,7 @@ class FieldRegistrar {
         string $position = 'normal',
         string $priority = 'high'
     ) {
-        $this->fields    = $fields->all();
+        $this->fields    = $fields->registered();
         $this->title     = $title;
         $this->postTypes = $postTypes;
         $this->position  = $position;
