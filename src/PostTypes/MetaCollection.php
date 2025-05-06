@@ -54,8 +54,9 @@ class MetaCollection {
      */
     public function value(string $key, ?int $id = null): string|array|null {
         $postId = $id ?? \get_the_ID();
+        $fields = $this->registeredFields->registered();
 
-        foreach ($this->registeredFields as $field) {
+        foreach ($fields as $field) {
             if ($field['id'] === $key) {
                 return $this->getPostMeta($postId, $key, $field['type'], $field['options']);
             }
