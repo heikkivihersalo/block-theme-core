@@ -4,18 +4,29 @@ declare(strict_types=1);
 
 namespace Vihersalo\Core\PostTypes;
 
+use InvalidArgumentException;
+
 class FieldCollection {
     /**
-     * The items in the collection.
+     * The registered fields in the collection.
      * @var array
      */
-    private $items = [];
+    private $registeredFields = [];
 
     /**
      * Constructor
      * @return void
      */
     public function __construct() {
+    }
+
+    /**
+     * Get the registered fields.
+     *
+     * @return array
+     */
+    public function registered(): array {
+        return $this->registeredFields;
     }
 
     /**
@@ -26,7 +37,7 @@ class FieldCollection {
      * @return void
      */
     public function addText(string $id, string $label): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'    => $id,
             'label' => $label,
             'type'  => 'text',
@@ -41,7 +52,7 @@ class FieldCollection {
      * @return void
      */
     public function addTextArea(string $id, string $label): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'    => $id,
             'label' => $label,
             'type'  => 'textarea',
@@ -56,7 +67,7 @@ class FieldCollection {
      * @return void
      */
     public function addUrl(string $id, string $label): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'    => $id,
             'label' => $label,
             'type'  => 'url',
@@ -71,7 +82,7 @@ class FieldCollection {
      * @return void
      */
     public function addNumber(string $id, string $label): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'    => $id,
             'label' => $label,
             'type'  => 'number',
@@ -86,7 +97,7 @@ class FieldCollection {
      * @return void
      */
     public function addCheckbox(string $id, string $label): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'    => $id,
             'label' => $label,
             'type'  => 'checkbox',
@@ -102,7 +113,7 @@ class FieldCollection {
      * @return void
      */
     public function addCheckboxGroup(string $id, string $label, array $options): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'      => $id,
             'label'   => $label,
             'type'    => 'checkbox-group',
@@ -118,7 +129,7 @@ class FieldCollection {
      * @return void
      */
     public function addDate(string $id, string $label): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'    => $id,
             'label' => $label,
             'type'  => 'date',
@@ -133,7 +144,7 @@ class FieldCollection {
      * @return void
      */
     public function addImage(string $id, string $label): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'    => $id,
             'label' => $label,
             'type'  => 'image',
@@ -149,7 +160,7 @@ class FieldCollection {
      * @return void
      */
     public function addSelect(string $id, string $label, array $options): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'      => $id,
             'label'   => $label,
             'type'    => 'select',
@@ -165,7 +176,7 @@ class FieldCollection {
      * @return void
      */
     public function addRichText(string $id, string $label): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'    => $id,
             'label' => $label,
             'type'  => 'rich-text',
@@ -181,7 +192,7 @@ class FieldCollection {
      * @return void
      */
     public function addRadioGroup(string $id, string $label, array $options): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'      => $id,
             'label'   => $label,
             'type'    => 'radio-group',
@@ -198,7 +209,7 @@ class FieldCollection {
      * @return void
      */
     public function addTaxonomyCheckboxGroup(string $id, string $label, string $taxonomy): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'       => $id,
             'label'    => $label,
             'type'     => 'taxonomy-checkbox-group',
@@ -215,7 +226,7 @@ class FieldCollection {
      * @return void
      */
     public function addTaxonomyRadio(string $id, string $label, string $taxonomy): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'       => $id,
             'label'    => $label,
             'type'     => 'taxonomy-radio',
@@ -231,7 +242,7 @@ class FieldCollection {
      * @return void
      */
     public function addTaxonomySelect(string $id, string $label, string $taxonomy): void {
-        $this->items[] = [
+        $this->registeredFields[] = [
             'id'       => $id,
             'label'    => $label,
             'type'     => 'taxonomy-select',
@@ -240,12 +251,81 @@ class FieldCollection {
     }
 
     /**
-     * Get all items in the collection.
+     * Get all the fields and their values for the current post type.
      *
-     * @return array
+     * @param int|null $id The post ID. If null, the current post ID will be used.
+     * @return array|null The fields and their values.
      */
-    public function all(): array {
-        return $this->items;
+    public function all(?int $id = null): array|null {
+        // Get post meta for the current post type
+        $postId = $id ?? \get_the_ID();
+        $fields = $this->registered();
+        $meta   = [];
+
+        foreach ($fields as $field) {
+            $metaKey = $field['id']      ?? null;
+            $type    = $field['type']    ?? null;
+            $options = $field['options'] ?? null;
+
+            $meta[$metaKey] = $this->getPostMeta($postId, $metaKey, $type, $options);
+        }
+
+        return $meta;
+    }
+
+    /**
+     * Get the value of a specific field.
+     *
+     * @param string $key The field key.
+     * @param int|null $id The post ID. If null, the current post ID will be used.
+     * @return array|null The field value.
+     */
+    public function value(string $key, ?int $id = null): array|null {
+        $postId = $id ?? \get_the_ID();
+
+        foreach ($this->registeredFields as $field) {
+            if ($field['id'] === $key) {
+                return $this->getPostMeta($postId, $key, $field['type'], $field['options']);
+            }
+        }
+
+        throw new InvalidArgumentException("Field with key {$key} not found in the collection.");
+    }
+
+    /**
+     * Get the post meta for a specific field.
+     *
+     * @param int $id The post ID.
+     * @param string $key The field key.
+     * @param string $type The field type.
+     * @param array $options The field options.
+     * @return mixed The formatted post meta value.
+     */
+    protected function getPostMeta($id, $key, $type, $options) {
+        switch ($type) {
+            case 'text':
+            case 'textarea':
+            case 'email':
+            case 'url':
+            case 'select':
+            case 'radio':
+                return Utils::formatPostMetaText($id, $key);
+
+            case 'number':
+                return Utils::formatPostMetaNumber($id, $key);
+
+            case 'checkbox':
+                return Utils::formatPostMetaCheckbox($id, $key);
+
+            case 'checkbox-group':
+                return Utils::formatPostMetaCheckboxGroup($id, $key, $options);
+
+            case 'image':
+                return Utils::formatPostMetaImage($id, $key);
+
+            default:
+                return Utils::formatPostMetaText($id, $key);
+        }
     }
 
     /**
@@ -254,7 +334,7 @@ class FieldCollection {
      * @return int
      */
     public function count(): int {
-        return count($this->items);
+        return count($this->registeredFields);
     }
 
     /**
@@ -263,6 +343,6 @@ class FieldCollection {
      * @return bool
      */
     public function isEmpty(): bool {
-        return empty($this->items);
+        return empty($this->registeredFields);
     }
 }
