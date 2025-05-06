@@ -54,9 +54,12 @@ abstract class PostType implements PostTypeContract {
             $this->name = $this->resolvePostTypeName();
         }
 
+        // Initialize the fields
         if (empty($this->fields)) {
             $this->fields = new FieldCollection();
         }
+
+        $this->fields();
     }
 
     /**
@@ -180,9 +183,6 @@ abstract class PostType implements PostTypeContract {
      * @return void
      */
     public function registerCustomFields() {
-        // Initialize the fields
-        $this->fields();
-
         if ($this->fields->isEmpty()) {
             return;
         }
