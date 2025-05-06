@@ -31,16 +31,16 @@ abstract class PostType implements PostTypeContract {
     protected $name;
 
     /**
-     * Custom fields.
-     * @var FieldCollection
-     */
-    protected $fields;
-
-    /**
      * Hidden fields.
      * @var array
      */
     protected $hidden = [];
+
+    /**
+     * Custom fields.
+     * @var FieldCollection
+     */
+    public $fields;
 
     /**
      * Constructor
