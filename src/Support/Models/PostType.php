@@ -9,6 +9,7 @@ namespace Vihersalo\Core\Support\Models;
 use Vihersalo\Core\Contracts\PostTypes\PostType as PostTypeContract;
 use Vihersalo\Core\PostTypes\FieldCollection;
 use Vihersalo\Core\PostTypes\FieldRegistrar;
+use Vihersalo\Core\PostTypes\MetaCollection;
 
 /**
  * Abstract class for registering custom post types
@@ -40,12 +41,19 @@ abstract class PostType implements PostTypeContract {
      * Custom fields.
      * @var FieldCollection
      */
-    public $fields;
+    protected $fields;
+
+    /**
+     * Meta fields.
+     * @var MetaCollection
+     */
+    public $meta;
 
     /**
      * Constructor
      */
     public function __construct() {
+        // Initialize the slug and name
         if (empty($this->slug)) {
             $this->slug = $this->resolvePostTypeSlug();
         }
@@ -60,6 +68,11 @@ abstract class PostType implements PostTypeContract {
         }
 
         $this->fields();
+
+        // Initialize the meta
+        if (empty($this->meta)) {
+            $this->meta = new MetaCollection($this->fields);
+        }
     }
 
     /**
