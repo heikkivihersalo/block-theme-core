@@ -216,8 +216,8 @@ abstract class PostType implements PostTypeContract {
      * Get the post type fields
      * @return FieldCollection
      */
-    protected function getFields(): FieldCollection {
-        return $this->fields;
+    protected function getRegisteredFields(): FieldCollection {
+        return $this->fields->registered();
     }
 
     /**

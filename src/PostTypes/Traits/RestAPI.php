@@ -76,7 +76,7 @@ trait RestAPI {
             'metadata',
             [
                 'get_callback' => function ($data) {
-                    $meta['fields'] = $this->getPostMeta($data['id'], parent::getFields()->all());
+                    $meta['fields'] = $this->getPostMeta($data['id'], parent::getRegisteredFields());
                     return $meta;
                 },
             ]

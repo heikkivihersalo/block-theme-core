@@ -14,8 +14,7 @@ trait BlockBindings {
      * @return void
      */
     public function registerBlockBindings(): void {
-        parent::fields(); // Initialize the fields
-        $fields = parent::getFields()->all();
+        $fields = parent::getRegisteredFields();
 
         foreach ($fields as $field) {
             $metaKey   = $field['id']      ?? null;
