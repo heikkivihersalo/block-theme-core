@@ -279,8 +279,9 @@ class FieldCollection {
      * @param string $key The field key.
      * @param int|null $id The post ID. If null, the current post ID will be used.
      * @return array|null The field value.
+     * @throws InvalidArgumentException If the field key is not found in the collection.
      */
-    public function value(string $key, ?int $id = null): array|null {
+    public function value(string $key, ?int $id = null): string|array|null {
         $postId = $id ?? \get_the_ID();
 
         foreach ($this->registeredFields as $field) {
